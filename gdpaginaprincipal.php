@@ -43,16 +43,48 @@
      <h1>How To</h1>
      <p class="big-text">Create Responsive website</p>
      <p>Learn how to make beautiful</p>
-     <a class="btn btn-first" href="#">asdasd</a>
-     <a class="btn btn-second" href="#">Subscribe us</a>
+     <div class="container">
+       <h2>Table</h2>
+       <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+       <table class="table">
+         <thead>
+           <tr>
+             <th>#</th>
+             <th>Firstname</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>1</td>
+             <td>Anna</td>
+           </tr>
+           <tr>
+             <td>2</td>
+             <td>Debbie</td>
+           </tr>
+           <tr>
+             <td>3</td>
+             <td>John</td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+
    </div>
    <div class="col-sm-6 banner-image">
    <img src="images/image.png" class="img-responsive">
+   </div>
+   <div class="col-sm-6 banner-info">
+     <a class="btn btn-first" href="#">Acceder Super Usuario</a>
+     <a class="btn btn-second" href="#">Añadir documento</a>
+     <a class="btn btn-second" href="#">Contacta a gestion  de calidad</a>
    </div>
 
  </div>
  </div>
 </header>
+
+
 
 </body>
 

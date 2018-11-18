@@ -34,7 +34,7 @@ li a
 a.btn
 {
   margin: 30px 10px;
-  width: 150px;
+  width: 210px;
   padding: 10px;
   border-radius: 20px;
 }
@@ -42,6 +42,8 @@ a.btn-first
 {
   background-color: darkorange;
   color: #fff;
+
+
 }
 a.btn-second
 {
@@ -60,4 +62,19 @@ a.btn:hover
 .banner-info, .banner-image
 {
   margin: 30px 0;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
