@@ -1,5 +1,5 @@
 <?php
-class User{
+class User implements \Serializable{
 
     // database connection and table name
     private $conn;
@@ -16,6 +16,24 @@ class User{
         $this->conn = $db;
     }
     // signup user
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+        ]);
+    }
+
+    public function unserialize($data)
+    {
+      echo "hola";
+        list(
+            $this->id,
+            $this->username,
+            $this->password
+        ) = unserialize($data);
+    }
     function signup(){
 
         if($this->isAlreadyExist()){
@@ -63,6 +81,10 @@ class User{
         $stmt = $this->conn->prepare($query);
         // execute query
         $stmt->execute();
+
+        echo $this->username;
+        echo "<br>";
+
 
         return $stmt;
     }

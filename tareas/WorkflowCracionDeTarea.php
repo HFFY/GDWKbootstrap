@@ -2,7 +2,7 @@
 
 <head>
         <title>Gestor de documentos pagina principal</title>
-        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
         <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -23,7 +23,7 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
              </button>
-             <a href=""> <img class="logo" src="images/logo.png"></a>
+             <a href=""> <img class="logo" src="../images/logo.png"></a>
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
