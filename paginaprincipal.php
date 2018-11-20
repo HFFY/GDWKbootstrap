@@ -17,6 +17,9 @@
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);
+  $sql = 'select * from usuarios;';
+  $result = $db->query($sql);
+  $result->setFetchMode(PDO::FETCH_ASSOC);
 
   session_start();
 
@@ -81,6 +84,27 @@
   <div class="col-sm-6 banner-info" style="background-color:lavender;">
 
       <h2>Documentos Disponibles</h2>
+
+           <table class="table table-striped table-bordered  table-responsive-sm  scrollbar">
+           <thead  class="thead-dark">
+             <tr>
+               <th style="width: 33%">Nombres</th>
+               <th style="width: 33%">Usuario</th>
+               <th style="width: 33%">Apellidos</th>
+
+             </tr>
+           </thead>
+           <tbody>
+              <?php   while ($fila = $result->fetch()){  ?>
+              <tr>
+                 <td><?php echo $fila['Nombres']; ?></td>
+                 <td><?php echo $fila['Usuario']; ?></td>
+                 <td><?php echo $fila['Apellidos']; ?></td>
+              </tr>
+             <?php } ?>
+           </tbody>
+           </table>
+        
       <table class="table">
         <thead>
           <tr>

@@ -63,7 +63,7 @@
         "Usuario" => $row['Usuario']
 
         );
-      
+
       $ser = $user->serialize();
       session_start();
       $_SESSION['ser'] = $ser;
@@ -79,7 +79,7 @@
       );
       }
       // make it json format
-      print_r(json_encode($user_arr));
+      //print_r(json_encode($user_arr));
 
           ?>
 
