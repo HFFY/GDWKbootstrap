@@ -64,6 +64,17 @@ a.btn:hover
   background: transparent;
   border: 1px solid darkorange;
   color: #333;
+  padding: 10px 75px;
+  transition: 0.3s;
+  border-radius: 30px;
+}
+.button:hover
+{
+  background: darkorange;
+  border: none;
+  color: #fff;
+  box-shadow: 5px 5px 10px #999;
+  transition: 0.3s;
 }
 
 .banner-info, .banner-image

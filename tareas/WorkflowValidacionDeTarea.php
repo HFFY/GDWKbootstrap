@@ -79,8 +79,8 @@
   </div>
 
   <a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
-  <a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block" href="" >Validar</button></a>
-  <a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block" href="" >Modificar</button></a>
+  <button type="submit" class="button" href="" >Validar</button>
+  <button type="submit" class="button" href="" >Modificar</button>
 
  </div>
  </div>
