@@ -11,25 +11,29 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
   <?php
+
   include_once 'clases/database.php';
   include_once 'clases/user.php';
+  session_start();
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);
-  $sql = 'select * from usuarios;';
+  $sql = 'select * from documentos;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
 
-  session_start();
 
-  $user->unserialize($_SESSION['ser']);
 
-  //$user->unserialize($ser);
+      $user->unserialize($_SESSION['ser']);
 
-  echo $user->username;
+      //$user->unserialize($ser);
 
-   ?>
+      echo $user->username;
+
+      if (!empty($user->username)) {
+          echo $user->usernam; ?>
 
 <header class="header">
 
@@ -46,7 +50,7 @@
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
          <li><a href=""><?php echo $user->username; ?></a></li>
-         <li><a href="">WorkFlow</a></li>
+         <li><a href="">WorkFlow <?php session_destroy(); ?></a></li>
          <li><a href="">Añadir Documento</a></li>
          <li><a href="">Modificar Documento</a></li>
 
@@ -88,24 +92,28 @@
            <table class="table table-striped table-bordered  table-responsive-sm  scrollbar">
            <thead  class="thead-dark">
              <tr>
-               <th style="width: 33%">Nombres</th>
-               <th style="width: 33%">Usuario</th>
-               <th style="width: 33%">Apellidos</th>
+               <th style="width: 25%">Nombre</th>
+               <th style="width: 25%">Codigo</th>
+               <th style="width: 25%">Version</th>
+               <th style="width: 25%">Link</th>
 
              </tr>
            </thead>
            <tbody>
-              <?php   while ($fila = $result->fetch()){  ?>
+              <?php   while ($fila = $result->fetch()) {
+              ?>
               <tr>
-                 <td><?php echo $fila['Nombres']; ?></td>
-                 <td><?php echo $fila['Usuario']; ?></td>
-                 <td><?php echo $fila['Apellidos']; ?></td>
+                 <td><?php echo $fila['Nombre del documento']; ?></td>
+                 <td>Codigo</td>
+                 <td><?php echo $fila['Version']; ?></td>
+                  <td>Link</td>
               </tr>
-             <?php } ?>
+             <?php
+          } ?>
            </tbody>
            </table>
-        
-      <table class="table">
+
+      <!-- <table class="table">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -134,7 +142,7 @@
                 <td>John</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
 
   </div>
   <div class="col-sm-6 banner-info" style="background-color:lavenderblush;">
@@ -179,7 +187,11 @@
 </header>
 
 
-
+<?php
+      } else {
+          echo "You don't have permission to view this page.";
+      }
+ ?>
 </body>
 
 </html>

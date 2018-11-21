@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet"  href="css/global.css">
 </head>
-
+<?php session_destroy();?>
     <body>
         <section class="container-fluid">
             <section class="row justify-content-center">
@@ -51,12 +51,12 @@
         // read the details of user to be edited
         $stmt = $user->login();
 
-        if($stmt->rowCount() > 0){
-        // get retrieved row
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo $row;
-        // create array
-        $user_arr=array(
+        if ($stmt->rowCount() > 0) {
+            // get retrieved row
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            echo $row;
+            // create array
+            $user_arr=array(
         "status" => true,
         "message" => "Successfully Login!",
         "ID_usuarios" => $row['ID_usuarios'],
@@ -64,20 +64,26 @@
 
         );
 
-      $ser = $user->serialize();
-      session_start();
-      $_SESSION['ser'] = $ser;
+            $ser = $user->serialize();
+            //    $loguser = $user->username->serialize();
 
-      header("Location: paginaprincipal.php");
+            session_start();
+            if (!empty($user->username)) {
+                echo !empty($ser);
+                $_SESSION['ser'] = $ser;
+                //$_SESSION['loguser'] =$loguser;
 
-        echo 'asd';
-      }
-      else{
-        $user_arr=array(
+
+                header("Location: paginaprincipal.php");
+            }
+
+            echo 'asd';
+        } else {
+            $user_arr=array(
         "status" => false,
         "message" => "Invalid Username or Password!",
       );
-      }
+        }
       // make it json format
       //print_r(json_encode($user_arr));
 

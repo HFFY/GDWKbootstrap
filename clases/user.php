@@ -110,4 +110,15 @@ class User implements \Serializable
             return false;
         }
     }
+    public function getUsername()
+    {
+        $con=mysqli_connect($this->database->getHost(), $this->database->getUsername(), $this->database->getPassword(), $this->database->getDbname());
+        echo "asdasd";
+        // Check connection
+        if (mysqli_connect_errno()) {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
+        mysqli_query($con, "SELECT usuario from usuarios where Usuario=".$this->username);
+        mysqli_close($con);
+    }
 }
