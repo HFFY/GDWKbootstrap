@@ -45,35 +45,35 @@
  <div class="row">
    <div class="col-sm-6 banner-info">
      <p>Tarea</p>
-     <select>
+     <select class="form-control" >
        <option value="volvo">Volvo</option>
        <option value="saab">Saab</option>
        <option value="mercedes">Mercedes</option>
        <option value="audi">Audi</option>
     </select>
-    <p>Fecha inicio</p>
+    <p><br>Fecha inicio</p>
     <form action="/action_page.php">
-  <input type="date" name="bday">
+  <input type="date" name="bday" class="form-control" >
 </form>
    </div>
    <div class="col-sm-6 banner-image">
      <p>Prioridad</p>
-     <select>
+     <select class="form-control" >
        <option value="volvo">Volvo</option>
        <option value="saab">Saab</option>
        <option value="mercedes">Mercedes</option>
        <option value="audi">Audi</option>
     </select>
-    <p>Fecha Aceptada</p>
+    <p><br>Fecha Aceptada</p>
     <form action="/action_page.php">
-  <input type="date" name="bday">
+  <input type="date" name="bday" class="form-control" >
 </form>
 
    </div>
    <div class="form-group">
-    <label for="inputlg">Descripcion</label>
+    <label for="inputlg"><br><br><br></label>
     <form action="/action_page.php">
-  <textarea class="form-control input-lg" name="message" rows="10" cols="30"></textarea>
+  <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion"></textarea>
   <br>
 </form>
   </div>

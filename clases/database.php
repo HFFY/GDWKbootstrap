@@ -1,26 +1,42 @@
 <?php
-class Database{
+class Database
+{
 
     // specify your own database credentials
     private $host = "localhost";
     private $db_name = "GDWKF";
     private $username = "root";
-    private $password = "1234";
+    private $password = "";
     public $conn;
 
     // get the database connection
-    public function getConnection(){
-
+    public function getConnection()
+    {
         $this->conn = null;
 
-        try{
+        try {
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
             $this->conn->exec("set names utf8");
-        }catch(PDOException $exception){
+        } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         }
 
         return $this->conn;
     }
+    public function getHost()
+    {
+        return $this->host;
+    }
+    public function getDbname()
+    {
+        return $this->db_name;
+    }
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
 }
-?>

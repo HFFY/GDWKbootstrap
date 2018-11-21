@@ -59,6 +59,13 @@ a.btn:hover
   box-shadow: 5px 5px 10px #999;
   transition: 0.3s;
 }
+.button
+{
+  background: transparent;
+  border: 1px solid darkorange;
+  color: #333;
+}
+
 .banner-info, .banner-image
 {
   margin: 30px 0;

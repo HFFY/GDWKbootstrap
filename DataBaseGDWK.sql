@@ -12,11 +12,11 @@ CREATE TABLE Usuarios (
   Idrango INT NOT NULL,
   Apellidos VARCHAR(64) NOT NULL,
   Contraseña VARCHAR(64) NOT NULL,
-  Usuario VARCHAR(64),
+  Usuario VARCHAR(64) UNIQUE,
   Estado INT NULL,
-  `Fecha de login` DATETIME,
-  `Fecha de cambio de clave` DATETIME,
-  `Fecha de creación` DATETIME,
+  `Fecha de login` VARCHAR(64),
+  `Fecha de cambio de clave` VARCHAR(64),
+  `Fecha de creación` VARCHAR(64),
   IDcreador INT NULL,
   IPcreación VARCHAR(64),
   IPlogin VARCHAR(64),
@@ -147,3 +147,5 @@ INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
 VALUES (null, 'Super Usuario');
 INSERT INTO usuarios (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
 VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
+INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras2',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
+INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','asdasd','haosdaosdao',1,'','','asdasd',null,'asdasd123','qwqeasda21312');

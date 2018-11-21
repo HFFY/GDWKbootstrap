@@ -1,19 +1,29 @@
 <?php
-class User implements \Serializable{
+include_once 'database.php';
+class User implements \Serializable
+{
 
     // database connection and table name
+
     private $conn;
+    private $database;
     private $table_name = "Usuarios";
 
     // object properties
     public $id;
     public $username;
     public $password;
-    public $created;
+    public $names;
+    public $lastname;
+    public $rol;
+    public $date;
+
 
     // constructor with $db as database connection
-    public function __construct($db){
+    public function __construct($db)
+    {
         $this->conn = $db;
+        $this->database= new Database();
     }
     // signup user
     public function serialize()
@@ -27,48 +37,39 @@ class User implements \Serializable{
 
     public function unserialize($data)
     {
-      echo "hola";
         list(
             $this->id,
             $this->username,
             $this->password
         ) = unserialize($data);
     }
-    function signup(){
-
-        if($this->isAlreadyExist()){
+    public function signup()
+    {
+        if ($this->isAlreadyExist()) {
             return false;
         }
-        // query to insert record
-        $query = "INSERT INTO
-                    " . $this->table_name . "
-                SET
-                    username=:username, password=:password, created=:created";
 
-        // prepare query
-        $stmt = $this->conn->prepare($query);
-
-        // sanitize
-        $this->username=htmlspecialchars(strip_tags($this->username));
-        $this->password=htmlspecialchars(strip_tags($this->password));
-        $this->created=htmlspecialchars(strip_tags($this->created));
-
-        // bind values
-        $stmt->bindParam(":username", $this->username);
-        $stmt->bindParam(":password", $this->password);
-        $stmt->bindParam(":created", $this->created);
-
-        // execute query
-        if($stmt->execute()){
-            $this->id = $this->conn->lastInsertId();
-            return true;
+        $con=mysqli_connect($this->database->getHost(), $this->database->getUsername(), $this->database->getPassword(), $this->database->getDbname());
+        echo "asdasd";
+        // Check connection
+        if (mysqli_connect_errno()) {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
 
-        return false;
 
+
+        // Perform queries
+
+        mysqli_query($con, "INSERT INTO $this->table_name (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
+  VALUES   ('$this->names', null, '1','$this->lastname','$this->password','$this->username',$this->rol,'','','$this->date',null,'asdasd123','qwqeasda21312')");
+
+
+        return true;
+        mysqli_close($con);
     }
     // login user
-    function login(){
+    public function login()
+    {
         // select all query
         $query = "SELECT
                     `Nombres`, `Apellidos`,`ID_usuarios`, `Contraseña`, `Usuario`
@@ -76,6 +77,7 @@ class User implements \Serializable{
                     " . $this->table_name . "
                 WHERE
                     Usuario='".$this->username."' AND Contraseña='".$this->password."'";
+
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -88,20 +90,20 @@ class User implements \Serializable{
 
         return $stmt;
     }
-    function isAlreadyExist(){
+    public function isAlreadyExist()
+    {
         $query = "SELECT *
             FROM
                 " . $this->table_name . "
             WHERE
-                username='".$this->username."'";
+                Usuario='".$this->username."'";
         // prepare query statement
         $stmt = $this->conn->prepare($query);
         // execute query
         $stmt->execute();
-        if($stmt->rowCount() > 0){
+        if ($stmt->rowCount() > 0) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }

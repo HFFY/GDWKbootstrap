@@ -54,16 +54,16 @@
       <div class="row">
         <form class="form-container">
           <div class="col-sm-6 banner-info">
-            <p>Ingresar nombre de usuario.</p>
+            <p>Seleccionar nombre de usuario.</p>
             <div class="form-group" method="post" action="crearusuario.php">
 
-              <input type="text" name="username" class="form-control" placeholder="Usuario">
+              <input type="text" name="username" class="form-control" placeholder="Ingresar usuario">
 
             </div>
-            <p><br>Ingresar Contraseña.</p>
+            <p><br>Seleccionar Contraseña.</p>
             <div class="form-group">
 
-              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresar contraseña">
             </div>
             <div class="form-group">
               <p><br>Seleccionar rol</p>
@@ -76,22 +76,17 @@
             </div>
           </div>
           <div class="col-sm-6 banner-image">
-            <p><br>Ingresar nombres.</p>
             <div class="form-group">
 
-              <input type="text" name="names" class="form-control" placeholder="Nombres">
+              <input type="text" name="nombres" class="form-control" placeholder="Nombres">
             </div>
-             <p><br>Ingresar apellidos.</p>
             <div class="form-group">
 
-              <input type="text" name="lastname" class="form-control" placeholder="Apellidos">
+              <input type="text" name="apellidos" class="form-control" placeholder="Apellidos">
             </div>
           </div>
           <div class="col-sm-6 banner-image">
-
-            <a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
-
-            <a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block">Crear</button></a>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>
 
@@ -100,41 +95,60 @@
   </header>
   <?php
 
-  // get database connection
   include_once '../clases/database.php';
-
-  // instantiate user object
   include_once '../clases/user.php';
 
+
   $database = new Database();
+
   $db = $database->getConnection();
 
   $user = new User($db);
 
-  // set user property values
+  echo $_GET['password'];
+  $user->username = isset($_GET['username']) ? $_GET['username'] : die();
 
-  $user->username = $_GET['username'];
-  $user->password = base64_encode($_GET['password']);
-  $user->rol = $_GET['rol'];
-  $user->names = $_GET['names'];
-  $user->lastname = $_GET['lastname'];
-  $user->date = date('Y-m-d H:i:s');
+  echo "asdasd";
+  $user->password = base64_encode(isset($_GET['password']) ? $_GET['password'] : die());
+  $user->names = isset($_GET['names']) ? $_GET['names'] : die();
+  $user->lastname = isset($_GET['lastname']) ? $_GET['lastname'] : die();
+  $user->rol = isset($_GET['rol']) ? $_GET['rol'] : die();
 
-  // create the user
-  if ($user->signup()) {
-      $user_arr=array(
-          "status" => true,
-          "message" => "Successfully Signup!",
-          
-      );
+  // read the details of user to be edited
+
+  $stmt = $user->signup();
+  echo $user->lastname."asdasd";
+
+  if ($stmt==true) {
+      // get retrieved row
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  // create array
+  // $user_arr=array(
+  // "status" => true,
+  // "message" => "Successfully Login!",
+  // "ID_usuarios" => $row['ID_usuarios'],
+  // "Usuario" => $row['Usuario']
+  //
+  // );
+  //
+  // $ser = $user->serialize();
+  // session_start();
+  // $_SESSION['ser'] = $ser;
+  //
+  // header("Location: paginaprincipal.php");
+  //
+  // echo 'asd';
   } else {
       $user_arr=array(
-          "status" => false,
-          "message" => "Username already exists!"
-      );
+  "status" => false,
+  "message" => "There is already an user lol!",
+  );
   }
-  print_r(json_encode($user_arr));
-  ?>
+  // make it json format
+  //print_r(json_encode($user_arr));
+
+    ?>
 
 </body>
 
