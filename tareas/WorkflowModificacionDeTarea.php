@@ -38,48 +38,59 @@
  </nav>
  <div class="container">
  <div class="row">
- <p class="big-text">Crear tarea</p>
+ <p class="big-text">Modificar tarea</p>
  </div>
+ </div>
+ <div class="container">
+   <div class="row">
+ <p>Estado</p>
+ <select>
+   <option value="volvo">Volvo</option>
+   <option value="saab">Saab</option>
+   <option value="mercedes">Mercedes</option>
+   <option value="audi">Audi</option>
+</select>
+</div>
  </div>
  <div class="container">
  <div class="row">
    <div class="col-sm-6 banner-info">
      <p>Tarea</p>
-     <select class="form-control" >
+     <select>
        <option value="volvo">Volvo</option>
        <option value="saab">Saab</option>
        <option value="mercedes">Mercedes</option>
        <option value="audi">Audi</option>
     </select>
-    <p><br>Fecha inicio</p>
+    <p>Fecha inicio</p>
     <form action="/action_page.php">
-  <input type="date" name="bday" class="form-control" >
+  <input type="date" name="bday">
 </form>
    </div>
    <div class="col-sm-6 banner-image">
      <p>Prioridad</p>
-     <select class="form-control" >
+     <select>
        <option value="volvo">Volvo</option>
        <option value="saab">Saab</option>
        <option value="mercedes">Mercedes</option>
        <option value="audi">Audi</option>
     </select>
-    <p><br>Fecha Aceptada</p>
+    <p>Fecha Aceptada</p>
     <form action="/action_page.php">
-  <input type="date" name="bday" class="form-control" >
+  <input type="date" name="bday">
 </form>
 
    </div>
    <div class="form-group">
-    <label for="inputlg"><br><br><br></label>
+    <label for="inputlg">Descripcion</label>
     <form action="/action_page.php">
-  <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion"></textarea>
+  <textarea class="form-control input-lg" name="message" rows="10" cols="30"></textarea>
   <br>
 </form>
   </div>
-<a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
-<a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block" href="" >Crear</button></a>
-</button>
+
+  <a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
+  <a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block" href="" >Modificar</button></a>
 
  </div>
  </div>
