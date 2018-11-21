@@ -59,12 +59,15 @@ class User implements \Serializable
 
 
         // Perform queries
-
-        mysqli_query($con, "INSERT INTO $this->table_name (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
+        if (!is_null($this->username)) {
+            mysqli_query($con, "INSERT INTO $this->table_name (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
   VALUES   ('$this->names', null, '1','$this->lastname','$this->password','$this->username',$this->rol,'','','$this->date',null,'asdasd123','qwqeasda21312')");
 
 
-        return true;
+            return true;
+        } else {
+            return false;
+        }
         mysqli_close($con);
     }
     // login user
