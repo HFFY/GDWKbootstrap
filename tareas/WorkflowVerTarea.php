@@ -51,7 +51,7 @@
        <option value="mercedes">Mercedes</option>
        <option value="audi">Audi</option>
     </select>
-    <p>Fecha inicio</p>
+    <p><br>Fecha inicio</p>
     <form action="/action_page.php">
   <input type="date" name="bday">
 </form>
@@ -64,7 +64,7 @@
        <option value="mercedes">Mercedes</option>
        <option value="audi">Audi</option>
     </select>
-    <p>Fecha Aceptada</p>
+    <p><br>Fecha Aceptada</p>
     <form action="/action_page.php">
   <input type="date" name="bday">
 </form>
