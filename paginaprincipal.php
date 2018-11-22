@@ -26,14 +26,19 @@
 
 
 
+  if (!empty($_SESSION['ser'])) {
       $user->unserialize($_SESSION['ser']);
-
+      $sql2 = 'select Idrango from usuarios where usuario="'.$user->username.'";';
+      $result2 = $db->query($sql2);
+      $result2->setFetchMode(PDO::FETCH_ASSOC);
+      $fila2 = $result2->fetch();
+      $_SESSION['rol']=$fila2['Idrango'];
       //$user->unserialize($ser);
 
       echo $user->username;
-
+  }
       if (!empty($user->username)) {
-          echo $user->usernam; ?>
+          echo $user->username; ?>
 
 <header class="header">
 
@@ -49,8 +54,8 @@
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
-         <li><a href=""><?php echo $user->username; ?></a></li>
-         <li><a href="">WorkFlow <?php session_destroy(); ?></a></li>
+         <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?></a></li>
+         <li><a href="">WorkFlow </a></li>
          <li><a href="">Añadir Documento</a></li>
          <li><a href="">Modificar Documento</a></li>
 
@@ -79,7 +84,7 @@
    </div>
 
    <div class="col-sm-6 banner-info">
-     <a class="btn btn-first" href="#">Acceder Super Usuario</a>
+     <a class="btn btn-first" href="usuario/master.php">Acceder Super Usuario</a>
      <a class="btn btn-second" href="#">Añadir documento</a>
      <a class="btn btn-second" href="#">Contacta a gestion  de calidad</a>
    </div>

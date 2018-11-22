@@ -14,6 +14,43 @@
 </head>
 
 <body>
+  <?php
+
+  // get database connection
+  include_once '../clases/database.php';
+
+  // instantiate user object
+  include_once '../clases/user.php';
+  session_start();
+  if ($_SESSION['rol']=="1") {
+      $database = new Database();
+      $db = $database->getConnection();
+
+      $user = new User($db);
+
+      // set user property values
+
+      $user->username = $_GET['username'];
+      $user->password = base64_encode($_GET['password']);
+      $user->rol = $_GET['rol'];
+      $user->names = $_GET['names'];
+      $user->lastname = $_GET['lastname'];
+      $user->date = date('Y-m-d H:i:s');
+
+      // create the user
+      if ($user->signup()) {
+          $user_arr=array(
+          "status" => true,
+          "message" => "Successfully Signup!",
+
+      );
+      } else {
+          $user_arr=array(
+          "status" => false,
+          "message" => "Username already exists!"
+      );
+      }
+      print_r(json_encode($user_arr)); ?>
   <header class="header">
 
     <nav class="navbar navbar-style">
@@ -99,43 +136,10 @@
     </div>
   </header>
   <?php
-
-  // get database connection
-  include_once '../clases/database.php';
-
-  // instantiate user object
-  include_once '../clases/user.php';
-
-  $database = new Database();
-  $db = $database->getConnection();
-
-  $user = new User($db);
-
-  // set user property values
-
-  $user->username = $_GET['username'];
-  $user->password = base64_encode($_GET['password']);
-  $user->rol = $_GET['rol'];
-  $user->names = $_GET['names'];
-  $user->lastname = $_GET['lastname'];
-  $user->date = date('Y-m-d H:i:s');
-
-  // create the user
-  if ($user->signup()) {
-      $user_arr=array(
-          "status" => true,
-          "message" => "Successfully Signup!",
-          
-      );
   } else {
-      $user_arr=array(
-          "status" => false,
-          "message" => "Username already exists!"
-      );
+      echo "You don't have permission to acces this page.";
   }
-  print_r(json_encode($user_arr));
-  ?>
-
+   ?>
 </body>
 
 </html>
