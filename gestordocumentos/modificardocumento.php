@@ -78,7 +78,7 @@
     <div class="container">
       <div class="navbar-header ">
 
-        <p class="big-text">Subir documento</p>
+        <p class="big-text">Modificar documento</p>
 
 
       </div>

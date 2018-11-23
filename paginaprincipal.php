@@ -23,7 +23,11 @@
   $sql = 'select * from documentos;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
-
+  // $sqlasd = "INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro',
+  //   'pedra','hola','hola','15/25','12/89','todas','todos','documento hola','1');";
+  // $resultasd = $db->query($sqlasd);
+  // $resultasd->setFetchMode(PDO::FETCH_ASSOC);
+  // $filaasd = $resultasd->fetch();
 
 
   if (!empty($_SESSION['ser'])) {

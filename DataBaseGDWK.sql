@@ -27,22 +27,22 @@ CREATE TABLE Usuarios (
 
 
 CREATE TABLE `Tipo de documento` (
-  `idtipo de documento` INT NOT NULL,
+  `idtipo de documento` INT NOT NULL AUTO_INCREMENT,
   `Descripción` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`idtipo de documento`)
 );
 CREATE TABLE `subproceso` (
-  `idsubproceso` INT NOT NULL,
+  `idsubproceso` INT NOT NULL AUTO_INCREMENT,
   `Descripción` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`idsubproceso`)
 );
 CREATE TABLE `Proceso` (
-  `idProceso` INT NOT NULL,
+  `idProceso` INT NOT NULL AUTO_INCREMENT,
   `Descripcion` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`idProceso`)
 );
 CREATE TABLE Documentos (
-  `ID_documentos` INT NOT NULL,
+  `ID_documentos` INT NOT NULL AUTO_INCREMENT,
   `Proceso` INT NULL,
   `Subproceso` INT NULL,
   `Tipo de documento` INT NULL,
@@ -145,7 +145,11 @@ CREATE TABLE `TareasUsuarios` (
 );
 INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
 VALUES (null, 'Super Usuario');
+INSERT into proceso VALUES(null,'proceso1');
+INSERT into subproceso VALUES(null,'proceso1');
+INSERT into `tipo de documento` VALUES(null,'proceso1');
 INSERT INTO usuarios (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
 VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
 INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras2',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
 INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','asdasd','haosdaosdao',1,'','','asdasd',null,'asdasd123','qwqeasda21312');
+INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro','pedra','hola','hola','15/25','12/89','todas','todos','documento hola','1');
