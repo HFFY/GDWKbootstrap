@@ -27,7 +27,11 @@ class documento
     public $Subproceso;
     public $Tipodedocumento;
     //
-
+    public function __construct($db)
+    {
+        $this->conn = $db;
+        $this->database= new Database();
+    }
     public function getDocumentLink()
     {
         $query = "SELECT
@@ -44,6 +48,47 @@ class documento
 
         return $stmt;
     }
+
+        public function deactivateDocument($iddocument)
+        {
+            // $query = "SELECT
+            //           `Link`
+            //         FROM
+            //         " . $this->table_name . "
+            //       WHERE
+            //           Proceso='".$this->Proceso."' AND Subproceso='".$this->Subproceso."'"."' AND Tipod de documento='".$this->Tipodedocumento."'";
+            //
+            // // prepare query statement
+            // $stmt = $this->conn->prepare($query);
+            // // execute query
+            // $stmt->execute();
+            //
+            // return $stmt;
+            $sql = 'UPDATE '$this->table_name' SET Estado='0' WHERE ID_documentos='$iddocument';';
+            $result = $db->query($sql);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+            $fila = $result->fetch();
+        }
+        public function activateDocument($iddocument)
+        {
+            // $query = "SELECT
+            //           `Link`
+            //         FROM
+            //         " . $this->table_name . "
+            //       WHERE
+            //           Proceso='".$this->Proceso."' AND Subproceso='".$this->Subproceso."'"."' AND Tipod de documento='".$this->Tipodedocumento."'";
+            //
+            // // prepare query statement
+            // $stmt = $this->conn->prepare($query);
+            // // execute query
+            // $stmt->execute();
+            //
+            // return $stmt;
+            $sql = 'UPDATE '$this->table_name' SET Estado='1' WHERE ID_documentos='$iddocument';';
+            $result = $db->query($sql);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+            $fila = $result->fetch();
+        }
     public function getDocument($iddocument)
     {
         // $query = "SELECT

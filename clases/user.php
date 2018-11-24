@@ -24,6 +24,7 @@ class User implements \Serializable
     {
         $this->conn = $db;
         $this->database= new Database();
+        $this->date=date('Y-m-d H:i:s');
     }
     // signup user
     public function serialize()
@@ -61,7 +62,7 @@ class User implements \Serializable
         // Perform queries
         if (!is_null($this->username)) {
             mysqli_query($con, "INSERT INTO $this->table_name (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
-  VALUES   ('$this->names', null, '1','$this->lastname','$this->password','$this->username',$this->rol,'','','$this->date',null,'asdasd123','qwqeasda21312')");
+  VALUES   ('$this->names', null, '1','$this->lastname','$this->password','$this->username',$this->rol,'','','$this->date',null,null,null)");
 
 
             return true;
@@ -110,15 +111,59 @@ class User implements \Serializable
             return false;
         }
     }
-    public function getUsername()
+    public function getUser($iduser)
     {
-        $con=mysqli_connect($this->database->getHost(), $this->database->getUsername(), $this->database->getPassword(), $this->database->getDbname());
-        echo "asdasd";
-        // Check connection
-        if (mysqli_connect_errno()) {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        }
-        mysqli_query($con, "SELECT usuario from usuarios where Usuario=".$this->username);
-        mysqli_close($con);
+        $sql = 'select * from usuarios where ID_usuarios='.$iduser.';';
+        $result = $db->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $fila = $result->fetch();
+
+        return $fila;
     }
+    public function setUserDeactivated($iduser)
+    {
+      $sql = 'UPDATE '$this->table_name' SET Estado='0' WHERE ID_usuarios='$iduser';';
+      $result = $db->query($sql);
+      $result->setFetchMode(PDO::FETCH_ASSOC);
+      $fila = $result->fetch();
+    }
+    public function setUserActivated($iduser)
+    {
+      $sql = 'UPDATE '$this->table_name' SET Estado='1' WHERE ID_usuarios='$iduser';';
+      $result = $db->query($sql);
+      $result->setFetchMode(PDO::FETCH_ASSOC);
+      $fila = $result->fetch();
+    }
+    // public $id;
+    // public $username;
+    // public $password;
+    // public $names;
+    // public $lastname;
+    // public $rol;
+    // public $date;
+
+    public function modifiedUser($iduser)
+    {
+      $this->date=date('Y-m-d H:i:s');
+      $sql = 'UPDATE '$this->table_name' SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', Fecha de cambio de clave='$this->date'  WHERE ID_usuarios='$iduser';';
+      $result = $db->query($sql);
+      $result->setFetchMode(PDO::FETCH_ASSOC);
+      $fila = $result->fetch();
+    }
+    function getRealIpAddr()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+    {
+      $ip=$_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+    {
+      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else
+    {
+      $ip=$_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
 }
