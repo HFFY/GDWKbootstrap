@@ -16,6 +16,7 @@
 
   include_once '../clases/database.php';
   include_once '../clases/user.php';
+  include_once '../clases/documento.php';
   session_start();
   $database = new Database();
   $db = $database->getConnection();
@@ -23,9 +24,10 @@
   $sql = 'select * from usuarios;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
+  $document = new Documento($db);
   $sqlD = 'select * from documentos;';
-  $resultD = $db->query($sqlD);
-  $resultD->setFetchMode(PDO::FETCH_ASSOC);
+   $resultD = $db->query($sqlD);
+   $resultD->setFetchMode(PDO::FETCH_ASSOC);
 
 
 
@@ -35,13 +37,14 @@
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
+
       $_SESSION['rol']=$fila2['Idrango'];
       //$user->unserialize($ser);
 
       echo $user->username;
   }
       if (!empty($user->username)) {
-          echo $user->username; ?>
+          ?>
 
 <header class="header">
 
@@ -78,56 +81,63 @@
            <thead  class="thead-dark">
              <tr>
                <th style="width: 25%">Nombre</th>
-               <th style="width: 25%">Codigo</th>
-               <th style="width: 25%">Version</th>
-               <th style="width: 25%">Link</th>
+               <th style="width: 25%">Rol</th>
+               <th style="width: 25%">Estado</th>
+               <th style="width: 25%">Modificar</th>
 
              </tr>
            </thead>
            <tbody>
-              <?php   while ($fila = $result->fetch()) {
-              ?>
+              <?php
+          while ($fila = $result->fetch()) {
+              echo $_POST['AD'.$fila['ID_usuarios']];
+              echo $fila['ID_usuarios'];
+              if ($_SERVER['REQUEST_METHOD']=="POST" && isset($_POST['AD'.$fila['ID_usuarios']])) {
+                  if ($fila['Estado']==1) {
+                      $user->setUserDeactivated($fila['ID_usuarios']);
+                  } else {
+                      $user->setUserActivated($fila['ID_usuarios']);
+                  }
+                  header("Refresh:0");
+              }
+
+              if ($fila['Idrango']!='666') {
+                  ?>
               <tr>
-                 <td><?php echo $fila['Usuario']; ?></td>
-                 <td>Rol</td>
-                 <td>Eliminar</td>
-                  <td>Modificar</td>
+                 <td><?php echo $fila['Nombres']; ?></td>
+                 <td><?php
+                 $dumvar=$user->getDescriptionRango($fila['Idrango']);
+                  echo $dumvar['Descripcion']; ?></td>
+
+                 <td>
+
+                        <form  method="post">
+                            <input type="submit" class="button" name="AD<?php
+                            echo $fila['ID_usuarios']?>"
+                              value="<?php
+                                if ($fila['Estado']==1) {
+                                    echo "Activado";
+                                } else {
+                                    echo "Desactivado";
+                                } ?>"
+                                />
+                          </form>
+                 </td>
+                 <?php
+               ?>
+
+
+               <td><a href="<?php $_SESSION['selecteduser']=$fila['ID_usuarios'] ?>modificarusuario.php">
+
+                 Modificar usuario</a></td>
               </tr>
              <?php
+              }
           } ?>
            </tbody>
            </table>
 
-      <!-- <table class="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Codigo</th>
-            <th>Version</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Anna</td>
-            <td>Anna</td>
-            <td>Anna</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>John</td>
-              <td>John</td>
-                <td>John</td>
-          </tr>
-        </tbody>
-      </table> -->
+
 
   </div>
   <div class="col-sm-6 banner-info" style="background-color:lavenderblush;">
@@ -145,13 +155,18 @@
         </tr>
       </thead>
       <tbody>
-         <?php   while ($fila = $result->fetch()) {
-              ?>
+         <?php
+
+          while ($filaD = $resultD->fetch()) {
+              $descripcioncodigo=$document->getCodeDocument($filaD['ID_documentos']);
+              echo "asdas"; ?>
          <tr>
-            <td><?php echo $fila['Nombre del documento']; ?></td>
-            <td>Codigo</td>
-            <td><?php echo $fila['Version']; ?></td>
-             <td>Link</td>
+            <td><?php echo $filaD['Nombre del documento']; ?></td>
+            <td><?php echo $descripcioncodigo['descripcion']; ?></td>
+            <td><?php echo $filaD['Version']; ?></td>
+             <td><a href="<?php echo $filaD['Link']; ?>">
+
+               Descargar</a></td>
          </tr>
         <?php
           } ?>

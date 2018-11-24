@@ -114,7 +114,7 @@ class User implements \Serializable
     public function getUser($iduser)
     {
         $sql = 'select * from usuarios where ID_usuarios='.$iduser.';';
-        $result = $db->query($sql);
+        $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
 
@@ -122,48 +122,47 @@ class User implements \Serializable
     }
     public function setUserDeactivated($iduser)
     {
-      $sql = 'UPDATE '$this->table_name' SET Estado='0' WHERE ID_usuarios='$iduser';';
-      $result = $db->query($sql);
-      $result->setFetchMode(PDO::FETCH_ASSOC);
-      $fila = $result->fetch();
+        $sql = "UPDATE $this->table_name SET Estado=0 WHERE ID_usuarios='$iduser';";
+    
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $fila = $result->fetch();
     }
     public function setUserActivated($iduser)
     {
-      $sql = 'UPDATE '$this->table_name' SET Estado='1' WHERE ID_usuarios='$iduser';';
-      $result = $db->query($sql);
-      $result->setFetchMode(PDO::FETCH_ASSOC);
-      $fila = $result->fetch();
+        $sql = "UPDATE $this->table_name SET Estado='1' WHERE ID_usuarios='$iduser';";
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $fila = $result->fetch();
     }
-    // public $id;
-    // public $username;
-    // public $password;
-    // public $names;
-    // public $lastname;
-    // public $rol;
-    // public $date;
+
 
     public function modifiedUser($iduser)
     {
-      $this->date=date('Y-m-d H:i:s');
-      $sql = 'UPDATE '$this->table_name' SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', Fecha de cambio de clave='$this->date'  WHERE ID_usuarios='$iduser';';
-      $result = $db->query($sql);
-      $result->setFetchMode(PDO::FETCH_ASSOC);
-      $fila = $result->fetch();
+        $this->date=date('Y-m-d H:i:s');
+        $sql = "UPDATE $this->table_name SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', Fecha de cambio de clave='$this->date'  WHERE ID_usuarios='$iduser';";
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $fila = $result->fetch();
     }
-    function getRealIpAddr()
-{
-    if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+    public function getRealIpAddr()
     {
-      $ip=$_SERVER['HTTP_CLIENT_IP'];
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from share internet
+            $ip=$_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {   //to check ip is pass from proxy
+            $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+    public function getDescriptionRango($idrango)
     {
-      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $sql = 'select Descripcion from RangoUsuarios where idRangoUsuarios='.$idrango.';';
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $fila = $result->fetch();
+
+        return $fila;
     }
-    else
-    {
-      $ip=$_SERVER['REMOTE_ADDR'];
-    }
-    return $ip;
-}
 }

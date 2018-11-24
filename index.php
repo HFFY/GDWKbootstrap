@@ -37,6 +37,7 @@
                 </section>
             </section>
         </section>
+
         <?php
 
         include_once 'clases/database.php';
@@ -47,7 +48,7 @@
         $user = new User($db);
         $user->username = isset($_GET['username']) ? $_GET['username'] : die();
         $user->password = base64_encode(isset($_GET['password']) ? $_GET['password'] : die());
-
+  
         // read the details of user to be edited
         $stmt = $user->login();
 
@@ -76,8 +77,6 @@
 
                 header("Location: paginaprincipal.php");
             }
-
-            echo 'asd';
         } else {
             $user_arr=array(
         "status" => false,

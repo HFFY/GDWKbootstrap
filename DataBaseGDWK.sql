@@ -59,6 +59,7 @@ CREATE TABLE Documentos (
   `Registros que corresponden` VARCHAR(45) NULL,
   `Descripción` LONGTEXT NULL,
   `Estado` INT NOT NULL,
+  `Link` LONGTEXT NOT NULL,
     PRIMARY KEY (`ID_documentos`),
     FOREIGN KEY (`Proceso`)
     REFERENCES `Proceso` (`idProceso`),
@@ -74,23 +75,26 @@ CREATE TABLE `codigoDocumento` (
   `idsubproceso` INT NULL,
   `idtipodedocumento` INT NULL,
   `descripcion` VARCHAR(64) NULL,
+  `ID_documentos` INT NOT NULL,
     PRIMARY KEY (`idcodigoDocumento`),
     FOREIGN KEY (`idproceso`)
     REFERENCES `GDWKF`.`Proceso` (`idProceso`),
     FOREIGN KEY (`idsubproceso`)
     REFERENCES `GDWKF`.`subproceso` (`idsubproceso`),
     FOREIGN KEY (`idtipodedocumento`)
-    REFERENCES `Tipo de documento` (`idtipo de documento`)
+    REFERENCES `Tipo de documento` (`idtipo de documento`),
+    FOREIGN KEY (`ID_documentos`)
+    REFERENCES `Documentos` (`ID_documentos`)
 );
 CREATE TABLE `documentosPorRango` (
   `idDocumentosPorRango` INT NOT NULL AUTO_INCREMENT,
-  `idRangoUsuarios` INT NULL,
-  `idCodigoDocumento` INT NULL,
+  `idRangoUsuarios` INT NOT NULL,
+  `ID_documentos` INT NOT NULL,
   PRIMARY KEY (`idDocumentosPorRango`),
     FOREIGN KEY (`idRangoUsuarios`)
     REFERENCES `RangoUsuarios` (`idRangoUsuarios`),
-    FOREIGN KEY (`idCodigoDocumento`)
-    REFERENCES `GDWKF`.`codigoDocumento` (`idcodigoDocumento`)
+    FOREIGN KEY (`ID_documentos`)
+    REFERENCES `Documentos` (`ID_documentos`)
 );
 CREATE TABLE `DocUsuCambios` (
   `Id_cambio` INT NOT NULL,
@@ -145,11 +149,14 @@ CREATE TABLE `TareasUsuarios` (
 );
 INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
 VALUES (null, 'Super Usuario');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (666,'GOD');
 INSERT into proceso VALUES(null,'proceso1');
 INSERT into subproceso VALUES(null,'proceso1');
 INSERT into `tipo de documento` VALUES(null,'proceso1');
+INSERT INTO usuarios VALUES ('GOD', '666','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
 INSERT INTO usuarios (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
 VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
 INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras2',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
 INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','asdasd','haosdaosdao',1,'','','asdasd',null,'asdasd123','qwqeasda21312');
-INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro','pedra','hola','hola','15/25','12/89','todas','todos','documento hola','1');
+INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro','pedra','hola','hola','15/25','12/89','todas','todos','documento hola','1','http://www.google.com');
+INSERT into codigoDocumento VALUES (null, '1','1','1','111','1');
