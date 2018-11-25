@@ -37,21 +37,19 @@
       $user->names = $_GET['names'];
       $user->lastname = $_GET['lastname'];
       $user->date = date('Y-m-d H:i:s');
-
+      $olduser=$user->getUser($_SESSION['oldusercreacion']);
       // create the user
       if ($user->signup()) {
-          $user_arr=array(
-          "status" => true,
-          "message" => "Successfully Signup!",
-
-      );
+          //     $user_arr=array(
+          //     "status" => true,
+          //     "message" => "Successfully Signup!",
+          //
+          // );
+          // echo "Creacion exitosa";
       } else {
-          $user_arr=array(
-          "status" => false,
-          "message" => "Username already exists!"
-      );
+          // echo "fallo la creacion";
       }
-      print_r(json_encode($user_arr)); ?>
+      // print_r(json_encode($user_arr));?>
   <header class="header">
 
     <nav class="navbar navbar-style">
@@ -66,10 +64,9 @@
         </div>
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="">Login</a></li>
-            <li><a href="">WorkFlow</a></li>
-            <li><a href="">Añadir Documento</a></li>
-            <li><a href="">Modificar Documento</a></li>
+            <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
+            <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+            <li><a href="../gestordocumentos/gdpaginaprincipal.php">Gestor de documentos</a></li>
 
           </ul>
         </div>

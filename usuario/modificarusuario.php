@@ -73,13 +73,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href=""> <img class="logo" src="../images/logo.png"></a>
+          <a href="../paginaprincipal.php"> <img class="logo" src="../images/logo.png"></a>
         </div>
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-            <li><a href="">WorkFlow </a></li>
-            <li><a href="">Gestor de documentos</a></li>
+            <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+            <li><a href="../gestordocumentos/gdpaginaprincipal.php">Gestor de documentos</a></li>
 
           </ul>
         </div>

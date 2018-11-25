@@ -18,39 +18,50 @@
 
   // get database connection
   include_once '../clases/database.php';
-
+  include_once '../clases/documento.php';
   // instantiate user object
   include_once '../clases/user.php';
   session_start();
-  if ($_SESSION['rol']=="1") {
+  if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
       $database = new Database();
       $db = $database->getConnection();
 
       $user = new User($db);
+      $document = new Documento($db);
+      $olduser=$user->getUser($_SESSION['oldusercreacion']);
+      echo $_SERVER['REQUEST_METHOD'];
 
-      // set user property values
 
-      $user->username = $_GET['username'];
-      $user->password = base64_encode($_GET['password']);
-      $user->rol = $_GET['rol'];
-      $user->names = $_GET['names'];
-      $user->lastname = $_GET['lastname'];
-      $user->date = date('Y-m-d H:i:s');
 
-      // create the user
-      if ($user->signup()) {
-          $user_arr=array(
-          "status" => true,
-          "message" => "Successfully Signup!",
+      if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
+          $document->Proceso = isset($_POST['Proceso']) ? $_POST['Proceso'] : die();
+          $document->Tipodedocumento = isset($_POST['Tipodedocumento']) ? $_POST['Tipodedocumento'] : die();
+          $document->Numerodeldocumento = isset($_POST['Numerodeldocumento']) ? $_POST['Numerodeldocumento'] : die();
+          $document->Nombredeldocumento = isset($_POST['Nombredeldocumento']) ? $_POST['Nombredeldocumento'] : die();
+          $document->Subproceso = isset($_POST['Subproceso']) ? $_POST['Subproceso'] : die();
+          $document->Fechadeentradavigencia = isset($_POST['Fechadeentradavigencia']) ? $_POST['Fechadeentradavigencia'] : die();
+          $document->Fechadeentradaencaducidad = isset($_POST['Fechadeentradaencaducidad']) ? $_POST['Fechadeentradaencaducidad'] : die();
+          $document->Version = isset($_POST['Version']) ? $_POST['Version'] : die();
+          $document->Creador = isset($_POST['Creador']) ? $_POST['Creador'] : die();
+          $document->Revisor = isset($_POST['Revisor']) ? $_POST['Revisor'] : die();
+          $document->Autorizador = isset($_POST['Autorizador']) ? $_POST['Autorizador'] : die();
+          $document->Disenodelproceso = isset($_POST['Disenodelproceso']) ? $_POST['Disenodelproceso'] : die();
+          $document->Areasalasqueafecta = isset($_POST['Areasalasqueafecta']) ? $_POST['Areasalasqueafecta'] : die();
+          $document->Registrosquecorresponden = isset($_POST['Registrosquecorresponden']) ? $_POST['Registrosquecorresponden'] : die();
 
-      );
-      } else {
-          $user_arr=array(
-          "status" => false,
-          "message" => "Username already exists!"
-      );
-      }
-      print_r(json_encode($user_arr)); ?>
+          $document->Descripcion = isset($_POST['Descripcion']) ? $_POST['Descripcion'] : die();
+          // $my_folder = "../uploads/";
+          // echo $my_folder . $_FILES['file']['tmp_name'];
+          // if (move_uploaded_file($_FILES['file']['tmp_name'], $my_folder . $_FILES['file']['name'])) {
+          //     echo 'Received file' . $_FILES['file']['name'] . ' with size ' . $_FILES['file']['size'];
+          // } else {
+          //     echo 'Upload failed!';
+          //
+          //     var_dump($_FILES['file']['error']);
+          // }
+          $document->Link = "https://www.google.com";
+          $document->insertDocument();
+      } ?>
   <header class="header">
 
     <nav class="navbar navbar-style">
@@ -61,14 +72,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href=""> <img class="logo" src="../images/logo.png"></a>
-        </div>
-        <div class="collapse navbar-collapse" id="micon">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="">Login</a></li>
-            <li><a href="">WorkFlow</a></li>
-            <li><a href="">Añadir Documento</a></li>
-            <li><a href="">Modificar Documento</a></li>
+          <a href="../paginaprincipal.php"> <img class="logo" src="../images/logo.png"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="micon">
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
+      <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+      <li><a href="gestordocumentos/gdpaginaprincipal.php">Gestor de documentos</a></li>
 
           </ul>
         </div>
@@ -88,11 +98,11 @@
     </div>
 
     <div class="container">
-        <form class="form-container">
+        <form class="form-container" action="subirdocumento.php" method="post">
       <div class="row">
 
           <div class="col-sm-6 banner-info" align="left" >
-            <div class="form-group" method="post" action="subirdocumento.php">
+            <div class="form-group" >
               <p><br>Seleccionar Procesos</p>
             <select class="form-control" name="Proceso">
               <option value="1">1</option>
@@ -103,7 +113,7 @@
                 </div>
               <div class="form-group">
               <p><br>Seleccionar Tipo de documento</p>
-            <select class="form-control" name="Tipo de documento">
+            <select class="form-control" name="Tipodedocumento">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -113,13 +123,13 @@
             <p>Numero del documento.</p>
 
               <div class="form-group">
-              <input type="text" name="Numero del documento" class="form-control" placeholder="Numero del documento">
+              <input type="text" name="Numerodeldocumento" class="form-control" placeholder="Numero del documento">
 
             </div>
             <p><br>Nombre del documento.</p>
             <div class="form-group">
 
-              <input type="text" name="Nombre del documento" class="form-control" placeholder="Nombre del documento">
+              <input type="text" name="Nombredeldocumento" class="form-control" placeholder="Nombre del documento">
             </div>
             <div class="form-group">
             <p><br>Subproceso</p>
@@ -133,11 +143,11 @@
 
               <div class="form-group">
                 <p><br>Fecha de entrada en vigencia.</p>
-                <input type="text" name="Nombre del documento" class="form-control" placeholder="Nombre del documento">
+                <input type="text" name="Fechadeentradavigencia" class="form-control" placeholder="Fecha de entrada vigencia">
               </div>
               <div class="form-group">
                 <p><br>Fecha de entrada en caducidad.</p>
-                <input type="text" name="Nombre del documento" class="form-control" placeholder="Nombre del documento">
+                <input type="text" name="Fechadeentradaencaducidad" class="form-control" placeholder="Fecha de entrada caducidad">
               </div>
           </div>
           <div class="col-sm-6 banner-image" align="left" >
@@ -145,12 +155,12 @@
             <p><br>Version.</p>
             <div class="form-group">
 
-              <input type="text" name="version" class="form-control" placeholder="Version">
+              <input type="text" name="Version" class="form-control" placeholder="Version">
             </div>
              <p><br>Creador.</p>
             <div class="form-group">
 
-              <input type="text" name="creador" class="form-control" placeholder="creador">
+              <input type="text" name="Creador" class="form-control" placeholder="creador">
             </div>
             <p><br>Revisor.</p>
            <div class="form-group">
@@ -160,38 +170,43 @@
            <p><br>Autorizador.</p>
           <div class="form-group">
 
-            <input type="text" name="autorizador" class="form-control" placeholder="autorizador">
+            <input type="text" name="Autorizador" class="form-control" placeholder="Autorizador">
           </div>
-          <p><br>Dueño del proceso.</p>
+          <p><br>Diseño del proceso.</p>
          <div class="form-group">
 
-           <input type="text" name="dueñodelproceso" class="form-control" placeholder="dueñodelproceso">
+           <input type="text" name="Disenodelproceso" class="form-control" placeholder="Diseño del proceso">
          </div>
          <div class="form-group">
            <p><br>Areas a las que afecta.</p>
-           <input type="text" name="Areas a las que afecta" class="form-control" placeholder="Areas a las que afecta">
+           <input type="text" name="Areasalasqueafecta" class="form-control" placeholder="Areas a las que afecta">
          </div>
          <div class="form-group">
            <p><br>Registros que correspondan.</p>
-           <input type="text" name="Registros que correspondan" class="form-control" placeholder="Registros que correspondan">
+           <input type="text" name="Registrosquecorresponden" class="form-control" placeholder="Registros que correspondan">
          </div>
           </div>
           <br><br><br>
-          <input type="file" id="myDocument" class="form-control">
-  </div>
+           <form action="subirdocumento.php" method="post" enctype="multipart/form-data">
+          <input type="file" name="file" id="file" class="form-control">
+          <!-- <input type="submit" name="submit" class="button" value="submit" > -->
+          </form>
+         </div>
           <div class="form-group" align="left">
            <label for="inputlg"><br><br><br></label>
-           <form action="">
-         <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion"></textarea>
+
+         <textarea class="form-control input-lg" name="Descripcion" rows="10" cols="30" placeholder="Descripcion"></textarea>
             <br>
-           </form>
+
          </div>
 
           <div class="col-sm-6 banner-image">
 
+            <div class="form-group">
             <a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
 
-            <a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block">Crear</button></a>
+                <input type="submit" name="crear" class="button" value="Crear" />
+              </div>
           </div>
         </form>
 

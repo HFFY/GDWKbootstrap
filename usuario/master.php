@@ -43,8 +43,8 @@
       //
       // echo $user->username;
   }
-      if (!empty($user->username)) {
-          ?>
+    if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
+        ?>
 
 <header class="header">
 
@@ -56,7 +56,7 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
              </button>
-             <a href=""> <img class="logo" src="../images/logo.png"></a>
+             <a href="../paginaprincipal.php"> <img class="logo" src="../images/logo.png"></a>
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
@@ -89,38 +89,44 @@
            </thead>
            <tbody>
               <?php
-          while ($fila = $result->fetch()) {
-              echo $_POST['AD'.$fila['ID_usuarios']];
-              echo $fila['ID_usuarios'];
-              if ($_SERVER['REQUEST_METHOD']=="POST" && isset($_POST['AD'.$fila['ID_usuarios']])) {
-                  if ($fila['Estado']==1) {
-                      $user->setUserDeactivated($fila['ID_usuarios']);
-                  } else {
-                      $user->setUserActivated($fila['ID_usuarios']);
-                  }
-                  header("Refresh:0");
-              }
+        while ($fila = $result->fetch()) {
+            // echo $_POST['AD'.$fila['ID_usuarios']];
 
-              if ($fila['Idrango']!='666') {
-                  ?>
+            if ($_SERVER['REQUEST_METHOD']=="POST" && isset($_POST['AD'.$fila['ID_usuarios']])) {
+                if ($fila['Estado']==1) {
+                    $user->setUserDeactivated($fila['ID_usuarios']);
+                    header("Refresh:0");
+                    unset($_POST['AD'.$fila['ID_usuarios']]);
+                } else {
+                    $user->setUserActivated($fila['ID_usuarios']);
+                    header("Refresh:0");
+                    unset($_POST['AD'.$fila['ID_usuarios']]);
+                }
+                // header("Refresh:0");
+            }
+
+            if ($fila['Idrango']!='666') {
+                ?>
               <tr>
                  <td><?php echo $fila['Nombres']; ?></td>
                  <td><?php
                  $dumvar=$user->getDescriptionRango($fila['Idrango']);
-                  echo $dumvar['Descripcion']; ?></td>
+                echo $dumvar['Descripcion']; ?></td>
 
                  <td>
 
-                        <form  method="post">
+                        <form  method="post" >
                             <input type="submit" class="button" name="AD<?php
                             echo $fila['ID_usuarios']?>"
                               value="<?php
+
                                 if ($fila['Estado']==1) {
                                     echo "Activado";
                                 } else {
                                     echo "Desactivado";
                                 } ?>"
                                 />
+
                           </form>
                  </td>
                  <?php
@@ -132,8 +138,8 @@
                  Modificar usuario</a></td>
               </tr>
              <?php
-              }
-          } ?>
+            }
+        } ?>
            </tbody>
            </table>
 
@@ -158,8 +164,7 @@
          <?php
 
           while ($filaD = $resultD->fetch()) {
-              $descripcioncodigo=$document->getCodeDocument($filaD['ID_documentos']);
-              echo "asdas"; ?>
+              $descripcioncodigo=$document->getCodeDocument($filaD['ID_documentos']); ?>
          <tr>
             <td><?php echo $filaD['Nombre del documento']; ?></td>
             <td><?php echo $descripcioncodigo['descripcion']; ?></td>
@@ -181,9 +186,12 @@
 
 
 <?php
-      } else {
-          echo "You don't have permission to view this page.";
-      }
+    } else {
+        echo "You don't have permission to view this page.";
+    }
+
+
+
  ?>
 </body>
 

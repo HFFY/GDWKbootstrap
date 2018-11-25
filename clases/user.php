@@ -51,7 +51,7 @@ class User implements \Serializable
         }
 
         $con=mysqli_connect($this->database->getHost(), $this->database->getUsername(), $this->database->getPassword(), $this->database->getDbname());
-        echo "asdasd";
+      
         // Check connection
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();

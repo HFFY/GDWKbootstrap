@@ -16,10 +16,12 @@
 
   include_once 'clases/database.php';
   include_once 'clases/user.php';
+  include_once 'clases/documento.php';
   session_start();
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);
+  $document = new Documento($db);
   $sql = 'select * from documentos;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -37,12 +39,13 @@
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
       $_SESSION['rol']=$fila2['Idrango'];
+      $_SESSION['oldusercreacion']=$fila2['ID_usuarios'];
       //$user->unserialize($ser);
 
       echo $user->username;
   }
       if (!empty($user->username)) {
-          echo $user->username; ?>
+          ?>
 
 <header class="header">
 
@@ -54,13 +57,13 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
              </button>
-             <a href=""> <img class="logo" src="images/logo.png"></a>
+             <a href="paginaprincipal.php"> <img class="logo" src="images/logo.png"></a>
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
          <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
-         <li><a href="">WorkFlow </a></li>
-         <li><a href="">Gestor de documentos</a></li>
+         <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+         <li><a href="gestordocumentos/gdpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">Gestor de documentos</a></li>
 
 
          </ul>
@@ -90,7 +93,8 @@
    <div class="col-sm-6 banner-info">
      <a class="btn btn-first" href="usuario/master.php">Acceder Super Usuario</a>
      <a class="btn btn-second" href="usuario/modificarusuario.php?id=<?php echo $fila2['ID_usuarios']; ?>">Modificar usuario</a>
-     <a class="btn btn-second" href="#">Contacta a gestion  de calidad</a>
+     <a class="btn btn-second" href="usuario/crearusuario.php">Crear Usuario</a>
+      <a class="btn btn-second" href="gestordocumentos/subirdocumento.php">Añadir nuevo documento</a>
    </div>
  </div>
  <div class="row">
@@ -112,8 +116,8 @@
               <?php   while ($fila = $result->fetch()) {
               ?>
               <tr>
-                 <td><?php echo $fila['Nombre del documento']; ?></td>
-                 <td>Codigo</td>
+                 <td><a href="gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $fila['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $fila['Nombre del documento']; ?></a></td>
+                 <td><?php echo $document->getCodeDocument($fila['ID_documentos'])['descripcion']; ?></td>
                  <td><?php echo $fila['Version']; ?></td>
                   <td>Link</td>
               </tr>
