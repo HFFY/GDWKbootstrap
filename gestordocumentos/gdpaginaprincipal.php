@@ -33,8 +33,8 @@
   // $resultasd = $db->query($sqlasd);
   // $resultasd->setFetchMode(PDO::FETCH_ASSOC);
   // $filaasd = $resultasd->fetch();
- $iddoc=$_SESSION['iddoc'];
-  $filadoc=$document->getDocument($iddoc);
+   $iddoc=$_SESSION['iddoc'];
+   $filadoc=$document->getDocument($iddoc);
    $user->username= $user->getUser($_SESSION['id'])['Usuario'];
    $user->id= $user->getUser($_SESSION['id'])['Idrango'];
    echo $user->username;
@@ -48,8 +48,13 @@
       // $_SESSION['oldusercreacion']=$fila2['ID_usuarios'];
 
 
+     $r = $document->getDifferentVersions($filadoc['Nombre del documento']);
 
+     $r2 = $document->getDifferentVersions($filadoc['Nombre del documento']);
 
+     $r3 = $document->getDifferentVersions($filadoc['Nombre del documento']);
+     $f3=$r3->fetch();
+     echo $f3['Version'];
           ?>
 
 <header class="header">
@@ -96,31 +101,35 @@
 </div>
  </div>
  <div class="row">
-  <div class="col-sm-6 banner-info" style="background-color:lavender;">
+  <div class="col-sm-6 banner-info" style="background-color:lavenderblush;">
 
       <h2>Documentos Disponibles</h2>
 
            <table class="table table-striped table-bordered  table-responsive-sm  scrollbar">
            <thead  class="thead-dark">
              <tr>
-               <th style="width: 25%">Nombre</th>
-               <th style="width: 25%">Codigo</th>
-               <th style="width: 25%">Version</th>
-               <th style="width: 25%">Link</th>
+               <th style="width: 33%">Nombre</th>
+               <th style="width: 33%">Version</th>
+               <th style="width: 33%">Link</th>
 
              </tr>
            </thead>
            <tbody>
-              <?php  // while ($fila = $result->fetch()) {
-              ?>
+
+              <?php
+
+
+              while ($f = $r->fetch()) {
+                  ?>
               <tr>
-                 <td><?php  ?></td>
-                 <td>Codigo</td>
-                 <td><?php ?></td>
-                  <td>Link</td>
+                 <td><?php echo $f['Nombre del documento']; ?></td>
+                 <td><?php echo $f['Version']; ?></td>
+                 <td><?php echo $f['Link']; ?></td>
+
               </tr>
              <?php
-      //    }?>
+              }
+               ?>
            </tbody>
            </table>
 
@@ -134,31 +143,28 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Codigo</th>
-            <th>Version</th>
-            <th>Link</th>
+            <th style="width: 50%">Nombre</th>
+            <th style="width: 50%">Descripcion</th>
+
+
           </tr>
         </thead>
         <tbody>
+          <?php
+
+
+          while ($f2 = $r2->fetch()) {
+              ?>
           <tr>
-            <td>1</td>
-            <td>Anna</td>
-            <td>Anna</td>
-            <td>Anna</td>
+             <td><?php echo $f2['Nombre del documento']; ?></td>
+             <td><?php echo $f2['Descripción']; ?></td>
+
+
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>John</td>
-              <td>John</td>
-                <td>Johnasdas</td>
-          </tr>
+         <?php
+          }
+           ?>
+
         </tbody>
       </table>
 

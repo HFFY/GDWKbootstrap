@@ -25,9 +25,9 @@
   session_start();
   // echo $_GET['id'];
       //echo $_SESSION['id'];
-  if (empty($_SESSION['id'])) {
+  // if (empty($_SESSION['id'])) {
       $_SESSION['id']=$_GET['id'];
-  }
+  // }
 
   if (!empty($_SESSION['rol'])) {
       $database = new Database();
