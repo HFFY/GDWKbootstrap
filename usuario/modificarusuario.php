@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
   <?php
 
   // get database connection
@@ -22,37 +23,46 @@
   // instantiate user object
   include_once '../clases/user.php';
   session_start();
+  // echo $_GET['id'];
+      //echo $_SESSION['id'];
+  if (empty($_SESSION['id'])) {
+      $_SESSION['id']=$_GET['id'];
+  }
+
   if (!empty($_SESSION['rol'])) {
       $database = new Database();
       $db = $database->getConnection();
 
       $user = new User($db);
 
+
       // set user property values
 
-      $user->username = $_GET['username'];
-      $user->password = base64_encode($_GET['password']);
-      if ($_SESSION['rol']=="1") {
-          $user->rol = $_GET['rol'];
-      }
-      $user->names = $_GET['names'];
-      $user->lastname = $_GET['lastname'];
+      // $user->username = $_GET['username'];
+      // $user->password = base64_encode($_GET['password']);
+
+
       $user->date = date('Y-m-d H:i:s');
-
-      // create the user
-      if ($user->signup()) {
-          $user_arr=array(
-          "status" => true,
-          "message" => "Successfully Signup!",
-
-      );
-      } else {
-          $user_arr=array(
-          "status" => false,
-          "message" => "Username already exists!"
-      );
-      }
-      print_r(json_encode($user_arr)); ?>
+      $olduser=$user->getUser($_SESSION['id']);
+      //  echo $_SERVER['REQUEST_METHOD'];
+      echo $_POST['Crear'];
+      if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
+          $user->username = isset($_POST['username']) ? $_POST['username'] : die();
+          $user->password = base64_encode(isset($_POST['password']) ? $_POST['password'] : die());
+          $user->names = isset($_POST['names']) ? $_POST['names'] : die();
+          $user->lastname = isset($_POST['lastname']) ? $_POST['lastname'] : die();
+          if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
+              $user->rol = isset($_GET['rol']) ? $_GET['rol'] : die();
+          } else {
+              $user->rol = $user->getUser($_SESSION['id'])['Idrango'];
+          }
+          // echo $user->username;
+          // echo $user->password;
+          // echo $user->names;
+          // echo $user->lastname;
+          // echo $_SESSION['id'];
+          $user->modifiedUser($_SESSION['id']);
+      } ?>
   <header class="header">
 
     <nav class="navbar navbar-style">
@@ -67,10 +77,9 @@
         </div>
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="">Login</a></li>
-            <li><a href="">WorkFlow</a></li>
-            <li><a href="">Añadir Documento</a></li>
-            <li><a href="">Modificar Documento</a></li>
+            <li><a href="sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
+            <li><a href="">WorkFlow </a></li>
+            <li><a href="">Gestor de documentos</a></li>
 
           </ul>
         </div>
@@ -91,12 +100,12 @@
 
     <div class="container">
       <div class="row">
-        <form class="form-container">
+        <form class="form-container" action="modificarusuario.php" method="post">
           <div class="col-sm-6 banner-info">
             <p>Ingresar nombre de usuario.</p>
-            <div class="form-group" method="post" action="crearusuario.php">
+            <div class="form-group" >
 
-              <input type="text" name="username" class="form-control" placeholder="Usuario">
+              <input type="text" name="username" class="form-control" placeholder="<?php echo $olduser['Usuario']; ?>">
 
             </div>
             <p><br>Ingresar Contraseña.</p>
@@ -104,15 +113,16 @@
 
               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
             </div>
-            <?php   if ($_SESSION['rol']=="1") {
+            <?php   if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
           ?>
             <div class="form-group">
               <p><br>Seleccionar rol</p>
               <select class="form-control" name="rol">
-                <option value="1">Administrador</option>
-                <option value="2">Vicerrector/Decano</option>
-                <option value="3">Jefe de carrera</option>
-                <option value="4">Docentes</option>
+
+                <option value="2">Administrador</option>
+                <option value="3">Vicerrector/Decano</option>
+                <option value="4">Jefe de carrera</option>
+                <option value="5">Docentes</option>
               </select>
             </div>
           <?php
@@ -122,19 +132,25 @@
             <p><br>Ingresar nombres.</p>
             <div class="form-group">
 
-              <input type="text" name="names" class="form-control" placeholder="Nombres">
+              <input type="text" name="names" class="form-control" placeholder="<?php echo $olduser['Nombres']; ?>">
             </div>
              <p><br>Ingresar apellidos.</p>
             <div class="form-group">
 
-              <input type="text" name="lastname" class="form-control" placeholder="Apellidos">
+              <input type="text" name="lastname" class="form-control" placeholder="<?php echo $olduser['Apellidos']; ?>">
             </div>
           </div>
           <div class="col-sm-6 banner-image">
-
+            <div class="form-group">
             <a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
 
-            <a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block">Crear</button></a>
+                <input type="submit" name="crear" class="button" value="Crear" />
+              </div>
+
+              <!-- <form action="" method="post">
+            <a href="" class="btn btn-second"><input name="crear" value="Crear" type="submit" class="btn btn-primary btn-block" method="post"></input></a>
+          </form> -->
+
           </div>
         </form>
 

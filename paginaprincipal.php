@@ -32,7 +32,7 @@
 
   if (!empty($_SESSION['ser'])) {
       $user->unserialize($_SESSION['ser']);
-      $sql2 = 'select Idrango from usuarios where usuario="'.$user->username.'";';
+      $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
@@ -61,7 +61,7 @@
          <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
          <li><a href="">WorkFlow </a></li>
          <li><a href="">Gestor de documentos</a></li>
-  
+
 
          </ul>
         </div>
@@ -89,7 +89,7 @@
 
    <div class="col-sm-6 banner-info">
      <a class="btn btn-first" href="usuario/master.php">Acceder Super Usuario</a>
-     <a class="btn btn-second" href="#">Añadir documento</a>
+     <a class="btn btn-second" href="usuario/modificarusuario.php?id=<?php echo $fila2['ID_usuarios']; ?>">Modificar usuario</a>
      <a class="btn btn-second" href="#">Contacta a gestion  de calidad</a>
    </div>
  </div>

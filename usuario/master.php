@@ -38,10 +38,10 @@
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
 
-      $_SESSION['rol']=$fila2['Idrango'];
-      //$user->unserialize($ser);
-
-      echo $user->username;
+      // $_SESSION['rol']=$fila2['Idrango'];
+      // //$user->unserialize($ser);
+      //
+      // echo $user->username;
   }
       if (!empty($user->username)) {
           ?>
@@ -60,7 +60,7 @@
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
-         <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?></a></li>
+         <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username; ?></a></li>
          <li><a href="">WorkFlow </a></li>
          <li><a href="">Añadir Documento</a></li>
          <li><a href="">Modificar Documento</a></li>
@@ -127,7 +127,7 @@
                ?>
 
 
-               <td><a href="<?php $_SESSION['selecteduser']=$fila['ID_usuarios'] ?>modificarusuario.php">
+               <td><a href="modificarusuario.php?id=<?php echo $fila['ID_usuarios']; ?>">
 
                  Modificar usuario</a></td>
               </tr>

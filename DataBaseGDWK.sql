@@ -153,7 +153,7 @@ INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (666,'GOD');
 INSERT into proceso VALUES(null,'proceso1');
 INSERT into subproceso VALUES(null,'proceso1');
 INSERT into `tipo de documento` VALUES(null,'proceso1');
-INSERT INTO usuarios VALUES ('GOD', '666','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
+INSERT INTO usuarios VALUES ('GOD', '1','1','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
 INSERT INTO usuarios (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
 VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
 INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras2',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');

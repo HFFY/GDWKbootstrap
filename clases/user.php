@@ -62,7 +62,7 @@ class User implements \Serializable
         // Perform queries
         if (!is_null($this->username)) {
             mysqli_query($con, "INSERT INTO $this->table_name (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
-  VALUES   ('$this->names', null, '1','$this->lastname','$this->password','$this->username',$this->rol,'','','$this->date',null,null,null)");
+  VALUES   ('$this->names', null, '$this->rol','$this->lastname','$this->password','$this->username',$this->rol,'','','$this->date',null,null,null)");
 
 
             return true;
@@ -123,7 +123,7 @@ class User implements \Serializable
     public function setUserDeactivated($iduser)
     {
         $sql = "UPDATE $this->table_name SET Estado=0 WHERE ID_usuarios='$iduser';";
-    
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
@@ -140,7 +140,8 @@ class User implements \Serializable
     public function modifiedUser($iduser)
     {
         $this->date=date('Y-m-d H:i:s');
-        $sql = "UPDATE $this->table_name SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', Fecha de cambio de clave='$this->date'  WHERE ID_usuarios='$iduser';";
+        $sql = "UPDATE $this->table_name SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', `Fecha de cambio de clave`='$this->date'  WHERE ID_usuarios='$iduser';";
+        // echo $sql;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();

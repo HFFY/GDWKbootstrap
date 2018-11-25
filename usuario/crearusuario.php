@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  
+
   <?php
 
   // get database connection
@@ -23,7 +23,7 @@
   // instantiate user object
   include_once '../clases/user.php';
   session_start();
-  if ($_SESSION['rol']=="1") {
+  if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
       $database = new Database();
       $db = $database->getConnection();
 
@@ -62,7 +62,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href=""> <img class="logo" src="../images/logo.png"></a>
+          <a href="../paginaprincipal.php"> <img class="logo" src="../images/logo.png"></a>
         </div>
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
