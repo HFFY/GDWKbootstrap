@@ -33,7 +33,7 @@
 
   if (!empty($_SESSION['ser'])) {
       $user->unserialize($_SESSION['ser']);
-      $sql2 = 'select Idrango from usuarios where usuario="'.$user->username.'";';
+      $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
@@ -166,7 +166,7 @@
           while ($filaD = $resultD->fetch()) {
               $descripcioncodigo=$document->getCodeDocument($filaD['ID_documentos']); ?>
          <tr>
-            <td><?php echo $filaD['Nombre del documento']; ?></td>
+            <td><a  href="../gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $filaD['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $filaD['Nombre del documento']; ?></a></td>
             <td><?php echo $descripcioncodigo['descripcion']; ?></td>
             <td><?php echo $filaD['Version']; ?></td>
              <td><a href="<?php echo $filaD['Link']; ?>">

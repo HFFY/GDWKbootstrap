@@ -62,8 +62,8 @@
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
          <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
-         <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
-         <li><a href="gestordocumentos/gdpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">Gestor de documentos</a></li>
+         <li><a href="tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+
 
 
          </ul>
@@ -78,7 +78,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="search-container">
-         <form action="/action_page.php">
+         <form action="buscador.php">
            <input type="text" placeholder="Search.." name="search">
            <button type="submit">Submit</button>
          </form>
@@ -114,48 +114,21 @@
            </thead>
            <tbody>
               <?php   while ($fila = $result->fetch()) {
-              ?>
+              if ($fila['Estado']==1) {
+                  ?>
               <tr>
                  <td><a href="gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $fila['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $fila['Nombre del documento']; ?></a></td>
                  <td><?php echo $document->getCodeDocument($fila['ID_documentos'])['descripcion']; ?></td>
                  <td><?php echo $fila['Version']; ?></td>
-                  <td>Link</td>
+                  <td><a href="<?php echo $fila['Link']; ?>">Descargar</a></td>
               </tr>
              <?php
+              }
           } ?>
            </tbody>
            </table>
 
-      <!-- <table class="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Codigo</th>
-            <th>Version</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Anna</td>
-            <td>Anna</td>
-            <td>Anna</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>John</td>
-              <td>John</td>
-                <td>John</td>
-          </tr>
-        </tbody>
-      </table> -->
+
 
   </div>
   <div class="col-sm-6 banner-info" style="background-color:lavenderblush;">
@@ -166,30 +139,26 @@
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Codigo</th>
-            <th>Version</th>
-            <th>Link</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Descripcion</th>
           </tr>
         </thead>
         <tbody>
+          <?php
+          $resultlatest=$document->getLatestDocuments();
+
+          while ($filalatest=$resultlatest->fetch()) {
+              ?>
           <tr>
-            <td>1</td>
-            <td>Anna</td>
-            <td>Anna</td>
-            <td>Anna</td>
+            <td><?php  echo $filalatest['id_documento']; ?></td>
+            <td><?php  echo $filalatest['fecha']; ?></td>
+            <td><?php  echo $filalatest['hora']; ?></td>
+            <td><?php  echo $filalatest['Descripcion']; ?></td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-            <td>Debbie</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>John</td>
-              <td>John</td>
-                <td>Johnasdas</td>
-          </tr>
+
+          <?php
+          } ?>
         </tbody>
       </table>
 

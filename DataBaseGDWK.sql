@@ -14,9 +14,9 @@ CREATE TABLE Usuarios (
   Contraseña VARCHAR(64) NOT NULL,
   Usuario VARCHAR(64) UNIQUE,
   Estado INT NULL,
-  `Fecha de login` VARCHAR(64),
-  `Fecha de cambio de clave` VARCHAR(64),
-  `Fecha de creación` VARCHAR(64),
+  `Fecha de login` DATETIME,
+  `Fecha de cambio de clave` DATETIME,
+  `Fecha de creación` DATETIME,
   IDcreador INT NULL,
   IPcreación VARCHAR(64),
   IPlogin VARCHAR(64),
@@ -53,8 +53,8 @@ CREATE TABLE Documentos (
   `Revisor` VARCHAR(45) NULL,
   `Autorizador` VARCHAR(45) NULL,
   `Diseño del proceso` VARCHAR(45) NULL,
-  `Fecha de entrada en vigencia` VARCHAR(45) NULL,
-  `Fecha de entrada en caducidad` VARCHAR(45) NULL,
+  `Fecha de entrada en vigencia` DATE NULL,
+  `Fecha de entrada en caducidad` DATE NULL,
   `Areas a las que afecta` VARCHAR(45) NULL,
   `Registros que corresponden` VARCHAR(45) NULL,
   `Descripción` LONGTEXT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE `documentosPorRango` (
     REFERENCES `Documentos` (`ID_documentos`)
 );
 CREATE TABLE `DocUsuCambios` (
-  `Id_cambio` INT NOT NULL,
+  `Id_cambio` INT NOT NULL AUTO_INCREMENT,
   `id_documento` INT NOT NULL,
   `Id_usuario` INT NOT NULL,
   `fecha` DATE NOT NULL,
@@ -116,9 +116,9 @@ CREATE TABLE `TipoTareas` (
   PRIMARY KEY (`idTipoTareas`)
 );
 CREATE TABLE `Tareas` (
-  `id_tareas` INT NOT NULL,
+  `id_tareas` INT NOT NULL AUTO_INCREMENT,
   `Prioridad` TINYINT(2) NOT NULL,
-  `Fecha de estimada` DATETIME(1) NOT NULL,
+  `Fecha estimada` DATETIME(1) NOT NULL,
   `Fecha oficial` DATETIME(1) NOT NULL,
   `Descripción` VARCHAR(45) NULL,
   `Id_usuario` INT NOT NULL,
@@ -137,7 +137,7 @@ CREATE TABLE `Tareas` (
     REFERENCES `GDWKF`.`TipoTareas` (`idTipoTareas`)
 );
 CREATE TABLE `TareasUsuarios` (
-  `Id_proceso` INT NOT NULL,
+  `Id_proceso` INT NOT NULL AUTO_INCREMENT,
   `Id_tarea` INT NOT NULL,
   `Id_usuario` INT NOT NULL,
   `Fecha` DATE NOT NULL,

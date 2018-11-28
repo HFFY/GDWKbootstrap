@@ -106,6 +106,26 @@ class Documento
             return $fila;
         }
     }
+    public function getLatestDocuments()
+    {
+        $sql = 'SELECT id_documento, fecha, hora, Descripcion FROM DocUsuCambios where fecha IN (SELECT max(fecha) from DocUsuCambios);';
+
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $fila = $result->fetch();
+
+        return $result;
+    }
+    public function getDifferentVersions($nombredelactual)
+    {
+        $sql = "SELECT `Nombre del documento`, Version, Link, Descripción FROM documentos where `Nombre del documento`='$nombredelactual';";
+        // echo $sql;
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $fila = $result->fetch();
+
+        return $result;
+    }
     public function insertDocument()
     {
         // $query = "SELECT
