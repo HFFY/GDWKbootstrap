@@ -13,6 +13,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+  <?php
+
+include_once '../clases/database.php';
+include_once '../clases/user.php';
+include_once '../clases/documento.php';
+session_start();
+$database = new Database();
+$db = $database->getConnection();
+
+$user = new User($db);
+$sql = 'select * from usuarios;';
+$result = $db->query($sql);
+$result->setFetchMode(PDO::FETCH_ASSOC);
+
+$tarea = new Database($db);//Por Validar
+$sqlTarea = "select * from tareas where id_tareas = 1 ;"; //poner de parametro de busueda la variable asignada
+$resultTarea = $db->query($sqlTarea);
+$resultTarea->setFetchMode(PDO::FETCH_ASSOC);
+
+    ?>
+
 <header class="header">
 
  <nav class="navbar navbar-style">
