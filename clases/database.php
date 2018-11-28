@@ -6,7 +6,7 @@ class Database
     private $host = "localhost";
     private $db_name = "GDWKF";
     private $username = "root";
-    private $password = "";
+    private $password = "1234";
     public $conn;
 
     // get the database connection

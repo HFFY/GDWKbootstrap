@@ -67,7 +67,7 @@
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
          <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username  ?> LOGOUT</a></li>
-         <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+         <li><a href="../tareas/WorkflowPaginaPrincipal.php">WorkFlow </a></li>
 
 
 

@@ -129,6 +129,7 @@ CREATE TABLE `Tareas` (
   `Fecha de creación` DATE NULL,
   `Estado` VARCHAR(1) NULL,
   `Persona` VARCHAR(45) NULL,
+  `nombre_tarea` VARCHAR(25) NOT NULL,
   PRIMARY KEY (`id_tareas`),
     FOREIGN KEY (`Id_usuario`)
     REFERENCES `GDWKF`.`Usuarios` (`ID_usuarios`),
@@ -158,5 +159,9 @@ INSERT INTO usuarios (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usu
 VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
 INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras2',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
 INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','asdasd','haosdaosdao',1,'','','asdasd',null,'asdasd123','qwqeasda21312');
-INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro','pedra','hola','hola','15/25','12/89','todas','todos','documento hola','1','http://www.google.com');
-INSERT into codigoDocumento VALUES (null, '1','1','1','111','1');
+INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5');
+INSERT into TipoTareas VALUES(1,'prueba');
+INSERT into Tareas VALUES(1,'1','12/08/18','12/08/18','prueba',1,1,null,'prueba',null,'12/08/18','0',null,'tarea prueba');
+INSERT into Tareas VALUES(2,'1','12/08/18','12/08/18','prueba',1,1,null,'prueba',null,'12/08/18','1',null,'tarea prueba');
+INSERT into Tareas VALUES(3,'1','12/08/18','12/08/18','prueba',1,1,null,'prueba',null,'12/08/18','2',null,'tarea prueba');
+INSERT into Tareas VALUES(4,'1','12/08/18','12/08/18','prueba',1,1,null,'prueba',null,'12/08/18','3',null,'tarea prueba');

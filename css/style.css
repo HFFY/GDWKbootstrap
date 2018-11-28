@@ -104,3 +104,10 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+#products-table { margin-top: 20px; height: 200px; overflow: auto; }
+#div1 {
+     overflow:scroll;
+     height:200px;
+     width:500px;
+}
