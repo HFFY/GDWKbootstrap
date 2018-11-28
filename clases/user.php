@@ -50,8 +50,6 @@ class User implements \Serializable
             return false;
         }
 
-        $con=mysqli_connect($this->database->getHost(), $this->database->getUsername(), $this->database->getPassword(), $this->database->getDbname());
-      
         // Check connection
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -59,17 +57,18 @@ class User implements \Serializable
 
 
 
+
         // Perform queries
         if (!is_null($this->username)) {
-            mysqli_query($con, "INSERT INTO $this->table_name (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
-  VALUES   ('$this->names', null, '$this->rol','$this->lastname','$this->password','$this->username',$this->rol,'','','$this->date',null,null,null)");
-
+            $sql= "INSERT INTO $this->table_name VALUES ('$this->names', null, '$this->rol','$this->lastname','$this->password','$this->username',1,null,null,'$this->date',null,null,null);";
+            // echo $sql;
+            $result = $this->conn->query($sql);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
 
             return true;
         } else {
             return false;
         }
-        mysqli_close($con);
     }
     // login user
     public function login()

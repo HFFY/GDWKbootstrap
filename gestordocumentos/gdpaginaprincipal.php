@@ -13,7 +13,8 @@
 <body>
 
   <?php
-
+  // usar documentospor rango para mostrar al inicio
+  // anadir tickbox to select wich users can use certain documents
   include_once '../clases/database.php';
   include_once '../clases/user.php';
   include_once '../clases/documento.php';
@@ -21,6 +22,7 @@
   session_start();
   $_SESSION['id']=$_GET['id'];
   $_SESSION['iddoc']=$_GET['iddoc'];
+  echo $_GET['id'];
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);
@@ -37,8 +39,7 @@
    $filadoc=$document->getDocument($iddoc);
    $user->username= $user->getUser($_SESSION['id'])['Usuario'];
    $user->id= $user->getUser($_SESSION['id'])['Idrango'];
-   echo $user->username;
-   echo $user->id;
+
       // $user->unserialize($_SESSION['ser']);
       // $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
       // $result2 = $db->query($sql2);
@@ -52,9 +53,8 @@
 
      $r2 = $document->getDifferentVersions($filadoc['Nombre del documento']);
 
-     $r3 = $document->getDifferentVersions($filadoc['Nombre del documento']);
-     $f3=$r3->fetch();
-     echo $f3['Version'];
+
+
           ?>
 
 <header class="header">
@@ -87,17 +87,17 @@
 
    <div class="col-sm-4 banner-info">
 
-     <a class="btn btn-first" href="actualizardocumento.php">Actualizar</a>
+     <a class="btn btn-first" href="actualizardocumento.php?iddoc=<?php echo $iddoc."&id=".$_GET['id']; ?>">Actualizar</a>
       </div>
        <div class="col-sm-4 banner-info">
-     <a class="btn btn-second" href="enabledisabledoc.php?iddoc=<?php echo $iddoc."&id=".$user->id; ?>"><?php if ($filadoc['Estado']=='1') {
+     <a class="btn btn-second" href="enabledisabledoc.php?iddoc=<?php echo $iddoc."&id=".$_GET['id'];?>"><?php if ($filadoc['Estado']=='1') {
               echo "Desactivar";
           } else {
               echo "Activar";
           }  ?></a>
       </div>
  <div class="col-sm-4 banner-info">
-     <a class="btn btn-second" href="modificardocumento.php">Modificar</a>
+     <a class="btn btn-second" href="modificardocumento.php?iddoc=<?php echo $iddoc."&id=".$_GET['id']; ?>">Modificar</a>
 </div>
  </div>
  <div class="row">

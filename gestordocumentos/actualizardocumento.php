@@ -21,36 +21,17 @@
 
   // instantiate user object
   include_once '../clases/user.php';
+      include_once '../clases/documento.php';
   session_start();
-  if ($_SESSION['rol']=="1") {
+  if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
       $database = new Database();
       $db = $database->getConnection();
 
       $user = new User($db);
+      $document = new Documento($db);
+      $olduser=$user->getUser($_SESSION['oldusercreacion']);
 
-      // set user property values
-
-      $user->username = $_GET['username'];
-      $user->password = base64_encode($_GET['password']);
-      $user->rol = $_GET['rol'];
-      $user->names = $_GET['names'];
-      $user->lastname = $_GET['lastname'];
-      $user->date = date('Y-m-d H:i:s');
-
-      // create the user
-      if ($user->signup()) {
-          $user_arr=array(
-          "status" => true,
-          "message" => "Successfully Signup!",
-
-      );
-      } else {
-          $user_arr=array(
-          "status" => false,
-          "message" => "Username already exists!"
-      );
-      }
-      print_r(json_encode($user_arr)); ?>
+      //print_r(json_encode($user_arr));?>
   <header class="header">
 
     <nav class="navbar navbar-style">
@@ -65,10 +46,9 @@
         </div>
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="">Login</a></li>
-            <li><a href="">WorkFlow</a></li>
-            <li><a href="">Añadir Documento</a></li>
-            <li><a href="">Modificar Documento</a></li>
+            <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
+            <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+
 
           </ul>
         </div>
@@ -83,7 +63,7 @@
 
       </div>
       <div class="collapse navbar-collapse" align="right" id="micon">
-        <a href=""> <img class="logo" src="../images/iconuser.png"></a>
+        <a href="../paginaprincipal.php"> <img class="logo" src="../images/iconuser.png"></a>
       </div>
     </div>
 

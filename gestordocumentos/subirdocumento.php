@@ -29,7 +29,7 @@
       $user = new User($db);
       $document = new Documento($db);
       $olduser=$user->getUser($_SESSION['oldusercreacion']);
-      echo $_SERVER['REQUEST_METHOD'];
+
 
 
 
@@ -59,7 +59,10 @@
           //
           //     var_dump($_FILES['file']['error']);
           // }
+
           $document->Link = "https://www.google.com";
+          $document->usuariosauto = isset($_POST['usuariosauto']) ? $_POST['usuariosauto'] : die();
+          echo "hola";
           $document->insertDocument();
       } ?>
   <header class="header">
@@ -76,9 +79,8 @@
       </div>
       <div class="collapse navbar-collapse" id="micon">
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
+      <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
       <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
-      <li><a href="gestordocumentos/gdpaginaprincipal.php">Gestor de documentos</a></li>
 
           </ul>
         </div>
@@ -143,12 +145,45 @@
 
               <div class="form-group">
                 <p><br>Fecha de entrada en vigencia.</p>
-                <input type="text" name="Fechadeentradavigencia" class="form-control" placeholder="Fecha de entrada vigencia">
+                <input type="date" name="Fechadeentradavigencia" class="form-control" placeholder="Fecha de entrada vigencia">
               </div>
               <div class="form-group">
                 <p><br>Fecha de entrada en caducidad.</p>
-                <input type="text" name="Fechadeentradaencaducidad" class="form-control" placeholder="Fecha de entrada caducidad">
+                <input type="date" name="Fechadeentradaencaducidad" class="form-control" placeholder="Fecha de entrada caducidad">
               </div>
+        <div class="form-group">
+          <!-- <input type="checkbox" class="button" name="Administrador" value="1"> Administrador<br> -->
+ <table class="table table-striped table-bordered  table-responsive-sm  scrollbar">
+          <thead  class="thead-dark">
+            <tr>
+              <th style="width: 50%">Nombre</th>
+              <th style="width: 50%">Roles<br></th>
+
+
+            </tr>
+          </thead>
+               <tbody>
+          <tr>
+            <td>Vicerrector<br></td>
+             <td><input type="checkbox" class="form-control"  name="usuariosauto[]" value="2"></td>
+
+
+          </tr>
+          <tr>
+             <td>Jefedecarrera<br></td>
+             <td><input type="checkbox" class="form-control" name="usuariosauto[]" value="3" ></td>
+
+
+          </tr>
+          <tr>
+             <td>Docente<br><br></td>
+             <td><input type="checkbox"class="form-control" name="usuariosauto[]" value="4" ></td>
+
+          </tr>
+        </tbody>
+   </table>
+       </div>
+
           </div>
           <div class="col-sm-6 banner-image" align="left" >
 

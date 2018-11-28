@@ -148,15 +148,25 @@ CREATE TABLE `TareasUsuarios` (
     REFERENCES `GDWKF`.`Usuarios` (`ID_usuarios`)
 );
 INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
-VALUES (null, 'Super Usuario');
+VALUES (null, 'Administrador');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
+VALUES (null, 'Vicerrector/Decano');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
+VALUES (null, 'Jefe de carrera');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
+VALUES (null, 'Docente');
+
 INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (666,'GOD');
 INSERT into proceso VALUES(null,'proceso1');
 INSERT into subproceso VALUES(null,'proceso1');
 INSERT into `tipo de documento` VALUES(null,'proceso1');
-INSERT INTO usuarios VALUES ('GOD', '1','1','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
-INSERT INTO usuarios (Nombres, ID_usuarios, Idrango, Apellidos, Contraseña, Usuario, Estado, `Fecha de login`, `Fecha de cambio de clave`, `Fecha de creación`, IDcreador, IPcreación, IPlogin)
-VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
-INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','MTIzNA==','mataperras2',1,'12/08/18','12/08/18','12/08/18',null,'asdasd123','qwqeasda21312');
-INSERT INTO usuarios VALUES ('asdasd', null, '1','asdasd','asdasd','haosdaosdao',1,'','','asdasd',null,'asdasd123','qwqeasda21312');
-INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro','pedra','hola','hola','15/25','12/89','todas','todos','documento hola','1','http://www.google.com');
-INSERT into codigoDocumento VALUES (null, '1','1','1','111','1');
+INSERT into proceso VALUES(null,'proceso1');
+INSERT into subproceso VALUES(null,'proceso1');
+INSERT into `tipo de documento` VALUES(null,'proceso1');
+INSERT into proceso VALUES(null,'proceso1');
+INSERT into subproceso VALUES(null,'proceso1');
+INSERT into `tipo de documento` VALUES(null,'proceso1');
+INSERT into proceso VALUES(null,'proceso1');
+INSERT into subproceso VALUES(null,'proceso1');
+INSERT into `tipo de documento` VALUES(null,'proceso1');
+INSERT INTO usuarios VALUES ('GOD', '1','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
