@@ -50,20 +50,24 @@
           $document->Registrosquecorresponden = isset($_POST['Registrosquecorresponden']) ? $_POST['Registrosquecorresponden'] : die();
 
           $document->Descripcion = isset($_POST['Descripcion']) ? $_POST['Descripcion'] : die();
-          // $my_folder = "../uploads/";
-          // echo $my_folder . $_FILES['file']['tmp_name'];
-          // if (move_uploaded_file($_FILES['file']['tmp_name'], $my_folder . $_FILES['file']['name'])) {
-          //     echo 'Received file' . $_FILES['file']['name'] . ' with size ' . $_FILES['file']['size'];
-          // } else {
-          //     echo 'Upload failed!';
-          //
-          //     var_dump($_FILES['file']['error']);
-          // }
 
-          $document->Link = "https://www.google.com";
           $document->usuariosauto = isset($_POST['usuariosauto']) ? $_POST['usuariosauto'] : die();
-          echo "hola";
-          $document->insertDocument();
+          $my_folder = ".././uploads/";
+          // $filePath = realpath($_FILES["myFile"]['tmp_name']);
+          // $dumbvariable = pathinfo($_FILES['myFile']['tmp_name'], PATHINFO_EXTENSION);
+          // echo $dumbvariable;
+          if (move_uploaded_file($_FILES['myFile']['tmp_name'], $my_folder . $_FILES['myFile']['name'])) {
+              echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
+
+              $document->Link = "/uploads/".basename($_FILES['myFile']['name']);
+              $document->insertDocument();
+          } else {
+              echo 'Upload failed!';
+              //
+              // var_dump($_FILES['myFile']['error']);
+          }
+
+          // echo "hola";
       } ?>
   <header class="header">
 
@@ -100,7 +104,7 @@
     </div>
 
     <div class="container">
-        <form class="form-container" action="subirdocumento.php" method="post">
+        <form class="form-container" action="subirdocumento.php" method="post" enctype="multipart/form-data">
       <div class="row">
 
           <div class="col-sm-6 banner-info" align="left" >
@@ -222,10 +226,12 @@
          </div>
           </div>
           <br><br><br>
-           <form action="subirdocumento.php" method="post" enctype="multipart/form-data">
-          <input type="file" name="file" id="file" class="form-control">
+           <div class="form-group">
+           <!-- <form action="subirdocumento.php" method="post" enctype="multipart/form-data"> -->
+            <input type="file" name="myFile" class="form-control">
           <!-- <input type="submit" name="submit" class="button" value="submit" > -->
-          </form>
+          <!-- </form> -->
+             </div>
          </div>
           <div class="form-group" align="left">
            <label for="inputlg"><br><br><br></label>

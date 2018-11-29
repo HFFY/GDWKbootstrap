@@ -22,7 +22,7 @@ CREATE TABLE Usuarios (
   IPlogin VARCHAR(64),
     PRIMARY KEY (`ID_usuarios`),
     FOREIGN KEY (`Idrango`)
-    REFERENCES `RangoUsuarios` (`idRangoUsuarios`)
+    REFERENCES `RangoUsuarios` (`idRangoUsuarios`) ON DELETE CASCADE
 );
 
 

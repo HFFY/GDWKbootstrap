@@ -41,7 +41,7 @@ class Documento
 
     public function deactivateDocument($iddocument)
     {
-        echo "HOLA";
+        // echo "HOLA";
         $sql = "UPDATE $this->table_name SET Estado='0' WHERE ID_documentos='$iddocument';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -62,7 +62,7 @@ class Documento
         // $stmt->execute();
         //
         // return $stmt;
-        echo "HOLA";
+        // echo "HOLA";
         $sql = "UPDATE $this->table_name SET Estado='1' WHERE ID_documentos='$iddocument';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -192,7 +192,7 @@ class Documento
         $dumbvar=$this->usuariosauto;
         foreach ($dumbvar as $usuario) {
             $sql = "INSERT into documentosPorRango VALUES (null,'$usuario','$iddoc')";
-            echo $sql;
+            // echo $sql;
             $result = $this->conn->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $fila = $result->fetch();
