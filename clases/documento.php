@@ -2,7 +2,7 @@
 class Documento
 {
 
-    // database connection and table name
+    // ve el metodoque modifica el documento
     private $conn;
     private $table_name = "Documentos";
     private $list;
@@ -82,7 +82,7 @@ class Documento
         // // execute query
         // $stmt->execute();
         $sql = 'SELECT * from documentos where ID_documentos='.$iddocument.';';
-
+        // echo $sql;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
@@ -167,8 +167,8 @@ class Documento
         //             Nombre del documento='".$this->Nombredeldocumento."'";
         $sql = "UPDATE documentos SET Proceso='$this->Proceso', Subproceso='$this->Subproceso', `Tipo de documento`='$this->Tipodedocumento',`Numero del documento`='$this->Numerodeldocumento',`Nombre del documento`='$this->Nombredeldocumento',
           Version='$this->Version',Creador='$this->Creador',Revisor='$this->Revisor',Autorizador='$this->Autorizador',`Diseño del proceso`='$this->Disenodelproceso',`Fecha de entrada en vigencia`='$this->Fechadeentradavigencia',`Fecha de entrada en caducidad`='$this->Fechadeentradaencaducidad',`Areas a las que afecta`='$this->Areasalasqueafecta',
-          `Registros que corresponden`='$this->Registrosquecorresponden',`Descripcion`='$this->Descripcion',Estado='$this->Estado',Link='$this->Link' WHERE ID_documentos=$iddoc;";
-        // echo $sql;
+          `Registros que corresponden`='$this->Registrosquecorresponden',`Descripción`='$this->Descripcion',Estado='$this->Estado',Link='$this->Link' WHERE ID_documentos=$iddoc;";
+        // echo $iddoc;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
@@ -176,8 +176,9 @@ class Documento
         $resultget = $this->conn->query($sqlget);
         $resultget->setFetchMode(PDO::FETCH_ASSOC);
         $filaget = $resultget->fetch();
-        $iddoc= $filaget['LAST_INSERT_ID()'];
-        $this->generateCodigoDocument($iddoc);
+
+
+        $this->modifiedCodigoDocument($iddoc);
 
         $this->modifiedUsuariosAuto($iddoc);
 
@@ -198,18 +199,36 @@ class Documento
             $fila = $result->fetch();
         }
     }
+    public function getArrayUsuariosAuto($iddoc)
+    {
+        $sql = "SELECT * from documentosPorRango where ID_documentos='$iddoc';";
+        // echo $sql;
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        // echo "Asd";
+        $resvar=array();
+
+        $contador=0;
+
+        while ($fila = $result->fetch()) {
+            $resvar[$contador]=$fila['idRangoUsuarios'];
+            $contador=$contador+1;
+        }
+        return $resvar;
+    }
 
     public function modifiedUsuariosAuto($iddoc)
     {
         $dumbvar=$this->usuariosauto;
         $idvardumb=0;
-        $sqlres = "UPDATE documentosPorRango SET idRangoUsuarios='0' where ID_documentos='$iddoc';";
+        $sqlres = "DELETE from documentosPorRango where ID_documentos='$iddoc';";
+
         $resultres = $this->conn->query($sqlres);
         $resultres->setFetchMode(PDO::FETCH_ASSOC);
         $filares = $resultres->fetch();
         foreach ($dumbvar as $usuario) {
             $sql = "INSERT into documentosPorRango VALUES (null,'$usuario','$iddoc')";
-            echo $sql;
+            // echo $sql;
             $result = $this->conn->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $fila = $result->fetch();
@@ -245,7 +264,7 @@ class Documento
     public function modifiedCodigoDocument($iddoc)
     {
         $sql = "SELECT Proceso, Subproceso, `Tipo de documento` from documentos where ID_documentos='$iddoc';";
-
+        // echo $sqlinsert;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
@@ -254,8 +273,8 @@ class Documento
         $var1=$fila['Proceso'];
         $var2=$fila['Subproceso'];
         $var3=$fila['Tipo de documento'];
-        $sqlinsert = "UPDATE codigoDocumento SET Proceso='$var1',Subproceso='$var2',`Tipo de documento`='$var3',descripcion='$codigogenerado' where ID_documentos='$iddoc';";
-        // echo $sqlinsert;
+        $sqlinsert = "UPDATE codigoDocumento SET idproceso='$var1',idsubproceso='$var2',idtipodedocumento='$var3',descripcion='$codigogenerado' where ID_documentos='$iddoc';";
+
         $resultinsert = $this->conn->query($sqlinsert);
         $resultinsert->setFetchMode(PDO::FETCH_ASSOC);
         $filainsert = $resultinsert->fetch();

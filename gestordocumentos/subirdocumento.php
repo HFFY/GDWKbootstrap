@@ -59,7 +59,7 @@
           if (move_uploaded_file($_FILES['myFile']['tmp_name'], $my_folder . $_FILES['myFile']['name'])) {
               echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
 
-              $document->Link = "/uploads/".basename($_FILES['myFile']['name']);
+              $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
               $document->insertDocument();
           } else {
               echo 'Upload failed!';

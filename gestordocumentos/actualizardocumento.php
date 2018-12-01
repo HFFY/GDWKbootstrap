@@ -21,8 +21,11 @@
 
   // instantiate user object
   include_once '../clases/user.php';
-      include_once '../clases/documento.php';
+    include_once '../clases/documento.php';
   session_start();
+  $_SESSION['id']=$_GET['id'];
+  $_SESSION['iddoc']=$_GET['iddoc'];
+
   if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
       $database = new Database();
       $db = $database->getConnection();
@@ -31,147 +34,297 @@
       $document = new Documento($db);
       $olduser=$user->getUser($_SESSION['oldusercreacion']);
 
-      //print_r(json_encode($user_arr));?>
+      $filashowdoc=$document->getDocument($_GET['iddoc']);
+
+      $document->Proceso = $filashowdoc['Proceso'];
+      $document->Tipodedocumento = $filashowdoc['Tipo de documento'];
+      $document->Numerodeldocumento = $filashowdoc['Numero del documento'];
+      $document->Nombredeldocumento = $filashowdoc['Nombre del documento'];
+      $document->Subproceso =$filashowdoc['Subproceso'];
+      $document->Fechadeentradavigencia = $filashowdoc['Fecha de entrada vigencia'];
+      $document->Fechadeentradaencaducidad = $filashowdoc['Fecha de entrada caducidad'];
+      $document->Version = $filashowdoc['Version'];
+      $document->Creador = $filashowdoc['Creador'];
+      $document->Revisor = $filashowdoc['Revisor'];
+      $document->Autorizador = $filashowdoc['Autorizador'];
+      $document->Disenodelproceso = $filashowdoc['Diseño del proceso'];
+      $document->Areasalasqueafecta = $filashowdoc['Areas a las que afecta'];
+      $document->Registrosquecorresponden = $filashowdoc['Registros que corresponden'];
+
+      $document->Descripcion = $filashowdoc['Descripción'];
+      $document->Link = $filashowdoc['Link'];
+
+      $document->usuariosauto = $document->getArrayUsuariosAuto($_GET['iddoc']);
+
+      if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
+          $document->Proceso = !empty($_POST['Proceso']) ? $_POST['Proceso'] :   $filashowdoc['Proceso'];
+
+          $document->Tipodedocumento = !empty($_POST['Tipodedocumento']) ? $_POST['Tipodedocumento'] : $document->Tipodedocumento;
+
+          $document->Numerodeldocumento = !empty($_POST['Numerodeldocumento']) ? $_POST['Numerodeldocumento'] : $filashowdoc['Numero del documento'];
+
+          $document->Nombredeldocumento = !empty($_POST['Nombredeldocumento']) ? $_POST['Nombredeldocumento'] : $filashowdoc['Nombre del documento'];
+
+          // echo "asd";
+
+          $document->Subproceso = !empty($_POST['Subproceso']) ? $_POST['Subproceso'] : $document->Subproceso;
+
+
+          $document->Fechadeentradavigencia = !empty($_POST['Fechadeentradavigencia']) ? $_POST['Fechadeentradavigencia'] :  $document->Fechadeentradavigencia;
+
+          $document->Fechadeentradaencaducidad = !empty($_POST['Fechadeentradaencaducidad']) ? $_POST['Fechadeentradaencaducidad'] : $document->Fechadeentradaencaducidad;
+
+          $document->Version = !empty($_POST['Version']) ? $_POST['Version'] : $document->Version;
+
+          $document->Creador = !empty($_POST['Creador']) ? $_POST['Creador'] : $document->Creador;
+
+          $document->Revisor = !empty($_POST['Revisor']) ? $_POST['Revisor'] : $document->Revisor;
+
+          $document->Autorizador = !empty($_POST['Autorizador']) ? $_POST['Autorizador'] : $document->Autorizador;
+
+          $document->Disenodelproceso = !empty($_POST['Disenodelproceso']) ? $_POST['Disenodelproceso'] : $document->Disenodelproceso;
+
+          $document->Areasalasqueafecta = !empty($_POST['Areasalasqueafecta']) ? $_POST['Areasalasqueafecta'] : $document->Areasalasqueafecta;
+
+          $document->Registrosquecorresponden = !empty($_POST['Registrosquecorresponden']) ? $_POST['Registrosquecorresponden'] : $document->Registrosquecorresponden;
+
+          $document->Descripcion = !empty($_POST['Descripcion']) ? $_POST['Descripcion'] : $document->Descripcion;
+
+          $document->usuariosauto = !empty($_POST['usuariosauto']) ? $_POST['usuariosauto'] : $document->usuariosauto;
+          // echo "asd";
+          $my_folder = ".././uploads/";
+          // $filePath = realpath($_FILES["myFile"]['tmp_name']);
+          // $dumbvariable = pathinfo($_FILES['myFile']['tmp_name'], PATHINFO_EXTENSION);
+          // echo $dumbvariable;
+          if (move_uploaded_file($_FILES['myFile']['tmp_name'], $my_folder . $_FILES['myFile']['name'])) {
+              //  echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
+
+              $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
+              $document->insertDocument();
+              $document->deactivateDocument($_GET['iddoc']);
+          } else {
+              echo 'Upload failed!';
+              //
+              // var_dump($_FILES['myFile']['error']);
+          }
+
+          // echo "hola";
+      } ?>
   <header class="header">
 
-    <nav class="navbar navbar-style">
-      <div class="container">
-        <div class="navbar-header ">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#micon">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href=""> <img class="logo" src="../images/logo.png"></a>
-        </div>
-        <div class="collapse navbar-collapse" id="micon">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-            <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+<nav class="navbar navbar-style">
+  <div class="container">
+    <div class="navbar-header ">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#micon">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../paginaprincipal.php"> <img class="logo" src="../images/logo.png"></a>
+  </div>
+  <div class="collapse navbar-collapse" id="micon">
+  <ul class="nav navbar-nav navbar-right">
+  <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
+  <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
 
-
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div class="container">
-      <div class="navbar-header ">
-
-        <p class="big-text">Actualizar documento</p>
-
-
-      </div>
-      <div class="collapse navbar-collapse" align="right" id="micon">
-        <a href="../paginaprincipal.php"> <img class="logo" src="../images/iconuser.png"></a>
-      </div>
+      </ul>
     </div>
+  </div>
+</nav>
 
-    <div class="container">
-        <form class="form-container">
-      <div class="row">
+<div class="container">
+  <div class="navbar-header ">
 
-          <div class="col-sm-6 banner-info" align="left" >
-            <div class="form-group" method="post" action="subirdocumento.php">
-              <p><br>Seleccionar Procesos</p>
+    <p class="big-text">Actualizar documento</p>
+
+
+  </div>
+  <div class="collapse navbar-collapse" align="right" id="micon">
+    <a href=""> <img class="logo" src="../images/iconuser.png"></a>
+  </div>
+</div>
+
+<div class="container">
+    <form class="form-container" action="actualizardocumento.php?iddoc=<?php echo $_GET['iddoc']."&id=".$_GET['id']; ?>" method="post" enctype="multipart/form-data">
+  <div class="row">
+
+      <div class="col-sm-6 banner-info" align="left" >
+        <div class="form-group" >
+          <p><br>Seleccionar Procesos</p>
             <select class="form-control" name="Proceso">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+              <option <?php  if ($filashowdoc['Proceso']==1) {
+          echo "selected='selected'";
+      } ?> value="1">1</option>
+              <option  <?php  if ($filashowdoc['Proceso']==2) {
+          echo "selected='selected'";
+      } ?>value="2">2</option>
+              <option  <?php  if ($filashowdoc['Proceso']==3) {
+          echo "selected='selected'";
+      } ?>value="3">3</option>
+              <option <?php  if ($filashowdoc['Proceso']==4) {
+          echo "selected='selected'";
+      } ?> value="4">4</option>
             </select>
                 </div>
               <div class="form-group">
               <p><br>Seleccionar Tipo de documento</p>
-            <select class="form-control" name="Tipo de documento">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
+              <select class="form-control" name="Tipodedocumento">
+                <option <?php  if ($filashowdoc['Tipo de documento']==1) {
+          echo "selected='selected'";
+      } ?> value="1">1</option>
+                <option  <?php  if ($filashowdoc['Tipo de documento']==2) {
+          echo "selected='selected'";
+      } ?>value="2">2</option>
+                <option  <?php  if ($filashowdoc['Tipo de documento']==3) {
+          echo "selected='selected'";
+      } ?>value="3">3</option>
+                <option <?php  if ($filashowdoc['Tipo de documento']==4) {
+          echo "selected='selected'";
+      } ?> value="4">4</option>
+              </select>
                 </div>
             <p>Numero del documento.</p>
 
               <div class="form-group">
-              <input type="text" name="Numero del documento" class="form-control" placeholder="Numero del documento">
+              <input type="text" name="Numerodeldocumento" class="form-control" placeholder="<?php echo $filashowdoc['Numero del documento']; ?>">
 
             </div>
             <p><br>Nombre del documento.</p>
             <div class="form-group">
 
-              <input type="text" name="Nombre del documento" class="form-control" placeholder="Nombre del documento">
+              <input type="text" name="Nombredeldocumento" class="form-control" placeholder="<?php echo $filashowdoc['Nombre del documento']; ?>" disabled>
             </div>
             <div class="form-group">
             <p><br>Subproceso</p>
           <select class="form-control" name="Subproceso">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option <?php  if ($filashowdoc['Subproceso']==1) {
+          echo "selected='selected'";
+      } ?> value="1">1</option>
+            <option  <?php  if ($filashowdoc['Subproceso']==2) {
+          echo "selected='selected'";
+      } ?>value="2">2</option>
+            <option  <?php  if ($filashowdoc['Subproceso']==3) {
+          echo "selected='selected'";
+      } ?>value="3">3</option>
+            <option <?php  if ($filashowdoc['Subproceso']==4) {
+          echo "selected='selected'";
+      } ?> value="4">4</option>
           </select>
               </div>
 
               <div class="form-group">
                 <p><br>Fecha de entrada en vigencia.</p>
-                <input type="text" name="Nombre del documento" class="form-control" placeholder="Nombre del documento">
+                <input type="date" name="Fechadeentradavigencia" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en vigencia']; ?>" required>
               </div>
               <div class="form-group">
                 <p><br>Fecha de entrada en caducidad.</p>
-                <input type="text" name="Nombre del documento" class="form-control" placeholder="Nombre del documento">
+                <input type="date" name="Fechadeentradaencaducidad" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en caducidad']; ?>" dirname=""required>
               </div>
+              <div class="form-group">
+                <!-- <input type="checkbox" class="button" name="Administrador" value="1"> Administrador<br> -->
+       <table class="table table-striped table-bordered  table-responsive-sm  scrollbar">
+                <thead  class="thead-dark">
+                  <tr>
+                    <th style="width: 50%">Nombre</th>
+                    <th style="width: 50%">Roles<br></th>
+
+
+                  </tr>
+                </thead>
+                <tbody><?php
+                $dumbvalorarray=$document->usuariosauto;
+      foreach ($dumbvalorarray as $valor) {
+          if ($valor==2) {
+              $dumbvar2="checked";
+          }
+          if ($valor==3) {
+              $dumbvar3="checked";
+          }
+          if ($valor==4) {
+              $dumbvar4="checked";
+          }
+      } ?>
+           <tr>
+             <td>Vicerrector<br></td>
+              <td><input type="checkbox" class="form-control"  name="usuariosauto[]" value="2" <?php
+         echo $dumbvar2; ?>></td>
+
+
+           </tr>
+           <tr>
+              <td>Jefedecarrera<br></td>
+              <td><input type="checkbox" class="form-control" name="usuariosauto[]" value="3" <?php   echo $dumbvar3; ?>></td>
+
+
+           </tr>
+           <tr>
+              <td>Docente<br><br></td>
+              <td><input type="checkbox"class="form-control" name="usuariosauto[]" value="4" <?php   echo $dumbvar4; ?> ></td>
+
+           </tr>
+
+         </tbody>
+         </table>
+             </div>
           </div>
           <div class="col-sm-6 banner-image" align="left" >
 
             <p><br>Version.</p>
             <div class="form-group">
 
-              <input type="text" name="version" class="form-control" placeholder="Version">
+              <input type="text" name="Version" class="form-control" placeholder="<?php echo $filashowdoc['Version']; ?>">
             </div>
              <p><br>Creador.</p>
             <div class="form-group">
 
-              <input type="text" name="creador" class="form-control" placeholder="creador">
+              <input type="text" name="Creador" class="form-control" placeholder="<?php echo $filashowdoc['Creador']; ?>">
             </div>
             <p><br>Revisor.</p>
            <div class="form-group">
 
-             <input type="text" name="Revisor" class="form-control" placeholder="Revisor"
+             <input type="text" name="Revisor" class="form-control" placeholder="<?php echo $filashowdoc['Revisor']; ?>">
            </div>
            <p><br>Autorizador.</p>
           <div class="form-group">
 
-            <input type="text" name="autorizador" class="form-control" placeholder="autorizador">
+            <input type="text" name="Autorizador" class="form-control" placeholder="<?php echo $filashowdoc['Autorizador']; ?>">
           </div>
-          <p><br>Dueño del proceso.</p>
+          <p><br>Diseño del proceso.</p>
          <div class="form-group">
 
-           <input type="text" name="dueñodelproceso" class="form-control" placeholder="dueñodelproceso">
+           <input type="text" name="Disenodelproceso" class="form-control" placeholder="<?php echo $filashowdoc['Diseño del proceso']; ?>">
          </div>
          <div class="form-group">
            <p><br>Areas a las que afecta.</p>
-           <input type="text" name="Areas a las que afecta" class="form-control" placeholder="Areas a las que afecta">
+           <input type="text" name="Areasalasqueafecta" class="form-control" placeholder="<?php echo $filashowdoc['Areas a las que afecta']; ?>">
          </div>
          <div class="form-group">
            <p><br>Registros que correspondan.</p>
-           <input type="text" name="Registros que correspondan" class="form-control" placeholder="Registros que correspondan">
+           <input type="text" name="Registrosquecorresponden" class="form-control" placeholder="<?php echo $filashowdoc['Registros que corresponden']; ?>">
          </div>
           </div>
           <br><br><br>
-          <input type="file" id="myDocument" class="form-control">
-  </div>
+          <div class="form-group">
+          <!-- <form action="subirdocumento.php" method="post" enctype="multipart/form-data"> -->
+           <input type="file" name="myFile" class="form-control">
+         <!-- <input type="submit" name="submit" class="button" value="submit" > -->
+         <!-- </form> -->
+            </div>
+          </div>
           <div class="form-group" align="left">
            <label for="inputlg"><br><br><br></label>
-           <form action="">
-         <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion"></textarea>
+
+            <textarea class="form-control input-lg" name="Descripcion" rows="10" cols="30" placeholder="<?php echo $filashowdoc['Descripción']; ?>"></textarea>
             <br>
-           </form>
+
          </div>
 
           <div class="col-sm-6 banner-image">
-
+          <div class="form-group">
             <a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
 
-            <a href="" class="btn btn-second">    <button type="submit" class="btn btn-primary btn-block">Crear</button></a>
+            <input type="submit" name="crear" class="button" value="Actualizar" />
+          </div>
           </div>
         </form>
 

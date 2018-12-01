@@ -60,11 +60,9 @@
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
-         <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username; ?></a></li>
-         <li><a href="">WorkFlow </a></li>
-         <li><a href="">Añadir Documento</a></li>
-         <li><a href="">Modificar Documento</a></li>
-
+         <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
+         
+         <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
          </ul>
         </div>
      </div>
