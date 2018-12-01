@@ -18,39 +18,32 @@
 <body>
 
     <?php
-
   include_once '../clases/database.php';
   include_once '../clases/user.php';
   include_once '../clases/documento.php';
   session_start();
   $database = new Database();
   $db = $database->getConnection();
-
   $user = new User($db);
   $sql = 'select * from usuarios;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
-
   $tareaCero = new Database($db);//Por Validar
   $sqlTareaCero = "select * from tareas where estado='0';";
   $resultTareaCero = $db->query($sqlTareaCero);
   $resultTareaCero->setFetchMode(PDO::FETCH_ASSOC);
-
   $tareaUno = new Database($db);//En Ejecucion
   $sqlTareaUno = "select * from tareas where estado='1';";
   $resultTareaUno = $db->query($sqlTareaUno);
   $resultTareaUno->setFetchMode(PDO::FETCH_ASSOC);
-
   $tareaDos = new Database($db);//Terminada
   $sqlTareaDos = "select * from tareas where estado='2';";
   $resultTareaDos = $db->query($sqlTareaDos);
   $resultTareaDos->setFetchMode(PDO::FETCH_ASSOC);
-
   $tareaTres = new Database($db);//Retrasada
   $sqlTareaTres = "select * from tareas where estado='3';";
   $resultTareaTres = $db->query($sqlTareaTres);
   $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
-
       ?>
 
         <header class="header">
@@ -103,7 +96,8 @@
 
                             <tbody class="thead-dark">
                                 <?php
-                           while ($filaCero = $resultTareaCero->fetch()) { ?>
+                           while ($filaCero = $resultTareaCero->fetch()) {
+                               ?>
                                     <tr>
                                         <td>
                                             <a href="../tareas/WorkflowVerTarea.php" value="<?php echo $filaCero['id_tareas']; ?>">
@@ -124,7 +118,7 @@
                                         </td>
                                     </tr>
                                     <?php
-                             } ?>
+                           } ?>
                             </tbody>
 
                         </table>
@@ -143,7 +137,8 @@
                             </thead>
                             <tbody class="thead-dark">
                                 <?php
-                           while ($filaUno = $resultTareaUno->fetch()) { ?>
+                           while ($filaUno = $resultTareaUno->fetch()) {
+                               ?>
                                     <tr>
                                         <td>
                                             <a href="../tareas/WorkflowVerTarea.php" value="<?php echo $filaUno['id_tareas']; ?>">
@@ -163,7 +158,7 @@
                                         </td>
                                     </tr>
                                     <?php
-                             } ?>
+                           } ?>
                             </tbody>
                         </table>
                     </div>
@@ -181,7 +176,8 @@
                             </thead>
                             <tbody class="thead-dark">
                                 <?php
-                           while ($filaTres = $resultTareaTres->fetch()) { ?>
+                           while ($filaTres = $resultTareaTres->fetch()) {
+                               ?>
                                     <tr>
                                         <td>
                                             <a href="../tareas/WorkflowVerTarea.php" value="<?php echo $filaTres['id_tareas']; ?>">
@@ -201,7 +197,7 @@
                                         </td>
                                     </tr>
                                     <?php
-                             } ?>
+                           } ?>
                             </tbody>
                         </table>
                     </div>
@@ -219,7 +215,8 @@
                             </thead>
                             <tbody class="thead-dark">
                                 <?php
-                              while ($filaDos = $resultTareaDos->fetch()) { ?>
+                              while ($filaDos = $resultTareaDos->fetch()) {
+                                  ?>
                                     <tr>
                                         <td>
                                             <a href="../tareas/WorkflowVerTarea.php" value="<?php echo $filaDos['id_tareas']; ?>">
@@ -237,7 +234,7 @@
                                         </td>
                                     </tr>
                                     <?php
-                                } ?>
+                              } ?>
                             </tbody>
                         </table>
                     </div>

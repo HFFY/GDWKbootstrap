@@ -111,15 +111,15 @@ CREATE TABLE `DocUsuCambios` (
     REFERENCES `GDWKF`.`Usuarios` (`ID_usuarios`)
 );
 CREATE TABLE `TipoTareas` (
-  `idTipoTareas` INT NOT NULL,
+  `idTipoTareas` INT NOT NULL AUTO_INCREMENT,
   `Descripción` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`idTipoTareas`)
 );
 CREATE TABLE `Tareas` (
   `id_tareas` INT NOT NULL AUTO_INCREMENT,
   `Prioridad` TINYINT(2) NOT NULL,
-  `Fecha estimada` DATETIME(1) NOT NULL,
-  `Fecha oficial` DATETIME(1) NOT NULL,
+  `Fecha estimada` DATE NOT NULL,
+  `Fecha oficial` DATE NOT NULL,
   `Descripción` VARCHAR(45) NULL,
   `Id_usuario` INT NOT NULL,
   `Tipo` INT NOT NULL,
@@ -170,3 +170,8 @@ INSERT into proceso VALUES(null,'proceso1');
 INSERT into subproceso VALUES(null,'proceso1');
 INSERT into `tipo de documento` VALUES(null,'proceso1');
 INSERT INTO usuarios VALUES ('GOD', '1','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
+INSERT INTO TipoTareas VALUES (null,'Reunión para documento');
+INSERT INTO TipoTareas VALUES (null,'Solicitud de actualización de proceso');
+INSERT INTO TipoTareas VALUES (null,'Solicitud de nuevo proceso');
+INSERT INTO TipoTareas VALUES (null,'Interpretación de normas y procesos');
+INSERT INTO TipoTareas VALUES (null,'Consulta');
