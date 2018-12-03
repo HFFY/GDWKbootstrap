@@ -1,7 +1,6 @@
 <?php
 include_once 'database.php';
-class Ticket
-{
+class Ticket{
     private $conn;
     private $database;
     private $table_name = "tareas";
@@ -22,6 +21,7 @@ class Ticket
     public $Creadopor='sin implementar';
     public $IP='sin implementar';
     public $Persona='sin implementar';
+    public $NombreTarea;
     public function __construct($db)
     {
         $this->conn = $db;
@@ -39,7 +39,7 @@ class Ticket
     }
     public function validarTarea($idtarea)
     {
-        $sql = "UPDATE Tareas SET Estado='E' where id_tareas='$idtarea';";
+        $sql = "UPDATE Tareas SET Estado='1' where id_tareas='$idtarea';";
         // echo $sql;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -57,7 +57,7 @@ class Ticket
             if ($dumbdate<$date1==1) {
                 $dumbvar=$fila['id_tareas'];
 
-                $sqlup = "UPDATE $this->table_name SET Estado='R' WHERE id_tareas='$dumbvar';";
+                $sqlup = "UPDATE $this->table_name SET Estado='3' WHERE id_tareas='$dumbvar';";
 
                 $resultup = $this->conn->query($sqlup);
                 $resultup->setFetchMode(PDO::FETCH_ASSOC);
@@ -66,7 +66,7 @@ class Ticket
     }
     public function resolverTarea($idtarea)
     {
-        $sql = "UPDATE Tareas SET Estado='D' where id_tareas='$idtarea';";
+        $sql = "UPDATE Tareas SET Estado='2' where id_tareas='$idtarea';";
         // echo $sql;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);

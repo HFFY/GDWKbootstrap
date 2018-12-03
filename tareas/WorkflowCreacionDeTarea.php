@@ -20,6 +20,7 @@
 include_once '../clases/database.php';
 include_once '../clases/user.php';
 include_once '../clases/documento.php';
+include_once '../clases/ticket.php';
 session_start();
 $database = new Database();
 $db = $database->getConnection();
@@ -28,6 +29,19 @@ $user = new User($db);
 $sql = 'select * from usuarios;';
 $result = $db->query($sql);
 $result->setFetchMode(PDO::FETCH_ASSOC);
+
+$creartarea = new Ticket($db);
+
+$creartarea->Prioridad = $_GET['selectprioridad'];
+$creartarea->Fechaestimada = $_GET['fechauno'];
+$creartarea->Fechaoficial = $_GET['fechados'];
+$creartarea->Descripción = $_GET['descripciontarea'];
+$creartarea->Id_usuario = '1';//hardcoded
+$creartarea->Tipo = $_GET['selecttarea'];
+$creartarea->Estado = '0';//pendiente de validacion
+$creartarea->Fechadecreacion = date('Y-m-d H:i:s');
+$creartarea->NombreTarea = $_GET['nombretarea'];
+
     ?>
 
     <header class="header">
@@ -44,10 +58,9 @@ $result->setFetchMode(PDO::FETCH_ASSOC);
                 </div>
                 <div class="collapse navbar-collapse" id="micon">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="">Login</a></li>
-                        <li><a href="">WorkFlow</a></li>
-                        <li><a href="">Añadir Documento</a></li>
-                        <li><a href="">Modificar Documento</a></li>
+                      <li><a href="">Login</a></li>
+                      <li><a href="">WorkFlow</a></li>
+                      <li><a href="..">Pagina principal</a></li>
 
                     </ul>
                 </div>
@@ -58,41 +71,42 @@ $result->setFetchMode(PDO::FETCH_ASSOC);
                 <p class="big-text">Crear tarea</p>
             </div>
         </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 banner-info">
                     <p>Tarea</p>
-                    <select class="form-control">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                    <select class="form-control" name="selecttarea">
+                        <option value="1"> Reunión para documento </option>
+                        <option value="2"> Solicitud de actualización de proceso </option>
+                        <option value="3"> Solicitud de nuevo proceso </option>
+                        <option value="4"> Interpretación de normas y procesos </option>
+                        <option value="5"> Consulta </option>
                     </select>
                     <p>
                         <br>Fecha inicio</p>
-                    <form action="/action_page.php">
-                        <input type="date" name="bday" class="form-control">
+                    <form action="/action_page.php" name="fechauno">
+                        <input type="date" name="bday" class="form-control" min ="<?php echo date("Y-m-d") ?>" max="<?php $d=strtotime("+12 Months"); echo date("Y-m-d",$d) ?>" required >
                     </form>
                 </div>
                 <div class="col-sm-6 banner-image">
                     <p>Prioridad</p>
-                    <select class="form-control">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                    <select class="form-control" name="selectprioridad">
+                      <option value="1">Alta</option>
+                      <option value="2">Media</option>
+                      <option value="3">Baja</option>
                     </select>
                     <p>
                         <br>Fecha Aceptada</p>
-                    <form action="/action_page.php">
-                        <input type="date" name="bday" class="form-control">
+                    <form action="/action_page.php" name="fechados">
+                        <input type="date" name="bday" class="form-control" min ="<?php echo date("Y-m-d") ?>" max="<?php $d=strtotime("+12 Months"); echo date("Y-m-d",$d) ?>" required >
                     </form>
 
                 </div>
 
                 <div class="col-sm-6 banner-image">
                   <p>Nombre de la tarea</p>
-                  <input type="text" class="form-control"><br>
+                  <input type="text" class="form-control" name="nombretarea" required ><br>
                 </div>
 
                 <div class="form-group">
@@ -101,12 +115,13 @@ $result->setFetchMode(PDO::FETCH_ASSOC);
                         <br>
                         <br>
                     </label>
-                    <form action="/action_page.php">
-                        <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion"></textarea>
+                    <form action="/action_page.php" name="descripciontarea">
+                        <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion" required ></textarea>
                         <br>
                     </form>
                 </div>
-                <a class="btn btn-first" href="../tareas/WorkflowPaginaPrincipal.php">Cancelar</a>
+
+                <a class="btn btn-first" href="../tareas/workflowpaginaprincipal.php">Cancelar</a>
                 <button type="submit" class="button" href="">Crear</button>
                 </button>
 

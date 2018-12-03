@@ -28,11 +28,14 @@ $sql = 'select * from usuarios;';
 $result = $db->query($sql);
 $result->setFetchMode(PDO::FETCH_ASSOC);
 
+$kind = $_GET['variable1'];
+$kindwork = $_GET['variable2'];
+
 $tarea = new Database($db);//Por Validar
-$sqlTarea = "select * from tareas where id_tareas = 1 ;"; //poner de parametro de busueda la variable asignada
+$sqlTarea = "select * from tareas where id_tareas = $kindwork";
 $resultTarea = $db->query($sqlTarea);
 $resultTarea->setFetchMode(PDO::FETCH_ASSOC);
-$fila = $resultTarea->fetch()
+$fila = $resultTarea->fetch();
     ?>
 
 <header class="header">
@@ -51,8 +54,8 @@ $fila = $resultTarea->fetch()
          <ul class="nav navbar-nav navbar-right">
          <li><a href="">Login</a></li>
          <li><a href="">WorkFlow</a></li>
-         <li><a href="">Añadir Documento</a></li>
-         <li><a href="">Modificar Documento</a></li>
+         <li><a href="">Crear tarea</a></li>
+         <li><a href="">Pagina principal</a></li>
 
          </ul>
         </div>
@@ -67,37 +70,55 @@ $fila = $resultTarea->fetch()
      <div class="row">
          <div class="col-sm-6 banner-info">
      <p>Tipo de Tarea</p>
-     <select class="form-control" form="1">
-       <option value="1" selected isabled>Uno</option>
-       <option value="2" disabled>Dos</option>
-       <option value="3" disabled>Tres</option>
-       <option value="4" disabled>Cuatro</option>
-     </select>
+
+     <?php if( $fila['Tipo'] == 1){?>
+     <p  class="form-control" disabled > Reunión para documento </p>
+   <?php } ?>
+
+     <?php if( $fila['Tipo'] == 2){?>
+       <p  class="form-control" disabled > Solicitud de actualización de proceso </p>
+     <?php } ?>
+
+       <?php if( $fila['Tipo'] == 3){?>
+         <p  class="form-control" disabled > Solicitud de nuevo proceso </p>
+       <?php } ?>
+
+         <?php if( $fila['Tipo'] == 4){?>
+           <p  class="form-control" disabled > Interpretación de normas y procesos </p>
+         <?php } ?>
+
+         <?php if( $fila['Tipo'] == 5){?>
+           <p  class="form-control" disabled > Consulta </p>
+         <?php } ?>
+
      <p>
          <br>Fecha inicio</p>
-     <form action="/action_page.php">
-         <input type="date" name="bday" class="form-control" min="<?php echo date("Y-m-d");?>" value="<?php echo $fila['Fecha de estimada']; ?>" disabled>
-     </form>
+     <p  class="form-control" disabled > <?php echo $fila['Fecha estimada'];?> </p>
  </div>
  <div class="col-sm-6 banner-image">
+
      <p>Prioridad</p>
-     <select class="form-control">
-         <option value="1" disabled>Uno</option>
-         <option value="2" disabled>Dos</option>
-         <option value="3" selected disabled>Tres</option>
-         <option value="4" disabled>Cuatro</option>
-     </select>
+     <?php if( $fila['Prioridad'] == 1){?>
+     <p  class="form-control" disabled > Alta </p>
+   <?php } ?>
+
+     <?php if( $fila['Prioridad'] == 2){?>
+       <p  class="form-control" disabled > Media </p>
+     <?php } ?>
+
+       <?php if( $fila['Prioridad'] == 3){?>
+         <p  class="form-control" disabled > Baja </p>
+       <?php } ?>
+
      <p>
          <br>Fecha Aceptada</p>
-     <form action="/action_page.php">
-         <input type="date" class="form-control" min="<?php echo date("Y-m-d");?>" value="<?php echo $fila['Fecha oficial']; ?>" disabled>
-     </form>
+     <p  class="form-control" disabled > <?php echo $fila['Fecha oficial'];?> </p>
 
  </div>
 
  <div class="col-sm-6 banner-image">
    <p>Nombre de la tarea</p>
-   <input type="text" class="form-control" disabled><br>
+   <p  class="form-control" disabled > <?php echo $fila['NombreTarea'];?> </p>
  </div>
 
  <div class="form-group">
@@ -107,22 +128,54 @@ $fila = $resultTarea->fetch()
          <br>
      </label>
      <form action="/action_page.php">
-         <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion" disabled ></textarea>
+         <textarea class="form-control input-lg" name="message" rows="10" cols="30" placeholder="Descripcion" disabled ><?php echo $fila['Descripción'];?></textarea>
          <br>
      </form>
  </div>
- <a class="btn btn-first" href="../tareas/WorkflowPaginaPrincipal.php">Cancelar</a>
-<a href="">
- <button type="submit" class="button" >Modificar</button>
-</a>
- <a href="">
-<button type="submit" class="button" > Validar </button>
-</a>
 
-<a href="">
-<button type="submit" class="button" > Finalizar </button>
-</a>
- </button>
+
+<a class="btn btn-first" href="../tareas/workflowpaginaprincipal.php">Cancelar</a>
+
+<?php
+if($kind == 1){ //Ver Tarea?>
+
+  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>">
+   <button type="submit" class="button" >Modificar</button>
+  </a>
+
+  <?php
+}
+?>
+
+<?php
+if($kind == 2){ //Validar Tarea?>
+
+  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>">
+   <button type="submit" class="button" >Modificar</button>
+  </a>
+
+  <a href="">
+ <button type="submit" class="button" > Validar </button>
+ </a>
+
+  <?php
+}
+?>
+
+<?php
+if($kind == 3){ //Finalizar Tarea?>
+
+  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>">
+   <button type="submit" class="button" >Modificar</button>
+  </a>
+
+  <a href="">
+  <button type="submit" class="button" > Finalizar </button>
+  </a>
+
+  <?php
+}
+?>
 
 </div>
 </div>

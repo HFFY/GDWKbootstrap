@@ -127,8 +127,9 @@ CREATE TABLE `Tareas` (
   `Creadopor` VARCHAR(45) NULL,
   `IP` VARCHAR(45) NULL,
   `Fecha de creación` DATE NULL,
-  `Estado` VARCHAR(1) NULL,
+  `Estado` VARCHAR(1) NOT NULL,
   `Persona` VARCHAR(45) NULL,
+  `NombreTarea` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_tareas`),
     FOREIGN KEY (`Id_usuario`)
     REFERENCES `GDWKF`.`Usuarios` (`ID_usuarios`),
@@ -175,3 +176,8 @@ INSERT INTO TipoTareas VALUES (null,'Solicitud de actualización de proceso');
 INSERT INTO TipoTareas VALUES (null,'Solicitud de nuevo proceso');
 INSERT INTO TipoTareas VALUES (null,'Interpretación de normas y procesos');
 INSERT INTO TipoTareas VALUES (null,'Consulta');
+INSERT INTO Tareas VALUES (1,1,"2018-12-12","2018-12-12","Tarea de prueba","1","1", null , null , null , null , 0, null,"prueba");
+INSERT INTO Tareas VALUES (2,1,"2018-12-12","2018-12-12","Tarea de prueba","1","1", null , null , null , null , 1, null,"prueba");
+INSERT INTO Tareas VALUES (3,1,"2018-12-12","2018-12-12","Tarea de prueba","1","2", null , null , null , null , 2, null,"prueba");
+INSERT INTO Tareas VALUES (4,1,"2018-12-12","2018-12-12","Tarea de prueba","1","3", null , null , null , null , 3, null,"prueba");
+INSERT INTO Tareas VALUES (5,1,"2018-12-12","2018-12-12","Tarea de prueba","1","1", null , null , null , null , 0, null,"prueba");
