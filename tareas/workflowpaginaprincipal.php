@@ -23,8 +23,12 @@
   include_once '../clases/documento.php';
   session_start();
   $database = new Database();
+  $_SESSION['id']=$_GET['id'];
+  $id=$_SESSION['id'];
   $db = $database->getConnection();
   $user = new User($db);
+
+  if(!empty($id)){//TODO: IMPLEMENTAR SESION INICIADA
   $sql = 'select * from usuarios;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -75,7 +79,7 @@
                 </div>
             </div>
             <div class="container">
-                <a href="../tareas/WorkflowCreacionDeTarea.php">
+                <a href="../tareas/WorkflowCreacionDeTarea.php?id=<?php echo $id;?>">
                     <button type="submit" class="button">Crear Tarea</button>
                 </a>
             </div>
@@ -100,20 +104,20 @@
                                ?>
                                     <tr>
                                         <td>
-                                          <?php $id = $filaCero['id_tareas'];?>
-                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $id; ?>">
+                                          <?php $idtarea = $filaCero['id_tareas'];?>
+                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                                 <?php echo $filaCero['NombreTarea']; ?>
                                             </a>
                                         </td>
 
                                         <td align="center">
-                                            <a href="../tareas/WorkflowVerTarea.php?variable1=2&variable2=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowVerTarea.php?variable1=2&variable2=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                       <button type="submit" value="<?php echo $filaCero['id_tareas']; ?>" > Validar </button>
                                       </a>
                                         </td>
 
                                         <td align="center">
-                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                     <button type="submit" value="<?php echo $filaCero['id_tareas']; ?>" > Modificar </button>
                                   </a>
                                         </td>
@@ -141,20 +145,20 @@
                            while ($filaUno = $resultTareaUno->fetch()) {
                                ?>
                                     <tr>
-                                      <?php $id = $filaUno['id_tareas'];?>
+                                      <?php $idtarea = $filaUno['id_tareas'];?>
                                         <td>
-                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                                 <?php echo $filaUno['NombreTarea']; ?>
                                             </a>
                                         </td>
 
                                         <td align="center">
-                                            <a href="../tareas/WorkflowVerTarea.php?variable1=3&variable2=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowVerTarea.php?variable1=3&variable2=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                     <button type="submit" value="<?php echo $filaUno['id_tareas']; ?>" > Terminar </button>
                                   </a>
                                         </td>
                                         <td align="center">
-                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                     <button type="submit" value="<?php echo $filaUno['id_tareas']; ?>" > Modificar </button>
                                   </a>
                                         </td>
@@ -181,20 +185,20 @@
                            while ($filaTres = $resultTareaTres->fetch()) {
                                ?>
                                     <tr>
-                                      <?php $id = $filaTres['id_tareas'];?>
+                                      <?php $idtarea = $filaTres['id_tareas'];?>
                                         <td>
-                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                                 <?php echo $filaTres['NombreTarea']; ?>
                                             </a>
                                         </td>
 
                                         <td align="center">
-                                            <a href="../tareas/WorkflowVerTarea.php?variable1=3&variable2=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowVerTarea.php?variable1=3&variable2=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                     <button type="submit" value="<?php echo $filaTres['id_tareas']; ?>" herf = ""> Finalizar </button>
                                   </a>
                                         </td>
                                         <td align="center">
-                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                     <button type="submit" value="<?php echo $filaTres['id_tareas']; ?>" > Modificar </button>
                                   </a>
                                         </td>
@@ -221,9 +225,9 @@
                               while ($filaDos = $resultTareaDos->fetch()) {
                                   ?>
                                     <tr>
-                                      <?php $id = $filaDos['id_tareas'];?>
+                                      <?php $idtarea = $filaDos['id_tareas'];?>
                                         <td>
-                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowVerTarea.php?variable1=1&variable2=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                                 <?php echo $filaDos['NombreTarea']; ?>
                                             </a>
                                         </td>
@@ -232,7 +236,7 @@
                                             <?php echo $filaDos['Fecha estimada']; ?>
                                         </td>
                                         <td align="center">
-                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $id; ?>">
+                                            <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
                                        <button type="submit" value="<?php echo $filaDos['id_tareas']; ?>" herf = ""> Modificar </button>
                                      </a>
                                         </td>
@@ -248,7 +252,11 @@
             </div>
             </div>
         </header>
-
+        <?php
+        } else {
+            echo "You don't have permission to acces this page.";
+        }
+         ?>
 </body>
 
 </html>

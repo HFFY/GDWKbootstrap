@@ -14,13 +14,13 @@ class Ticket{
     public $Id_usuario;
     public $Tipo;
     public $Estado;
-    public $Fechadecreacion;
+    public $Fechadecreacion=null;
     //////
 
-    public $Demora;
-    public $Creadopor='sin implementar';
-    public $IP='sin implementar';
-    public $Persona='sin implementar';
+    public $Demora=NULL;
+    public $Creadopor=NULL;
+    public $IP=NULL;
+    public $Persona=NULL;
     public $NombreTarea;
     public function __construct($db)
     {
@@ -29,11 +29,9 @@ class Ticket{
         $this->Fechadecreacion=date('Y-m-d H:i:s');
         $this->Demora=date('Y-m-d H:i:s');
     }
-    public function crearTarea()
-    {
+    public function crearTarea(){
         $sql = "INSERT into Tareas VALUES (null, '$this->Prioridad', '$this->Fechaestimada','$this->Fechaoficial','$this->Descripción','$this->Id_usuario',
-     '$this->Tipo','$this->Demora','$this->Creadopor','$this->IP','$this->Fechadecreacion','$this->Estado','$this->Persona');";
-        echo $sql;
+          '$this->Tipo','$this->Demora','$this->Creadopor','$this->IP','$this->Fechadecreacion','$this->Estado','$this->Persona','$this->$NombreTarea');";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }

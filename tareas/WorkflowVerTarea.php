@@ -22,12 +22,12 @@ include_once '../clases/documento.php';
 session_start();
 $database = new Database();
 $db = $database->getConnection();
-
+$id=$_GET['id'];
 $user = new User($db);
 $sql = 'select * from usuarios;';
 $result = $db->query($sql);
 $result->setFetchMode(PDO::FETCH_ASSOC);
-
+if(!empty($id)){//TODO: IMPLEMENTAR SESION INICIADA
 $kind = $_GET['variable1'];
 $kindwork = $_GET['variable2'];
 
@@ -134,12 +134,12 @@ $fila = $resultTarea->fetch();
  </div>
 
 
-<a class="btn btn-first" href="../tareas/workflowpaginaprincipal.php">Cancelar</a>
+<a class="btn btn-first" href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">Cancelar</a>
 
 <?php
 if($kind == 1){ //Ver Tarea?>
 
-  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>">
+  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>&id=<?php echo $id;?>">
    <button type="submit" class="button" >Modificar</button>
   </a>
 
@@ -150,11 +150,11 @@ if($kind == 1){ //Ver Tarea?>
 <?php
 if($kind == 2){ //Validar Tarea?>
 
-  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>">
+  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>&id=<?php echo $id;?>">
    <button type="submit" class="button" >Modificar</button>
   </a>
 
-  <a href="">
+  <a href="../tareas/ManageWorkflow.php?id=<?php echo $id;?>&uno=1&dos=<?php echo $kindwork; ?>">
  <button type="submit" class="button" > Validar </button>
  </a>
 
@@ -165,11 +165,11 @@ if($kind == 2){ //Validar Tarea?>
 <?php
 if($kind == 3){ //Finalizar Tarea?>
 
-  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>">
+  <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $kindwork; ?>&id=<?php echo $id;?>">
    <button type="submit" class="button" >Modificar</button>
   </a>
 
-  <a href="">
+  <a href="../tareas/ManageWorkflow.php?id=<?php echo $id;?>&uno=2&dos=<?php echo $kindwork; ?>">
   <button type="submit" class="button" > Finalizar </button>
   </a>
 
@@ -180,7 +180,11 @@ if($kind == 3){ //Finalizar Tarea?>
 </div>
 </div>
 </header>
-
+<?php
+} else {
+    echo "You don't have permission to acces this page.";
+}
+ ?>
 </body>
 
 </html>
