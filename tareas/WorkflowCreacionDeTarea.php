@@ -50,7 +50,7 @@ if(!empty($creartarea->Prioridad)){
     '$creartarea->Tipo',null,null,null,'$creartarea->Fechadecreacion','0',null,'$creartarea->NombreTarea');";
   $result1 = $db->query($sql1);
   $result1->setFetchMode(PDO::FETCH_ASSOC);
-  
+
   header("Location: workflowpaginaprincipal.php?id=".$id);
 }
     ?>
@@ -69,9 +69,9 @@ if(!empty($creartarea->Prioridad)){
                     </div>
                     <div class="collapse navbar-collapse" id="micon">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="">Login</a></li>
-                            <li><a href="">WorkFlow</a></li>
-                            <li><a href="..">Pagina principal</a></li>
+                          <li><a href="../">Login</a></li>
+                          <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">WorkFlow</a></li>
+                          <li><a href="../paginaprincipal.php?id=<?php echo $id;?>">Pagina principal</a></li>
 
                         </ul>
                     </div>
