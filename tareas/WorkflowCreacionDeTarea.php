@@ -104,8 +104,7 @@ if(!empty($creartarea->Prioridad)){
                             <p>Prioridad</p>
                             <select class="form-control" name="selectprioridad">
                                 <option value=1>Alta</option>
-                                <option value=2 selected>Media</option>
-                                <option value=3>Baja</option>
+                                <option value=2 selected>Baja</option>
                             </select>
                             <p>
                                 <br>Fecha Aceptada</p>

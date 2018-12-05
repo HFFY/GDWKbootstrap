@@ -106,12 +106,8 @@ $fila = $resultTarea->fetch();
                             <?php } ?>
 
                                 <?php if( $fila['Prioridad'] == 2){?>
-                                    <p class="form-control" disabled> Media </p>
+                                    <p class="form-control" disabled> Baja </p>
                                     <?php } ?>
-
-                                        <?php if( $fila['Prioridad'] == 3){?>
-                                            <p class="form-control" disabled> Baja </p>
-                                            <?php } ?>
 
                                                 <p>
                                                     <br>Fecha Aceptada</p>

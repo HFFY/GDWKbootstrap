@@ -185,20 +185,12 @@ if(!empty($tareamodificada->Prioridad)){
                             <select class="form-control" name="selectprioridad">
                                 <?php if( $fila['Prioridad'] == 1){?>
                                     <option value="1" selected>Alta</option>
-                                    <option value="2">Media</option>
-                                    <option value="3">Baja</option>
+                                    <option value="2">Baja</option>
                                     <?php } ?>
 
-                                        <?php if( $fila['Prioridad'] == 2){?>
-                                            <option value="1">Alta</option>
-                                            <option value="2" selected>Media</option>
-                                            <option value="3">Baja</option>
-                                            <?php } ?>
-
-                                                <?php if( $fila['Prioridad'] == 3){?>
+                                                <?php if( $fila['Prioridad'] == 2){?>
                                                     <option value="1">Alta</option>
-                                                    <option value="2">Media</option>
-                                                    <option value="3" selected>Baja</option>
+                                                    <option value="2" selected>Baja</option>
                                                     <?php } ?>
                             </select>
 
