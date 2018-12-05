@@ -118,9 +118,9 @@ CREATE TABLE `TipoTareas` (
 CREATE TABLE `Tareas` (
   `id_tareas` INT NOT NULL AUTO_INCREMENT,
   `Prioridad` TINYINT(2) NOT NULL,
-  `Fecha estimada` DATE NOT NULL,
-  `Fecha oficial` DATE NOT NULL,
-  `Descripción` VARCHAR(45) NULL,
+  `Fechaestimada` DATE NOT NULL,
+  `Fechaoficial` DATE NOT NULL,
+  `Descripcion` VARCHAR(45) NULL,
   `Id_usuario` INT NOT NULL,
   `Tipo` INT NOT NULL,
   `Demora` DATETIME NULL,

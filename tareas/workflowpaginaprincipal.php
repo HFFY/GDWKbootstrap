@@ -233,11 +233,11 @@
                                         </td>
 
                                         <td>
-                                            <?php echo $filaDos['Fecha estimada']; ?>
+                                            <?php echo $filaDos['Fechaestimada']; ?>
                                         </td>
                                         <td align="center">
                                             <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
-                                       <button type="submit" value="<?php echo $filaDos['id_tareas']; ?>" herf = ""> Modificar </button>
+                                       <button type="submit" value="<?php echo $filaDos['id_tareas']; ?>" > Modificar </button>
                                      </a>
                                         </td>
                                     </tr>
