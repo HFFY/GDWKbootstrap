@@ -62,7 +62,13 @@
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
          <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
-         <li><a href="tareas/workflowpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">WorkFlow </a></li>
+         <?php if($_SESSION['rol']=="1"||$_SESSION['rol']=="666"){ ?>
+
+           <li><a href="tareas/workflowpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">WorkFlow</a></li>
+
+         <?php } ?>
+
+         <li><a href="tareas/WorkflowCreacionDeTarea.php?id=<?php echo $fila2['ID_usuarios']; ?>">Crear tarea</a></li>
 
 
 

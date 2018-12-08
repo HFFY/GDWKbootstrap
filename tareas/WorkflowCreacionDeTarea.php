@@ -22,6 +22,7 @@ include_once '../clases/user.php';
 include_once '../clases/documento.php';
 include_once '../clases/ticket.php';
 session_start();
+$_SESSION['id']=$_GET['id'];
 $database = new Database();
 $db = $database->getConnection();
 $id=$_GET['id'];
@@ -47,11 +48,17 @@ $creartarea->NombreTarea= !empty($_POST['nombretarea']) ? $_POST['nombretarea'] 
 if(!empty($creartarea->Prioridad)){
 
   $sql1 = "INSERT into Tareas VALUES (null, '$creartarea->Prioridad', '$creartarea->Fechaestimada','$creartarea->Fechaoficial','$creartarea->Descripción','$creartarea->Id_usuario',
-    '$creartarea->Tipo',null,null,null,'$creartarea->Fechadecreacion','0',null,'$creartarea->NombreTarea');";
+    '$creartarea->Tipo',null,null,null,'$creartarea->Fechadecreacion','1',null,'$creartarea->NombreTarea');";
   $result1 = $db->query($sql1);
   $result1->setFetchMode(PDO::FETCH_ASSOC);
 
-  header("Location: workflowpaginaprincipal.php?id=".$id);
+  if($_SESSION['rol']=="1"||$_SESSION['rol']=="666"){
+    header("Location: workflowpaginaprincipal.php?id=".$id);
+  }else {
+    header("Location: ../paginaprincipal.php?id=".$id);
+  }
+
+
 }
     ?>
 
@@ -69,8 +76,13 @@ if(!empty($creartarea->Prioridad)){
                     </div>
                     <div class="collapse navbar-collapse" id="micon">
                         <ul class="nav navbar-nav navbar-right">
-                          <li><a href="../">Login</a></li>
-                          <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">WorkFlow</a></li>
+
+                          <?php if($_SESSION['rol']=="1"||$_SESSION['rol']=="666"){ ?>
+
+                            <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">WorkFlow</a></li>
+
+                        <?php } ?>
+
                           <li><a href="../paginaprincipal.php?id=<?php echo $id;?>">Pagina principal</a></li>
 
                         </ul>
@@ -95,7 +107,7 @@ if(!empty($creartarea->Prioridad)){
                                 <option value=5> Consulta </option>
                             </select>
                             <p>
-                                <br>Fecha inicio</p>
+                                <br>Fecha estimada de inicio</p>
 
                                 <input type="date" name="fechauno" class="form-control" min="<?php echo date(" Y-m-d ") ?>" max="<?php $d=strtotime(" +12 Months "); echo date("Y-m-d ",$d) ?>" required>
 
@@ -107,7 +119,7 @@ if(!empty($creartarea->Prioridad)){
                                 <option value=2 selected>Baja</option>
                             </select>
                             <p>
-                                <br>Fecha Aceptada</p>
+                                <br>Fecha estimada fin</p>
 
                                 <input type="date" name="fechados" class="form-control" min="<?php echo date(" Y-m-d ") ?>" max="<?php $d=strtotime(" +12 Months "); echo date("Y-m-d ",$d) ?>" required>
 
@@ -131,7 +143,15 @@ if(!empty($creartarea->Prioridad)){
                                 <br>
                         </div>
 
-                        <a class="btn btn-first" href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">Cancelar</a>
+                        <?php if($_SESSION['rol']=="1"||$_SESSION['rol']=="666"){ ?>
+
+                          <a class="btn btn-first" href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">Cancelar</a>
+
+                      <?php }else { ?>
+
+                          <a class="btn btn-first" href="../paginaprincipal.php?id=<?php echo $id;?>">Cancelar</a>
+
+                      <?php } ?>
 
                         <button type="submit" class="button"> Crear </button>
 

@@ -21,6 +21,7 @@ include_once '../clases/user.php';
 include_once '../clases/documento.php';
 include_once '../clases/ticket.php';
 session_start();
+$_SESSION['id']=$_GET['id'];
 $database = new Database();
 $db = $database->getConnection();
 $id=$_GET['id'];
@@ -29,7 +30,7 @@ $sql = 'select * from usuarios;';
 $result = $db->query($sql);
 $result->setFetchMode(PDO::FETCH_ASSOC);
 
-if(!empty($id)){//TODO: IMPLEMENTAR SESION INICIADA
+if(!empty($id) && ($_SESSION['rol']=="1"||$_SESSION['rol']=="666")){
 
 $work = $_GET['variable'];
 
@@ -50,7 +51,7 @@ $tareamodificada->Estado = !empty($_POST['selectestado']) ? $_POST['selectestado
 $tareamodificada->NombreTarea= !empty($_POST['nombretarea']) ? $_POST['nombretarea'] : $tareamodificada->NombreTarea;
 
 if(!empty($tareamodificada->Prioridad)){
-  $sql1 = "UPDATE Tareas SET Prioridad = '$tareamodificada->Prioridad' , Descripcion='$tareamodificada->Descripción', NombreTarea='$tareamodificada->NombreTarea', Tipo='$tareamodificada->Tipo' , Estado='$tareamodificada->Estado' , Fechaestimada ='$tareamodificada->Fechaestimada' , Fechaoficial ='$tareamodificada->Fechaoficial' WHERE id_tareas ='$work' ;";
+  $sql1 = "UPDATE Tareas SET Prioridad = '$tareamodificada->Prioridad' , Descripcion='$tareamodificada->Descripción', NombreTarea='$tareamodificada->NombreTarea', Tipo='$tareamodificada->Tipo' , Estado='$tareamodificada->Estado' , Fechaestimada ='$tareamodificada->Fechaestimada' , Fechaoficial ='$tareamodificada->Fechaoficial' WHERE id_tareas ='$work';";
 
   $result1 = $db->query($sql1);
   $result1->setFetchMode(PDO::FETCH_ASSOC);
@@ -92,35 +93,12 @@ if(!empty($tareamodificada->Prioridad)){
                     <div class="row">
                         <div class="col-sm-6 banner-info">
                             <p>Estado</p>
+
                             <select class="form-control" name="selectestado">
-                                <?php if( $fila['Estado'] == 0){?>
-                                    <option value=0 selected>Pendiente de validación</option>
-                                    <option value=1>En ejecución</option>
-                                    <option value=3>Retrasada</option>
-                                    <option value=2>Finalizada</option>
-                                    <?php } ?>
-
-                                        <?php if( $fila['Estado'] == 1){?>
-                                            <option value=0>Pendiente de validación</option>
-                                            <option value=1 selected>En ejecución</option>
-                                            <option value=3>Retrasada</option>
-                                            <option value=2>Finalizada</option>
-                                            <?php } ?>
-
-                                                <?php if( $fila['Estado'] == 2){?>
-                                                    <option value=0>Pendiente de validación</option>
-                                                    <option value=1>En ejecución</option>
-                                                    <option value=3>Retrasada</option>
-                                                    <option value=2 selected>Finalizada</option>
-                                                    <?php } ?>
-
-                                                        <?php if( $fila['Estado'] == 3){?>
-                                                            <option value=0>Pendiente de validación</option>
-                                                            <option value=1>En ejecución</option>
-                                                            <option value=3 selected>Retrasada</option>
-                                                            <option value=2>Finalizada</option>
-                                                            <?php } ?>
-
+                                    <option value=1  <?php if( $fila['Estado'] == 0){?> selected <?php } ?> >Pendiente de validación</option>
+                                    <option value=2  <?php if( $fila['Estado'] == 1){?> selected <?php } ?> >En ejecución</option>
+                                    <option value=4  <?php if( $fila['Estado'] == 3){?> selected <?php } ?> >Retrasada</option>
+                                    <option value=3  <?php if( $fila['Estado'] == 2){?> selected <?php } ?> >Finalizada</option>
                             </select>
                         </div>
                     </div>
@@ -195,7 +173,7 @@ if(!empty($tareamodificada->Prioridad)){
                             </select>
 
                             <p>
-                                <br>Fecha Aceptada</p>
+                                <br>Fecha fin</p>
 
                                 <input type="date" name="fechados" class="form-control" min="<?php echo date(" Y-m-d ") ?>" max="<?php $d=strtotime(" +12 Months "); echo date("Y-m-d ",$d) ?>" value="<?php echo $fila['Fechaoficial']; ?>" required>
 

@@ -31,41 +31,37 @@ class Ticket{
     }
     public function crearTarea(){
         $sql = "INSERT into Tareas VALUES (null, '$this->Prioridad', '$this->Fechaestimada','$this->Fechaoficial','$this->Descripción','$this->Id_usuario',
-          '$this->Tipo','null','null','null','$this->Fechadecreacion','0','null','$this->$NombreTarea');";
+          '$this->Tipo','null','null','null','$this->Fechadecreacion','1','null','$this->$NombreTarea');";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }
     public function validarTarea($idtarea)
     {
-        $sql = "UPDATE Tareas SET Estado='1' where id_tareas='$idtarea';";
+        $sql = "UPDATE Tareas SET Estado='2' where id_tareas='$idtarea';";
         // echo $sql;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }
     public function comprobarDateTarea()
     {
-        $sql= "SELECT * from Tareas;";
+        $sql= "SELECT * from Tareas where Estado = '2';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
+
         while ($fila=$result->fetch()) {
-            $date1 = date('Y-m-d');
-            $dumbdate=$fila['Fecha oficial'];
-            echo "<br>".$dumbdate." ".$date1."<br>";
-            echo $dumbdate<$date1;
-            if ($dumbdate<$date1==1) {
+            $date1 = strtotime(date('Y-m-d'));
+            $dumbdate=strtotime($fila['Fechaoficial']);
+            if ($dumbdate < $date1 ==1) {
                 $dumbvar=$fila['id_tareas'];
-
-                $sqlup = "UPDATE $this->table_name SET Estado='3' WHERE id_tareas='$dumbvar';";
-
+                $sqlup = "UPDATE $this->table_name SET Estado='4' WHERE id_tareas='$dumbvar';";
                 $resultup = $this->conn->query($sqlup);
                 $resultup->setFetchMode(PDO::FETCH_ASSOC);
             }
         }
     }
-    public function resolverTarea($idtarea)
+    public function resolverTarea($idtarea,$newdate)
     {
-        $sql = "UPDATE Tareas SET Estado='2' where id_tareas='$idtarea';";
-        // echo $sql;
+        $sql = "UPDATE Tareas SET Estado='3' , Fechaoficial ='$newdate' where id_tareas='$idtarea';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }

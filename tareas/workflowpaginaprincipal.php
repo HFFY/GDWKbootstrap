@@ -21,31 +21,35 @@
   include_once '../clases/database.php';
   include_once '../clases/user.php';
   include_once '../clases/documento.php';
+  include_once '../clases/ticket.php';
   session_start();
+  $_SESSION['id']=$_GET['id'];
   $database = new Database();
   $_SESSION['id']=$_GET['id'];
   $id=$_SESSION['id'];
   $db = $database->getConnection();
   $user = new User($db);
+  $verificartarea = new Ticket($db);
 
-  if(!empty($id)){//TODO: IMPLEMENTAR SESION INICIADA
+  if(!empty($id) && ($_SESSION['rol']=="1"||$_SESSION['rol']=="666")){
+  $verificartarea-> comprobarDateTarea();
   $sql = 'select * from usuarios;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
   $tareaCero = new Database($db);//Por Validar
-  $sqlTareaCero = "select * from tareas where estado='0';";
+  $sqlTareaCero = "select * from tareas where Estado='1' ORDER BY Prioridad ASC, Creadopor ASC;";
   $resultTareaCero = $db->query($sqlTareaCero);
   $resultTareaCero->setFetchMode(PDO::FETCH_ASSOC);
   $tareaUno = new Database($db);//En Ejecucion
-  $sqlTareaUno = "select * from tareas where estado='1';";
+  $sqlTareaUno = "select * from tareas where Estado='2' ORDER BY Prioridad ASC, Creadopor ASC;";
   $resultTareaUno = $db->query($sqlTareaUno);
   $resultTareaUno->setFetchMode(PDO::FETCH_ASSOC);
   $tareaDos = new Database($db);//Terminada
-  $sqlTareaDos = "select * from tareas where estado='2';";
+  $sqlTareaDos = "select * from tareas where Estado='3' ORDER BY Prioridad ASC, Creadopor ASC;";
   $resultTareaDos = $db->query($sqlTareaDos);
   $resultTareaDos->setFetchMode(PDO::FETCH_ASSOC);
   $tareaTres = new Database($db);//Retrasada
-  $sqlTareaTres = "select * from tareas where estado='3';";
+  $sqlTareaTres = "select * from tareas where Estado='4' ORDER BY Prioridad ASC, Creadopor ASC;";
   $resultTareaTres = $db->query($sqlTareaTres);
   $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
       ?>
@@ -233,7 +237,7 @@
                                         </td>
 
                                         <td>
-                                            <?php echo $filaDos['Fechaestimada']; ?>
+                                            <?php echo $filaDos['Fechaoficial']; ?>
                                         </td>
                                         <td align="center">
                                             <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id;?>">
