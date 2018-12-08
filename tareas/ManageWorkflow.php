@@ -8,7 +8,7 @@ $type=$_GET['uno'];
 $idtarea=$_GET['dos'];
 $fecha = date(" Y-m-d ");
 
-if(!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id && ($_SESSION['rol']=="1"||$_SESSION['rol']=="666")){
+if(!empty($id))){
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);

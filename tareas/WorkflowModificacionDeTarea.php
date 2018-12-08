@@ -94,10 +94,10 @@ if(!empty($tareamodificada->Prioridad)){
                             <p>Estado</p>
 
                             <select class="form-control" name="selectestado">
-                                    <option value=1  <?php if( $fila['Estado'] == 0){?> selected <?php } ?> >Pendiente de validación</option>
-                                    <option value=2  <?php if( $fila['Estado'] == 1){?> selected <?php } ?> >En ejecución</option>
-                                    <option value=4  <?php if( $fila['Estado'] == 3){?> selected <?php } ?> >Retrasada</option>
-                                    <option value=3  <?php if( $fila['Estado'] == 2){?> selected <?php } ?> >Finalizada</option>
+                                    <option value=1  <?php if( $fila['Estado'] == 1){?> selected <?php } ?> >Pendiente de validación</option>
+                                    <option value=2  <?php if( $fila['Estado'] == 2){?> selected <?php } ?> >En ejecución</option>
+                                    <option value=4  <?php if( $fila['Estado'] == 4){?> selected <?php } ?> >Retrasada</option>
+                                    <option value=3  <?php if( $fila['Estado'] == 3){?> selected <?php } ?> >Finalizada</option>
                             </select>
                         </div>
                     </div>

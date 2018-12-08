@@ -32,7 +32,7 @@ $result->setFetchMode(PDO::FETCH_ASSOC);
 
 $creartarea = new Ticket($db);
 
-if(!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id)){
+if(!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id){
 
 $creartarea->Prioridad = !empty($_POST['selectprioridad']) ? $_POST['selectprioridad'] : $creartarea->Prioridad;
 $creartarea->Fechaestimada= !empty($_POST['fechauno']) ? $_POST['fechauno'] : $creartarea->Fechaestimada;

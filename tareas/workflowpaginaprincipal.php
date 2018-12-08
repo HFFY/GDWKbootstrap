@@ -28,7 +28,10 @@
     $db = $database->getConnection();
     $user = new User($db);
 
+
     if (!empty($_SESSION['id']) && $_SESSION['id']==$id) {
+      $verificartarea = new Ticket($db);
+      $verificartarea-> comprobarDateTarea();
         if ($id==1||$id==666) {
             $sql = 'select * from usuarios;';
             $result = $db->query($sql);
@@ -49,6 +52,8 @@
             $sqlTareaTres = "SELECT * from tareas where estado='4';";
             $resultTareaTres = $db->query($sqlTareaTres);
             $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
+
+
         } else {
             $sqlTareaCero = "SELECT * from tareas where Id_usuario='$id' and estado='1';";
             $resultTareaCero = $db->query($sqlTareaCero);
