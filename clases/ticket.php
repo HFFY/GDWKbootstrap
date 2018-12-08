@@ -1,6 +1,7 @@
 <?php
 include_once 'database.php';
-class Ticket{
+class Ticket
+{
     private $conn;
     private $database;
     private $table_name = "tareas";
@@ -22,7 +23,8 @@ class Ticket{
         $this->conn = $db;
         $this->database= new Database();
     }
-    public function crearTarea(){
+    public function crearTarea()
+    {
         $sql = "INSERT into Tareas VALUES (null, '$this->Prioridad', '$this->Fechaestimada','$this->Fechaoficial','$this->Descripción','$this->Id_usuario',
           '$this->Tipo',null,'$this->Creadopor',null,'$this->Fechadecreacion','1',null,'$this->NombreTarea');";
         $result = $this->conn->query($sql);
@@ -51,9 +53,17 @@ class Ticket{
             }
         }
     }
-    public function resolverTarea($idtarea,$newdate)
+
+    public function resolverTarea($idtarea, $newdate)
     {
         $sql = "UPDATE Tareas SET Estado='3' , Fechaoficial ='$newdate' where id_tareas='$idtarea';";
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+    }
+    public function modificarTarea($idtarea)
+    {
+        $sql = "UPDATE Tareas SET Prioridad = '$this->Prioridad' , Descripcion='$this->Descripción', NombreTarea='$this->NombreTarea', Tipo='$this->Tipo' , Estado='$this->Estado' , Fechaestimada ='$this->Fechaestimada' , Fechaoficial ='$this->Fechaoficial' WHERE id_tareas ='$idtarea';";
+      
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }
