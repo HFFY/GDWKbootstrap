@@ -91,20 +91,21 @@ class Documento
     }
     public function getDocumentsPerUser($roluser)
     {
-        if ($roluser=='1'|| $roluser=='0') {
+        if ($roluser=='1'|| $roluser=='666') {
             $sql = 'SELECT * from documentos;';
             $result = $this->conn->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
-            $fila = $result->fetch();
 
-            return $fila;
+
+            return $result;
         } else {
             $sql = 'SELECT * from documentosPorRango where idRangoUsuarios='.$roluser.';';
+            echo $sql;
             $result = $this->conn->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
-            $fila = $result->fetch();
 
-            return $fila;
+
+            return $result;
         }
     }
     public function getLatestDocuments()

@@ -29,8 +29,8 @@
                                   <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                 </div>
                                 <div class="form-group form-check">
-                                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                  <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                  <label class="form-check-label" for="exampleCheck1">Check me out</label> -->
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
                               </form>
@@ -48,7 +48,7 @@
         $user = new User($db);
         $user->username = isset($_GET['username']) ? $_GET['username'] : die();
         $user->password = base64_encode(isset($_GET['password']) ? $_GET['password'] : die());
-  
+
         // read the details of user to be edited
         $stmt = $user->login();
 
