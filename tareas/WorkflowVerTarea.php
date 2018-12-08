@@ -49,11 +49,10 @@ $fila = $resultTarea->fetch();
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href=""> <img class="logo" src="../images/logo.png"></a>
+                        <a href="../paginaprincipal.php?id=<?php echo $id;?>"> <img class="logo" src="../images/logo.png"></a>
                     </div>
                     <div class="collapse navbar-collapse" id="micon">
                         <ul class="nav navbar-nav navbar-right">
-                          <li><a href="../">Login</a></li>
                           <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">WorkFlow</a></li>
                           <li><a href="../tareas/WorkflowCreacionDeTarea.php?id=<?php echo $id;?>">Crear tarea</a></li>
                           <li><a href="../paginaprincipal.php?id=<?php echo $id;?>">Pagina principal</a></li>

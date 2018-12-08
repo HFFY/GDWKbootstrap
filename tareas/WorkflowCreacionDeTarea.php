@@ -71,7 +71,7 @@ if(!empty($creartarea->Prioridad)){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href=""> <img class="logo" src="../images/logo.png"></a>
+                        <a href="../paginaprincipal.php?id=<?php echo $id;?>"> <img class="logo" src="../images/logo.png"></a>
                     </div>
                     <div class="collapse navbar-collapse" id="micon">
                         <ul class="nav navbar-nav navbar-right">
