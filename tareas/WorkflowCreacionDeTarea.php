@@ -39,18 +39,15 @@ $creartarea->Fechaestimada= !empty($_POST['fechauno']) ? $_POST['fechauno'] : $c
 $creartarea->Fechaoficial= !empty($_POST['fechados']) ? $_POST['fechados'] : $creartarea->Fechaoficial;
 $creartarea->Descripción = !empty($_POST['descripciontarea']) ? $_POST['descripciontarea'] : $creartarea->Descripción;
 $creartarea->Id_usuario = $id;
+$creartarea->Creadopor = $_SESSION['rol'];
 $creartarea->Tipo = !empty($_POST['selecttarea']) ? $_POST['selecttarea'] : $creartarea->Tipo;
 $creartarea->Fechadecreacion = date(" Y-m-d ");
 $creartarea->NombreTarea= !empty($_POST['nombretarea']) ? $_POST['nombretarea'] : $creartarea->NombreTarea;
 
 
 if(!empty($creartarea->Prioridad)){
-
-  $sql1 = "INSERT into Tareas VALUES (null, '$creartarea->Prioridad', '$creartarea->Fechaestimada','$creartarea->Fechaoficial','$creartarea->Descripción','$creartarea->Id_usuario',
-    '$creartarea->Tipo',null,null,null,'$creartarea->Fechadecreacion','1',null,'$creartarea->NombreTarea');";
-  $result1 = $db->query($sql1);
-  $result1->setFetchMode(PDO::FETCH_ASSOC);
-
+  $creartarea->crearTarea();
+  
   if($_SESSION['rol']=="1"||$_SESSION['rol']=="666"){
     header("Location: workflowpaginaprincipal.php?id=".$id);
   }else {

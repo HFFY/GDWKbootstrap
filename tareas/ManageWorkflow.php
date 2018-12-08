@@ -8,7 +8,7 @@ $type=$_GET['uno'];
 $idtarea=$_GET['dos'];
 $fecha = date(" Y-m-d ");
 
-if(!empty($id))){
+if(!empty($id)){
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);
