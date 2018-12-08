@@ -23,11 +23,10 @@
   // instantiate user object
   include_once '../clases/user.php';
   session_start();
-  // echo $_GET['id'];
-      //echo $_SESSION['id'];
-  // if (empty($_SESSION['id'])) {
-      $_SESSION['id']=$_GET['id'];
-  // }
+
+
+      $usergetid=$_GET['id'];
+
 
   if (!empty($_SESSION['rol'])) {
       $database = new Database();
@@ -43,7 +42,7 @@
 
 
       $user->date = date('Y-m-d H:i:s');
-      $olduser=$user->getUser($_SESSION['id']);
+      $olduser=$user->getUser($usergetid);
       //  echo $_SERVER['REQUEST_METHOD'];
       echo $_POST['Crear'];
       if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
@@ -54,14 +53,10 @@
           if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
               $user->rol = isset($_GET['rol']) ? $_GET['rol'] : die();
           } else {
-              $user->rol = $user->getUser($_SESSION['id'])['Idrango'];
+              $user->rol = $user->getUser($usergetid)['Idrango'];
           }
-          // echo $user->username;
-          // echo $user->password;
-          // echo $user->names;
-          // echo $user->lastname;
-          // echo $_SESSION['id'];
-          $user->modifiedUser($_SESSION['id']);
+
+          $user->modifiedUser($usergetid);
       } ?>
   <header class="header">
 

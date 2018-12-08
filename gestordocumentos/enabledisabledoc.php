@@ -4,19 +4,18 @@ include_once '../clases/user.php';
 include_once '../clases/documento.php';
 session_start();
 //echo $_GET['id'];
-$_SESSION['iddoc']=$_GET['iddoc'];
-$_SESSION['id']=$_GET['id'];
+
 
 
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
 $document= new Documento($db);
-// echo $_SESSION['id'];
+
 
 //echo "VIVO";
-$iddoc=$_SESSION['iddoc'];
-$id=$_SESSION['id'];
+$iddoc=$_GET['iddoc'];
+$id=$_GET['id'];
 $filadoc=$document->getDocument($iddoc);
 //echo $_GET['id'];
 if ($filadoc['Estado']==1) {

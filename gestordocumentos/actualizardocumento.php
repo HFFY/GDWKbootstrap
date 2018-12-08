@@ -23,7 +23,7 @@
   include_once '../clases/user.php';
     include_once '../clases/documento.php';
   session_start();
-  $_SESSION['id']=$_GET['id'];
+
   $_SESSION['iddoc']=$_GET['iddoc'];
 
   if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {

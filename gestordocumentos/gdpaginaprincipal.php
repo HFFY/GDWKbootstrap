@@ -20,8 +20,8 @@
   include_once '../clases/documento.php';
 
   session_start();
-  $_SESSION['id']=$_GET['id'];
-  $_SESSION['iddoc']=$_GET['iddoc'];
+  $variduser=$_GET['id'];
+  $variddoc=$_GET['iddoc'];
   echo $_GET['id'];
   $database = new Database();
   $db = $database->getConnection();
@@ -35,10 +35,10 @@
   // $resultasd = $db->query($sqlasd);
   // $resultasd->setFetchMode(PDO::FETCH_ASSOC);
   // $filaasd = $resultasd->fetch();
-   $iddoc=$_SESSION['iddoc'];
+   $iddoc=$variddoc;
    $filadoc=$document->getDocument($iddoc);
-   $user->username= $user->getUser($_SESSION['id'])['Usuario'];
-   $user->id= $user->getUser($_SESSION['id'])['Idrango'];
+   $user->username= $user->getUser($variduser)['Usuario'];
+   $user->id= $user->getUser($variduser)['Idrango'];
 
       // $user->unserialize($_SESSION['ser']);
       // $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';

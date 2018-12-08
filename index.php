@@ -55,7 +55,7 @@
         if ($stmt->rowCount() > 0) {
             // get retrieved row
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            echo $row;
+
             // create array
             $user_arr=array(
         "status" => true,
@@ -70,11 +70,15 @@
 
             session_start();
             if (!empty($user->username)) {
-                echo !empty($ser);
                 $_SESSION['ser'] = $ser;
                 //$_SESSION['loguser'] =$loguser;
+                $sql = "SELECT ID_usuarios from usuarios where Usuario='$user->username';";
 
-
+                $result = $db->query($sql);
+                $result->setFetchMode(PDO::FETCH_ASSOC);
+                $variable=$result->fetch();
+                $_SESSION['id']=$variable['ID_usuarios'];
+                
                 header("Location: paginaprincipal.php");
             }
         } else {

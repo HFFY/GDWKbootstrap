@@ -22,17 +22,13 @@
   $db = $database->getConnection();
   $user = new User($db);
   $document = new Documento($db);
+
   $sql = 'select * from documentos;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
-  // $sqlasd = "INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro',
-  //   'pedra','hola','hola','15/25','12/89','todas','todos','documento hola','1');";
-  // $resultasd = $db->query($sqlasd);
-  // $resultasd->setFetchMode(PDO::FETCH_ASSOC);
-  // $filaasd = $resultasd->fetch();
 
 
-  if (!empty($_SESSION['ser'])) {
+  if (!empty($_SESSION['ser'])&&!empty($_SESSION['id'])) {
       $user->unserialize($_SESSION['ser']);
       $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
       $result2 = $db->query($sql2);
@@ -41,7 +37,6 @@
       $_SESSION['rol']=$fila2['Idrango'];
       $_SESSION['oldusercreacion']=$fila2['ID_usuarios'];
       //$user->unserialize($ser);
-
       $result=$document->getDocumentsPerUser($fila2['Idrango']);
   }
       if (!empty($user->username)) {
@@ -62,15 +57,7 @@
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
          <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
-         <?php if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
-              ?>
-
-           <li><a href="tareas/workflowpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">WorkFlow</a></li>
-
-         <?php
-          } ?>
-
-         <li><a href="tareas/WorkflowCreacionDeTarea.php?id=<?php echo $fila2['ID_usuarios']; ?>">Crear tarea</a></li>
+         <li><a href="tareas/workflowpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">WorkFlow </a></li>
 
 
 
