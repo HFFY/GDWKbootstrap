@@ -21,7 +21,6 @@ include_once '../clases/database.php';
 include_once '../clases/user.php';
 include_once '../clases/documento.php';
 session_start();
-$_SESSION['id']=$_GET['id'];
 $database = new Database();
 $db = $database->getConnection();
 $id=$_GET['id'];
@@ -29,7 +28,7 @@ $user = new User($db);
 $sql = 'select * from usuarios;';
 $result = $db->query($sql);
 $result->setFetchMode(PDO::FETCH_ASSOC);
-if(!empty($id) && ($_SESSION['rol']=="1"||$_SESSION['rol']=="666")){
+if(!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id && ($_SESSION['rol']=="1"||$_SESSION['rol']=="666")){
 $kind = $_GET['variable1'];
 $kindwork = $_GET['variable2'];
 

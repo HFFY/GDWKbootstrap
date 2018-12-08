@@ -22,7 +22,6 @@ include_once '../clases/user.php';
 include_once '../clases/documento.php';
 include_once '../clases/ticket.php';
 session_start();
-$_SESSION['id']=$_GET['id'];
 $database = new Database();
 $db = $database->getConnection();
 $id=$_GET['id'];
@@ -33,7 +32,7 @@ $result->setFetchMode(PDO::FETCH_ASSOC);
 
 $creartarea = new Ticket($db);
 
-if(!empty($id)){//TODO: IMPLEMENTAR SESION INICIADA
+if(!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id)){
 
 $creartarea->Prioridad = !empty($_POST['selectprioridad']) ? $_POST['selectprioridad'] : $creartarea->Prioridad;
 $creartarea->Fechaestimada= !empty($_POST['fechauno']) ? $_POST['fechauno'] : $creartarea->Fechaestimada;

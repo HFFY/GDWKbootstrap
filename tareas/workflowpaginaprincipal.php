@@ -24,12 +24,11 @@
     include_once '../clases/ticket.php';
     session_start();
     $database = new Database();
-    $_SESSION['id']=$_GET['id'];
     $id=$_GET['id'];
     $db = $database->getConnection();
     $user = new User($db);
 
-    if (!empty($id)) {//TODO: IMPLEMENTAR SESION INICIADA
+    if (!empty($_SESSION['id']) && $_SESSION['id']==$id) {
         if ($id==1||$id==666) {
             $sql = 'select * from usuarios;';
             $result = $db->query($sql);
@@ -83,7 +82,7 @@
                     <div class="collapse navbar-collapse" id="micon">
                         <ul class="nav navbar-nav navbar-right">
                           <li><a href="../sessiondestroy.php">Logout</a></li>
-                          
+
                           <li><a href="../tareas/WorkflowCreacionDeTarea.php?id=<?php echo $id; ?>">Crear tarea</a></li>
                           <li><a href="../paginaprincipal.php?id=<?php echo $id; ?>">Pagina principal</a></li>
 
