@@ -44,14 +44,15 @@
       $user->date = date('Y-m-d H:i:s');
       $olduser=$user->getUser($usergetid);
       //  echo $_SERVER['REQUEST_METHOD'];
-      echo $_POST['Crear'];
+
       if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
           $user->username = isset($_POST['username']) ? $_POST['username'] : die();
           $user->password = base64_encode(isset($_POST['password']) ? $_POST['password'] : die());
           $user->names = isset($_POST['names']) ? $_POST['names'] : die();
           $user->lastname = isset($_POST['lastname']) ? $_POST['lastname'] : die();
+        
           if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
-              $user->rol = isset($_GET['rol']) ? $_GET['rol'] : die();
+              $user->rol = isset($_POST['rol']) ? $_POST['rol'] : die();
           } else {
               $user->rol = $user->getUser($usergetid)['Idrango'];
           }
@@ -95,7 +96,7 @@
 
     <div class="container">
       <div class="row">
-        <form class="form-container" action="modificarusuario.php" method="post">
+        <form class="form-container" action="modificarusuario.php?id=<?php echo $usergetid; ?>" method="post">
           <div class="col-sm-6 banner-info">
             <p>Ingresar nombre de usuario.</p>
             <div class="form-group" >
