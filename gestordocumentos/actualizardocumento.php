@@ -152,35 +152,41 @@
         <div class="form-group" >
           <p><br>Seleccionar Procesos</p>
             <select class="form-control" name="Proceso">
-              <option <?php  if ($filashowdoc['Proceso']==1) {
-          echo "selected='selected'";
-      } ?> value="1">1</option>
-              <option  <?php  if ($filashowdoc['Proceso']==2) {
-          echo "selected='selected'";
-      } ?>value="2">2</option>
-              <option  <?php  if ($filashowdoc['Proceso']==3) {
-          echo "selected='selected'";
-      } ?>value="3">3</option>
-              <option <?php  if ($filashowdoc['Proceso']==4) {
-          echo "selected='selected'";
-      } ?> value="4">4</option>
+              <?php
+
+        $count=0;
+
+      $dumbvalorarray=$document->getAllProcesos();
+      while ($valor=$dumbvalorarray->fetch()) {
+          ?>
+
+                  <option  value="<?php echo $count=$count+1; ?>" <?php  if ($filashowdoc['Proceso']==$count) {
+              echo "selected='selected'";
+          } ?>><?php echo $valor['Descripción']; ?></option>
+
+
+                <?php
+      } ?>
             </select>
                 </div>
               <div class="form-group">
               <p><br>Seleccionar Tipo de documento</p>
               <select class="form-control" name="Tipodedocumento">
-                <option <?php  if ($filashowdoc['Tipo de documento']==1) {
-          echo "selected='selected'";
-      } ?> value="1">1</option>
-                <option  <?php  if ($filashowdoc['Tipo de documento']==2) {
-          echo "selected='selected'";
-      } ?>value="2">2</option>
-                <option  <?php  if ($filashowdoc['Tipo de documento']==3) {
-          echo "selected='selected'";
-      } ?>value="3">3</option>
-                <option <?php  if ($filashowdoc['Tipo de documento']==4) {
-          echo "selected='selected'";
-      } ?> value="4">4</option>
+                <?php
+
+          $count=0;
+
+      $dumbvalorarray=$document->getAllTipoDeDocumento();
+      while ($valor=$dumbvalorarray->fetch()) {
+          ?>
+
+                    <option  value="<?php echo $count=$count+1; ?>" <?php  if ($filashowdoc['Tipo de documento']==$count) {
+              echo "selected='selected'";
+          } ?>><?php echo $valor['Descripción']; ?></option>
+
+
+                  <?php
+      } ?>
               </select>
                 </div>
             <p>Numero del documento.</p>
@@ -197,18 +203,21 @@
             <div class="form-group">
             <p><br>Subproceso</p>
           <select class="form-control" name="Subproceso">
-            <option <?php  if ($filashowdoc['Subproceso']==1) {
-          echo "selected='selected'";
-      } ?> value="1">1</option>
-            <option  <?php  if ($filashowdoc['Subproceso']==2) {
-          echo "selected='selected'";
-      } ?>value="2">2</option>
-            <option  <?php  if ($filashowdoc['Subproceso']==3) {
-          echo "selected='selected'";
-      } ?>value="3">3</option>
-            <option <?php  if ($filashowdoc['Subproceso']==4) {
-          echo "selected='selected'";
-      } ?> value="4">4</option>
+            <?php
+
+      $count=0;
+
+      $dumbvalorarray=$document->getAllSubproceso();
+      while ($valor=$dumbvalorarray->fetch()) {
+          ?>
+
+                <option  value="<?php echo $count=$count+1; ?>" <?php  if ($filashowdoc['Subproceso']==$count) {
+              echo "selected='selected'";
+          } ?>><?php echo $valor['Descripción']; ?></option>
+
+
+              <?php
+      } ?>
           </select>
               </div>
 

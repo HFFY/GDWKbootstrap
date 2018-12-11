@@ -22,6 +22,7 @@
   // instantiate user object
   include_once '../clases/user.php';
   session_start();
+
   if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
       $database = new Database();
       $db = $database->getConnection();
@@ -60,6 +61,7 @@
               echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
 
               $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
+            
               $document->insertDocument();
           } else {
               echo 'Upload failed!';
@@ -105,25 +107,48 @@
 
     <div class="container">
         <form class="form-container" action="subirdocumento.php" method="post" enctype="multipart/form-data">
+
       <div class="row">
 
           <div class="col-sm-6 banner-info" align="left" >
-            <div class="form-group" >
-              <p><br>Seleccionar Procesos</p>
-            <select class="form-control" name="Proceso">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-                </div>
+
+              <div class="form-group" >
+
+                    <p><br>Seleccionar Procesos</p>
+
+                  <select class="form-control" name="Proceso">
+
+            <?php
+
+      $count=0;
+
+      $dumbvalorarray=$document->getAllProcesos();
+      while ($valor=$dumbvalorarray->fetch()) {
+          ?>
+
+                <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripción']; ?></option>
+
+
+              <?php
+      } ?>
+                  </select>
+
+              </div>
+
               <div class="form-group">
               <p><br>Seleccionar Tipo de documento</p>
             <select class="form-control" name="Tipodedocumento">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+              <?php
+              $count=0;
+      $dumbvalorarray=$document->getAllSubproceso();
+      while ($valor=$dumbvalorarray->fetch()) {
+          ?>
+
+                  <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripción']; ?></option>
+
+
+                <?php
+      } ?>
             </select>
                 </div>
             <p>Numero del documento.</p>
@@ -140,10 +165,17 @@
             <div class="form-group">
             <p><br>Subproceso</p>
           <select class="form-control" name="Subproceso">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <?php
+            $count=0;
+      $dumbvalorarray=$document->getAllTipoDeDocumento();
+      while ($valor=$dumbvalorarray->fetch()) {
+          ?>
+
+                <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripción']; ?></option>
+
+
+              <?php
+      } ?>
           </select>
               </div>
 

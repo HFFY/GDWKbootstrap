@@ -38,7 +38,28 @@ class Documento
     {
         return;
     }
+    public function getAllProcesos()
+    {
+        $sql = "SELECT * from proceso;";
 
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getAllSubproceso()
+    {
+        $sql = "SELECT * from subproceso;";
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getAllTipoDeDocumento()
+    {
+        $sql = "SELECT * from `Tipo de documento`;";
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function deactivateDocument($iddocument)
     {
         // echo "HOLA";
@@ -140,10 +161,12 @@ class Documento
           '$this->Version','$this->Creador','$this->Revisor','$this->Autorizador','$this->Disenodelproceso','$this->Fechadeentradavigencia','$this->Fechadeentradaencaducidad','$this->Areasalasqueafecta',
           '$this->Registrosquecorresponden','$this->Descripcion','$this->Estado','$this->Link');";
         // echo $sql;
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
         $sqlget="SELECT LAST_INSERT_ID();";
+
         $resultget = $this->conn->query($sqlget);
         $resultget->setFetchMode(PDO::FETCH_ASSOC);
         $filaget = $resultget->fetch();
@@ -247,29 +270,62 @@ class Documento
     public function generateCodigoDocument($iddoc)
     {
         $sql = "SELECT Proceso, Subproceso, `Tipo de documento` from documentos where ID_documentos='$iddoc';";
-
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
-        $codigogenerado=$fila['Proceso'].$fila['Subproceso'].$fila['Tipo de documento'];
+        $dumbvarsql1=$fila['Proceso'];
+        $sql1 = "SELECT Codigo from proceso where idProceso='$dumbvarsql1';";
+
+        $result1 = $this->conn->query($sql1);
+        $result1->setFetchMode(PDO::FETCH_ASSOC);
+        $fila1 = $result1->fetch();
+        $dumbvarsql2=$fila['Subproceso'];
+        $sql2 = "SELECT Codigo from subproceso where idsubproceso='$dumbvarsql2';";
+        $result2 = $this->conn->query($sql2);
+        $result2->setFetchMode(PDO::FETCH_ASSOC);
+        $fila2 = $result2->fetch();
+        $dumbvarsql3=$fila['Tipo de documento'];
+        $sql3 = "SELECT Codigo from `Tipo de documento` where `idtipo de documento`='$dumbvarsql3';";
+        $result3 = $this->conn->query($sql3);
+        $result3->setFetchMode(PDO::FETCH_ASSOC);
+        $fila3 = $result3->fetch();
+
+        $codigogenerado=$fila1['Codigo'].$fila2['Codigo'].$fila3['Codigo'];
 
         $var1=$fila['Proceso'];
         $var2=$fila['Subproceso'];
         $var3=$fila['Tipo de documento'];
+
         $sqlinsert = "INSERT into codigoDocumento VALUES (null, '$var1','$var2','$var3','$codigogenerado','$iddoc');";
-        // echo $sqlinsert;
+
+
         $resultinsert = $this->conn->query($sqlinsert);
+
         $resultinsert->setFetchMode(PDO::FETCH_ASSOC);
         $filainsert = $resultinsert->fetch();
     }
     public function modifiedCodigoDocument($iddoc)
     {
         $sql = "SELECT Proceso, Subproceso, `Tipo de documento` from documentos where ID_documentos='$iddoc';";
-        // echo $sqlinsert;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
-        $codigogenerado=$fila['Proceso'].$fila['Subproceso'].$fila['Tipo de documento'];
+        $dumbvarsql1=$fila['Proceso'];
+        $sql1 = "SELECT Codigo from proceso where idProceso='$dumbvarsql1';";
+        $result1 = $this->conn->query($sql1);
+        $result1->setFetchMode(PDO::FETCH_ASSOC);
+        $fila1 = $result1->fetch();
+        $dumbvarsql2=$fila['Subproceso'];
+        $sql2 = "SELECT Codigo from subproceso where idsubproceso='$dumbvarsql2';";
+        $result2 = $this->conn->query($sql2);
+        $result2->setFetchMode(PDO::FETCH_ASSOC);
+        $fila2 = $result2->fetch();
+        $dumbvarsql3=$fila['Tipo de documento'];
+        $sql3 = "SELECT Codigo from `Tipo de documento` where `idtipo de documento`='$dumbvarsql3';";
+        $result3 = $this->conn->query($sql3);
+        $result3->setFetchMode(PDO::FETCH_ASSOC);
+        $fila3 = $result3->fetch();
+        $codigogenerado=$fila1['Codigo'].$fila2['Codigo'].$fila3['Codigo'];
 
         $var1=$fila['Proceso'];
         $var2=$fila['Subproceso'];
