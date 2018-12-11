@@ -101,7 +101,7 @@
               //echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
               // echo $_GET['iddoc'];
               $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
-              $document->modifiedDocument($_GET['iddoc']);
+              $document->modifiedDocument($_GET['iddoc'], $_SESSION['id']);
           } else {
               echo 'Upload failed!';
               //

@@ -121,12 +121,28 @@ class Documento
             return $result;
         } else {
             $sql = 'SELECT * from documentosPorRango where idRangoUsuarios='.$roluser.';';
-            echo $sql;
+
             $result = $this->conn->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
+            $string;
+            $contador=0;
 
 
-            return $result;
+            while ($fila=$result->fetch()) {
+                if ($contador==0) {
+                    $string="ID_documentos=".$fila['ID_documentos'];
+                    echo $fila['ID_documentos'];
+                } else {
+                    $string=$string." or ID_documentos=".$fila['ID_documentos'];
+                }
+                $contador=$contador+1;
+            }
+
+            $sql1 = 'SELECT * from documentos where '.$string.';';
+          
+            $result1 = $this->conn->query($sql1);
+            $result1->setFetchMode(PDO::FETCH_ASSOC);
+            return $result1;
         }
     }
     public function getLatestDocuments()
@@ -181,7 +197,7 @@ class Documento
         // $stmt->execute();
         // return $file;
     }
-    public function modifiedDocument($iddoc)
+    public function modifiedDocument($iddoc, $iduser)
     {
         // $query = "SELECT
         //             `Proceso`, `Subproceso`, `Tipo de documento`,`Link`, `Numero del documento` ,`Nombre del documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha de entrada en vigencia` , `Fecha de entrada en caducidad` , `Areas a las que afecta` , `Registros que corresponden` , `Descripcion` , `Estado`
@@ -205,12 +221,20 @@ class Documento
         $this->modifiedCodigoDocument($iddoc);
 
         $this->modifiedUsuariosAuto($iddoc);
-
+        $this->addChangeToDocument($iddoc, $iduser, $this->Descripcion);
         // // prepare query statement
         // $stmt = $this->conn->prepare($query);
         // // execute query
         // $stmt->execute();
         // return $file;
+    }
+    public function addChangeToDocument($iddoc, $iduser, $descrip)
+    {
+        $date=date('Y-m-d H:i:s');
+        $sql = "INSERT into docusucambios VALUES (null,'$iddoc','$iduser','$date','$date','$descrip',null)";
+        // echo $sql;
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
     }
     public function getUsuariosAuto($iddoc)
     {

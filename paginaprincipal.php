@@ -29,6 +29,8 @@
 
 
   if (!empty($_SESSION['ser'])&&!empty($_SESSION['id'])) {
+      //$arrayuser=$user->getUser($_SESSION['id']);
+
       $user->unserialize($_SESSION['ser']);
       $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
       $result2 = $db->query($sql2);
@@ -36,9 +38,11 @@
       $fila2 = $result2->fetch();
       $_SESSION['rol']=$fila2['Idrango'];
       $_SESSION['oldusercreacion']=$fila2['ID_usuarios'];
+      echo "hola";
       //$user->unserialize($ser);
       $result=$document->getDocumentsPerUser($fila2['Idrango']);
   }
+
       if (!empty($user->username)) {
           ?>
 

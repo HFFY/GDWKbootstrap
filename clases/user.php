@@ -87,8 +87,7 @@ class User implements \Serializable
         // execute query
         $stmt->execute();
 
-        echo $this->username;
-        echo "<br>";
+        
 
 
         return $stmt;
