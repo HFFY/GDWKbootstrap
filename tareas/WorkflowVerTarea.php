@@ -25,18 +25,21 @@ $database = new Database();
 $db = $database->getConnection();
 $id=$_GET['id'];
 $user = new User($db);
-$sql = 'select * from usuarios;';
-$result = $db->query($sql);
-$result->setFetchMode(PDO::FETCH_ASSOC);
+
 if(!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id && ($_SESSION['rol']=="1"||$_SESSION['rol']=="666")){
 $kind = $_GET['variable1'];
 $kindwork = $_GET['variable2'];
 
 $tarea = new Database($db);//Por Validar
-$sqlTarea = "select * from tareas where id_tareas = $kindwork";
+$sqlTarea = "select * from tareas where id_tareas = $kindwork ;";
 $resultTarea = $db->query($sqlTarea);
 $resultTarea->setFetchMode(PDO::FETCH_ASSOC);
 $fila = $resultTarea->fetch();
+$creadopor=$fila['Id_usuario'];
+$sqlname = "select Nombres from Usuarios where ID_usuarios = '$creadopor' ;";
+$resultname = $db->query($sqlname);
+$resultname->setFetchMode(PDO::FETCH_ASSOC);
+$creadoporname=$resultname->fetch();
     ?>
 
         <header class="header">
@@ -64,6 +67,15 @@ $fila = $resultTarea->fetch();
             <div class="container">
                 <div class="row">
                     <p class="big-text">Tarea</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm-6 banner-info">
+                    <p>Creado Por:</p>
+                    <p class="form-control" disabled> <?php echo $creadoporname['Nombres'];?> </p>
+                    </div>
                 </div>
             </div>
             <div class="container">
