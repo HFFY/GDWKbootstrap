@@ -23,22 +23,22 @@
   $user = new User($db);
   $document = new Documento($db);
 
-  $sql = 'select * from documentos;';
-  $result = $db->query($sql);
-  $result->setFetchMode(PDO::FETCH_ASSOC);
+  // $sql = 'SELECT * from documentos;';
+  // $result = $db->query($sql);
+  // $result->setFetchMode(PDO::FETCH_ASSOC);
 
 
   if (!empty($_SESSION['ser'])&&!empty($_SESSION['id'])) {
       //$arrayuser=$user->getUser($_SESSION['id']);
 
       $user->unserialize($_SESSION['ser']);
-      $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
+      $sql2 = 'SELECT Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
       $_SESSION['rol']=$fila2['Idrango'];
       $_SESSION['oldusercreacion']=$fila2['ID_usuarios'];
-      echo "hola";
+
       //$user->unserialize($ser);
       $result=$document->getDocumentsPerUser($fila2['Idrango']);
   }
@@ -90,10 +90,16 @@
    </div>
 
    <div class="col-sm-6 banner-info">
-     <a class="btn btn-first" href="usuario/master.php">Acceder Super Usuario</a>
-     <a class="btn btn-second" href="usuario/modificarusuario.php?id=<?php echo $fila2['ID_usuarios']; ?>">Modificar usuario</a>
+   <a class="btn btn-second" href="usuario/modificarusuario.php?id=<?php echo $fila2['ID_usuarios']; ?>">Modificar usuario</a>
+
+
+        <?php if ($_SESSION['rol']==1 || $_SESSION['rol']==666) {
+              ?>
+          <a class="btn btn-first" href="usuario/master.php">Acceder Super Usuario</a>
      <a class="btn btn-second" href="usuario/crearusuario.php">Crear Usuario</a>
       <a class="btn btn-second" href="gestordocumentos/subirdocumento.php">Añadir nuevo documento</a>
+      <?php
+          } ?>
    </div>
  </div>
  <div class="row">
@@ -112,9 +118,12 @@
              </tr>
            </thead>
            <tbody>
-              <?php   while ($fila = $result->fetch()) {
-              if ($fila['Estado']==1) {
-                  ?>
+              <?php
+
+    if ($result) {
+        while ($fila = $result->fetch()) {
+            if (!empty($fila)&&$fila['Estado']==1) {
+                ?>
               <tr>
                  <td><a href="gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $fila['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $fila['Nombre del documento']; ?></a></td>
                  <td><?php echo $document->getCodeDocument($fila['ID_documentos'])['descripcion']; ?></td>
@@ -122,8 +131,9 @@
                   <td><a href="<?php echo $fila['Link']; ?>">Descargar</a></td>
               </tr>
              <?php
-              }
-          } ?>
+            }
+        }
+    } ?>
            </tbody>
            </table>
 
@@ -145,6 +155,8 @@
         </thead>
         <tbody>
           <?php
+
+
           $resultlatest=$document->getLatestDocuments();
 
           while ($filalatest=$resultlatest->fetch()) {

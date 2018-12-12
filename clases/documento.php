@@ -137,12 +137,13 @@ class Documento
                 }
                 $contador=$contador+1;
             }
+            if (!empty($string)) {
+                $sql1 = 'SELECT * from documentos where '.$string.';';
 
-            $sql1 = 'SELECT * from documentos where '.$string.';';
-          
-            $result1 = $this->conn->query($sql1);
-            $result1->setFetchMode(PDO::FETCH_ASSOC);
-            return $result1;
+                $result1 = $this->conn->query($sql1);
+                $result1->setFetchMode(PDO::FETCH_ASSOC);
+                return $result1;
+            }
         }
     }
     public function getLatestDocuments()
