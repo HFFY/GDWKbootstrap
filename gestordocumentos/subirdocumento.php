@@ -61,8 +61,14 @@
               echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
 
               $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
-            
+
               $document->insertDocument();
+              $sqlget="SELECT MAX(ID_documentos) as id from documentos";
+              $resultget = $db->query($sqlget);
+              $resultget->setFetchMode(PDO::FETCH_ASSOC);
+              $filaget = $resultget->fetch();
+              $iddoc= $filaget['id'];
+              $document->addChangeToDocument($iddoc,$_SESSION['id'],$document->Descripcion);
           } else {
               echo 'Upload failed!';
               //
