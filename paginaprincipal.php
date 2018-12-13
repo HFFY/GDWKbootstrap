@@ -128,7 +128,15 @@
                  <td><a href="gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $fila['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $fila['Nombre del documento']; ?></a></td>
                  <td><?php echo $document->getCodeDocument($fila['ID_documentos'])['descripcion']; ?></td>
                  <td><?php echo $fila['Version']; ?></td>
-                  <td><a href="<?php echo $fila['Link']; ?>">Descargar</a></td>
+                  <td><a href="<?php
+                  if ($handle = opendir($fila['Link'])) {
+                      while (false !== ($entry = readdir($handle))) {
+                          if ($entry != "." && $entry != "..") {
+                              echo "<a href='download.php?file=".$entry."'>".$entry."</a>\n";
+                          }
+                      }
+                      closedir($handle);
+                  } ?>">Descargar</a></td>
               </tr>
              <?php
             }
