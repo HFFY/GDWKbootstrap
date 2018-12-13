@@ -102,6 +102,7 @@
               $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
               $document->insertDocument();
               $document->deactivateDocument($_GET['iddoc']);
+              $document->addChangeToDocument($_GET['iddoc'],$_SESSION['id'],$document->Descripcion);
           } else {
               echo 'Upload failed!';
               //

@@ -28,11 +28,11 @@
   // $result->setFetchMode(PDO::FETCH_ASSOC);
 
 
-  if (!empty($_SESSION['ser'])&&!empty($_SESSION['id'])) {
+  if (!empty($_SESSION['id'])) {
       //$arrayuser=$user->getUser($_SESSION['id']);
 
-      $user->unserialize($_SESSION['ser']);
-      $sql2 = 'SELECT Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
+      $user=$user->getUser($_SESSION['id']);
+      $sql2 = 'SELECT * from usuarios where ID_usuarios="'.$_SESSION['id'].'";';
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
@@ -43,7 +43,7 @@
       $result=$document->getDocumentsPerUser($fila2['Idrango']);
   }
 
-      if (!empty($user->username)) {
+      if (!empty($_SESSION['id'])) {
           ?>
 
 <header class="header">
@@ -60,7 +60,7 @@
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
-         <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
+         <li><a href="sessiondestroy.php" type="button"><?php echo $fila2['Usuario']; ?> LOGOUT</a></li>
          <li><a href="tareas/workflowpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">WorkFlow </a></li>
 
 
@@ -72,13 +72,15 @@
 
  <div class="container">
  <div class="row">
+   <?php if ($_SESSION['rol']==1 || $_SESSION['rol']==666) {
+         ?>
   <div class="col-sm-6 banner-info">
      <h2>Buscador</h2>
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="search-container">
          <form action="buscador.php">
-           <input type="text" placeholder="Search.." name="search">
+           <input type="text" placeholder="Ingresar codigo" name="search">
            <button type="submit">Submit</button>
          </form>
        </div>
@@ -88,6 +90,8 @@
 
 
    </div>
+   <?php
+       } ?>
 
    <div class="col-sm-6 banner-info">
    <a class="btn btn-second" href="usuario/modificarusuario.php?id=<?php echo $fila2['ID_usuarios']; ?>">Modificar usuario</a>
@@ -124,8 +128,17 @@
         while ($fila = $result->fetch()) {
             if (!empty($fila)&&$fila['Estado']==1) {
                 ?>
-              <tr>
+              <tr><?php if ($_SESSION['rol']==1 || $_SESSION['rol']==666) {
+                    ?>
                  <td><a href="gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $fila['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $fila['Nombre del documento']; ?></a></td>
+                 <?php
+               }else{
+                 ?>
+                  <td><?php echo $fila['Nombre del documento']; ?></td>
+              <?php
+            }
+              ?>
+
                  <td><?php echo $document->getCodeDocument($fila['ID_documentos'])['descripcion']; ?></td>
                  <td><?php echo $fila['Version']; ?></td>
                   <td><a href="<?php

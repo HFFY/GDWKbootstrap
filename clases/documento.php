@@ -137,13 +137,13 @@ class Documento
                 }
                 $contador=$contador+1;
             }
-            if (!empty($string)) {
-                $sql1 = 'SELECT * from documentos where '.$string.';';
 
-                $result1 = $this->conn->query($sql1);
-                $result1->setFetchMode(PDO::FETCH_ASSOC);
-                return $result1;
-            }
+            if (!empty($string)) {
+               $sql1 = 'SELECT * from documentos where '.$string.';';
+               $result1 = $this->conn->query($sql1);
+               $result1->setFetchMode(PDO::FETCH_ASSOC);
+               return $result1;
+           }
         }
     }
     public function getLatestDocuments()
@@ -233,7 +233,7 @@ class Documento
     {
         $date=date('Y-m-d H:i:s');
         $sql = "INSERT into docusucambios VALUES (null,'$iddoc','$iduser','$date','$date','$descrip',null)";
-        // echo $sql;
+        echo $sql;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }

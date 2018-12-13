@@ -46,11 +46,11 @@
       //  echo $_SERVER['REQUEST_METHOD'];
 
       if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
-          $user->username = isset($_POST['username']) ? $_POST['username'] : die();
-          $user->password = base64_encode(isset($_POST['password']) ? $_POST['password'] : die());
-          $user->names = isset($_POST['names']) ? $_POST['names'] : die();
-          $user->lastname = isset($_POST['lastname']) ? $_POST['lastname'] : die();
-        
+          $user->username = !empty($_POST['username']) ? $_POST['username'] : $olduser->username;
+          $user->password = base64_encode(!empty($_POST['password']) ? $_POST['password'] :$olduser->password);
+          $user->names = !empty($_POST['names']) ? $_POST['names'] : $olduser->names;
+          $user->lastname = !empty($_POST['lastname']) ? $_POST['lastname'] : $olduser->lastname;
+
           if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
               $user->rol = isset($_POST['rol']) ? $_POST['rol'] : die();
           } else {
