@@ -61,7 +61,7 @@
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
          <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
-         
+
          <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
          </ul>
         </div>
@@ -167,9 +167,9 @@
             <td><a  href="../gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $filaD['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $filaD['Nombre del documento']; ?></a></td>
             <td><?php echo $descripcioncodigo['descripcion']; ?></td>
             <td><?php echo $filaD['Version']; ?></td>
-             <td><a href="<?php echo $filaD['Link']; ?>">
-
-               Descargar</a></td>
+            <td><a href="<?php
+$name= "../".substr($filaD['Link'], 14);
+              echo $name; ?>" download>Descargar</a></td>
          </tr>
         <?php
           } ?>

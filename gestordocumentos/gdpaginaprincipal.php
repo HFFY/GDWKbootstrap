@@ -124,7 +124,9 @@
               <tr>
                  <td><?php echo $f['Nombre del documento']; ?></td>
                  <td><?php echo $f['Version']; ?></td>
-                 <td><?php echo $f['Link']; ?></td>
+                 <td><a href="<?php
+     $name= "../".substr($f['Link'], 14);
+                  echo $name; ?>" download>Descargar</a></td>
 
               </tr>
              <?php
