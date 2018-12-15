@@ -31,12 +31,12 @@ $kind = $_GET['variable1'];
 $kindwork = $_GET['variable2'];
 
 $tarea = new Database($db);//Por Validar
-$sqlTarea = "select * from tareas where id_tareas = $kindwork ;";
+$sqlTarea = "SELECT * from Tareas where id_tareas = $kindwork ;";
 $resultTarea = $db->query($sqlTarea);
 $resultTarea->setFetchMode(PDO::FETCH_ASSOC);
 $fila = $resultTarea->fetch();
 $creadopor=$fila['Id_usuario'];
-$sqlname = "select Nombres from Usuarios where ID_usuarios = '$creadopor' ;";
+$sqlname = "SELECT Nombres from Usuarios where ID_usuarios = '$creadopor' ;";
 $resultname = $db->query($sqlname);
 $resultname->setFetchMode(PDO::FETCH_ASSOC);
 $creadoporname=$resultname->fetch();

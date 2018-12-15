@@ -26,7 +26,7 @@ $database = new Database();
 $db = $database->getConnection();
 $id=$_GET['id'];
 $user = new User($db);
-$sql = 'select * from usuarios;';
+$sql = 'SELECT * from Usuarios;';
 $result = $db->query($sql);
 $result->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -47,7 +47,7 @@ $creartarea->NombreTarea= !empty($_POST['nombretarea']) ? $_POST['nombretarea'] 
 
 if(!empty($creartarea->Prioridad)){
   $creartarea->crearTarea();
-  
+
   if($_SESSION['rol']=="1"||$_SESSION['rol']=="666"){
     header("Location: workflowpaginaprincipal.php?id=".$id);
   }else {

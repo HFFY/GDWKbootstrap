@@ -33,7 +33,7 @@ if (!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id && ($_SESSION
     $work = $_GET['variable'];
 
     $tarea = new Database($db);
-    $sqlTarea = "select * from tareas where id_tareas = $work ;";
+    $sqlTarea = "SELECT * from Tareas where id_tareas = $work ;";
     $resultTarea = $db->query($sqlTarea);
     $resultTarea->setFetchMode(PDO::FETCH_ASSOC);
     $fila = $resultTarea->fetch();

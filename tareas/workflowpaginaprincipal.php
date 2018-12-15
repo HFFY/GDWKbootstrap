@@ -28,7 +28,6 @@
     $db = $database->getConnection();
     $user = new User($db);
 
-
     if (!empty($_SESSION['id']) && $_SESSION['id']==$id) {
       $verificartarea = new Ticket($db);
       $verificartarea-> comprobarDateTarea();
@@ -37,37 +36,37 @@
             $result = $db->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $tarea = new Ticket($db);//Por Validar
-            $sqlTareaCero = "SELECT * from tareas where estado='1';";
+            $sqlTareaCero = "SELECT * from Tareas where Estado='1';";
             $resultTareaCero = $db->query($sqlTareaCero);
             $resultTareaCero->setFetchMode(PDO::FETCH_ASSOC);
 
-            $sqlTareaUno = "SELECT * from tareas where estado='2';";
+            $sqlTareaUno = "SELECT * from Tareas where Estado='2';";
             $resultTareaUno = $db->query($sqlTareaUno);
             $resultTareaUno->setFetchMode(PDO::FETCH_ASSOC);
 
-            $sqlTareaDos = "SELECT * from tareas where estado='3';";
+            $sqlTareaDos = "SELECT * from Tareas where Estado='3';";
             $resultTareaDos = $db->query($sqlTareaDos);
             $resultTareaDos->setFetchMode(PDO::FETCH_ASSOC);
 
-            $sqlTareaTres = "SELECT * from tareas where estado='4';";
+            $sqlTareaTres = "SELECT * from Tareas where Estado='4';";
             $resultTareaTres = $db->query($sqlTareaTres);
             $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
 
 
         } else {
-            $sqlTareaCero = "SELECT * from tareas where Id_usuario='$id' and estado='1';";
+            $sqlTareaCero = "SELECT * from Tareas where Id_usuario='$id' and Estado='1';";
             $resultTareaCero = $db->query($sqlTareaCero);
             $resultTareaCero->setFetchMode(PDO::FETCH_ASSOC);
 
-            $sqlTareaUno = "SELECT * from tareas where Id_usuario='$id' and estado='2';";
+            $sqlTareaUno = "SELECT * from Tareas where Id_usuario='$id' and Estado='2';";
             $resultTareaUno = $db->query($sqlTareaUno);
             $resultTareaUno->setFetchMode(PDO::FETCH_ASSOC);
 
-            $sqlTareaDos = "SELECT * from tareas where Id_usuario='$id' and estado='3';";
+            $sqlTareaDos = "SELECT * from Tareas where Id_usuario='$id' and Estado='3';";
             $resultTareaDos = $db->query($sqlTareaDos);
             $resultTareaDos->setFetchMode(PDO::FETCH_ASSOC);
 
-            $sqlTareaTres = "SELECT * from tareas where Id_usuario='$id' and estado='4';";
+            $sqlTareaTres = "SELECT * from Tareas where Id_usuario='$id' and Estado='4';";
             $resultTareaTres = $db->query($sqlTareaTres);
             $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
         } ?>
