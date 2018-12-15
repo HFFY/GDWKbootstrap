@@ -32,7 +32,7 @@
       //$arrayuser=$user->getUser($_SESSION['id']);
 
       $user->unserialize($_SESSION['ser']);
-      $sql2 = 'SELECT Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
+      $sql2 = 'SELECT Idrango, ID_usuarios from Usuarios where Usuario="'.$user->username.'";';
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
@@ -44,6 +44,7 @@
   }
 
       if (!empty($user->username)) {
+        
           ?>
 
 <header class="header">

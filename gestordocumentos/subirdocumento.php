@@ -63,7 +63,7 @@
               $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
 
               $document->insertDocument();
-              $sqlget="SELECT MAX(ID_documentos) as id from documentos";
+              $sqlget="SELECT MAX(ID_documentos) as id from Documentos";
               $resultget = $db->query($sqlget);
               $resultget->setFetchMode(PDO::FETCH_ASSOC);
               $filaget = $resultget->fetch();
@@ -146,7 +146,7 @@
             <select class="form-control" name="Tipodedocumento">
               <?php
               $count=0;
-      $dumbvalorarray=$document->getAllSubproceso();
+      $dumbvalorarray=$document->getAllTipoDeDocumento();
       while ($valor=$dumbvalorarray->fetch()) {
           ?>
 
@@ -173,7 +173,7 @@
           <select class="form-control" name="Subproceso">
             <?php
             $count=0;
-      $dumbvalorarray=$document->getAllTipoDeDocumento();
+      $dumbvalorarray=$document->getAllSubproceso();
       while ($valor=$dumbvalorarray->fetch()) {
           ?>
 

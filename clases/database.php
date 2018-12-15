@@ -7,6 +7,9 @@ class Database
     private $db_name = "GDWKF";
     private $username = "root";
     private $password = "";
+    // private $db_name = "kcardenas15";
+    // private $username = "kcardenas15";
+    // private $password = "isc818";
     public $conn;
 
     // get the database connection

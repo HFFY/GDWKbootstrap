@@ -21,11 +21,11 @@
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);
-  $sql = 'select * from usuarios;';
+  $sql = 'SELECT * from Usuarios;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
   $document = new Documento($db);
-  $sqlD = 'select * from documentos;';
+  $sqlD = 'SELECT * from Documentos;';
    $resultD = $db->query($sqlD);
    $resultD->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -33,7 +33,7 @@
 
   if (!empty($_SESSION['ser'])) {
       $user->unserialize($_SESSION['ser']);
-      $sql2 = 'select Idrango, ID_usuarios from usuarios where usuario="'.$user->username.'";';
+      $sql2 = 'SELECT Idrango, ID_usuarios from Usuarios where usuario="'.$user->username.'";';
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
