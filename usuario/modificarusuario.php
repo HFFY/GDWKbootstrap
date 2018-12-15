@@ -46,10 +46,10 @@
       //  echo $_SERVER['REQUEST_METHOD'];
 
       if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
-          $user->username = !empty($_POST['username']) ? $_POST['username'] : $olduser->username;
-          $user->password = base64_encode(!empty($_POST['password']) ? $_POST['password'] :$olduser->password);
-          $user->names = !empty($_POST['names']) ? $_POST['names'] : $olduser->names;
-          $user->lastname = !empty($_POST['lastname']) ? $_POST['lastname'] : $olduser->lastname;
+          $user->username = !empty($_POST['username']) ? $_POST['username'] : $olduser['Usuario'];
+          $user->password = base64_encode(!empty($_POST['password']) ? $_POST['password'] :$olduser['Contraseña']);
+          $user->names = !empty($_POST['names']) ? $_POST['names'] : $olduser['Nombres'];
+          $user->lastname = !empty($_POST['lastname']) ? $_POST['lastname'] : $olduser['Apellidos'];
 
           if ($_SESSION['rol']=="1"||$_SESSION['rol']=="666") {
               $user->rol = isset($_POST['rol']) ? $_POST['rol'] : die();
@@ -74,7 +74,7 @@
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-          
+
 
           </ul>
         </div>

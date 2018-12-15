@@ -23,18 +23,21 @@
     include_once '../clases/documento.php';
     include_once '../clases/ticket.php';
     session_start();
+
     $database = new Database();
     $id=$_GET['id'];
     $db = $database->getConnection();
     $user = new User($db);
 
     if (!empty($_SESSION['id']) && $_SESSION['id']==$id) {
+
       $verificartarea = new Ticket($db);
       $verificartarea-> comprobarDateTarea();
+
         if ($id==1||$id==666) {
-            $sql = 'select * from usuarios;';
-            $result = $db->query($sql);
-            $result->setFetchMode(PDO::FETCH_ASSOC);
+            // $sql = 'SELECT * from Usuarios;';
+            // $result = $db->query($sql);
+            // $result->setFetchMode(PDO::FETCH_ASSOC);
             $tarea = new Ticket($db);//Por Validar
             $sqlTareaCero = "SELECT * from Tareas where Estado='1';";
             $resultTareaCero = $db->query($sqlTareaCero);

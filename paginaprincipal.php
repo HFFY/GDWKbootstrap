@@ -44,7 +44,7 @@
   }
 
       if (!empty($user->username)) {
-        
+
           ?>
 
 <header class="header">
@@ -74,6 +74,8 @@
  <div class="container">
  <div class="row">
   <div class="col-sm-6 banner-info">
+    <?php if ($_SESSION['rol']==1 || $_SESSION['rol']==666) {
+          ?>
      <h2>Buscador</h2>
   <div class="panel panel-default">
     <div class="panel-body">
@@ -86,7 +88,8 @@
     </div>
   </div>
 
-
+  <?php
+      } ?>
 
    </div>
 

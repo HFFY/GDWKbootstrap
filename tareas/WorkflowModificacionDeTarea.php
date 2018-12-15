@@ -25,7 +25,7 @@ $database = new Database();
 $db = $database->getConnection();
 $id=$_GET['id'];
 $user = new User($db);
-$sql = 'select * from usuarios;';
+$sql = 'SELECT * from Usuarios;';
 $result = $db->query($sql);
 $result->setFetchMode(PDO::FETCH_ASSOC);
 

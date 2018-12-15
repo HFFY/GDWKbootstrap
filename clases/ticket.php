@@ -4,7 +4,7 @@ class Ticket
 {
     private $conn;
     private $database;
-    private $table_name = "tareas";
+    private $table_name = "Tareas";
 
     // object properties
     public $id;
@@ -52,6 +52,7 @@ class Ticket
                 $resultup->setFetchMode(PDO::FETCH_ASSOC);
             }
         }
+      
     }
 
     public function resolverTarea($idtarea, $newdate)
@@ -63,7 +64,7 @@ class Ticket
     public function modificarTarea($idtarea)
     {
         $sql = "UPDATE Tareas SET Prioridad = '$this->Prioridad' , Descripcion='$this->Descripción', NombreTarea='$this->NombreTarea', Tipo='$this->Tipo' , Estado='$this->Estado' , Fechaestimada ='$this->Fechaestimada' , Fechaoficial ='$this->Fechaoficial' WHERE id_tareas ='$idtarea';";
-      
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }

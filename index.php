@@ -72,14 +72,16 @@
             if (!empty($user->username)) {
                 $_SESSION['ser'] = $ser;
                 //$_SESSION['loguser'] =$loguser;
-                $sql = "SELECT ID_usuarios from Usuarios where Usuario='$user->username';";
+                $sql = "SELECT ID_usuarios, Estado from Usuarios where Usuario='$user->username';";
 
                 $result = $db->query($sql);
                 $result->setFetchMode(PDO::FETCH_ASSOC);
                 $variable=$result->fetch();
+                  if($variable['Estado']==1){
                 $_SESSION['id']=$variable['ID_usuarios'];
 
                 header("Location: paginaprincipal.php");
+              }
             }
         } else {
             $user_arr=array(

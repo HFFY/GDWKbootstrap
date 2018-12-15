@@ -138,13 +138,13 @@ class User implements \Serializable
 
     public function modifiedUser($iduser)
     {
-      if ($this->isAlreadyExist()) {
-          return false;
-      }
+      // if ($this->isAlreadyExist()) {
+      //     return false;
+      // }
 
         $this->date=date('Y-m-d H:i:s');
         $sql = "UPDATE $this->table_name SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', `Fecha de cambio de clave`='$this->date'  WHERE ID_usuarios='$iduser';";
-         echo $sql;
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();

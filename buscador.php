@@ -8,8 +8,8 @@ $db = $database->getConnection();
 $user = new User($db);
 $document = new Documento($db);
 $var=$_GET['search'];
-$sql = "SELECT ID_documentos from codigodocumento where descripcion='$var';";
-echo $sql;
+$sql = "SELECT ID_documentos from codigoDocumento where descripcion='$var';";
+
 $result = $db->query($sql);
 
 $result->setFetchMode(PDO::FETCH_ASSOC);
