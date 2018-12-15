@@ -81,9 +81,9 @@ CREATE TABLE `codigoDocumento` (
   `ID_documentos` INT NOT NULL,
     PRIMARY KEY (`idcodigoDocumento`),
     FOREIGN KEY (`idproceso`)
-    REFERENCES `GDWKF`.`Proceso` (`idProceso`),
+    REFERENCES `Proceso` (`idProceso`),
     FOREIGN KEY (`idsubproceso`)
-    REFERENCES `GDWKF`.`subproceso` (`idsubproceso`),
+    REFERENCES `subproceso` (`idsubproceso`),
     FOREIGN KEY (`idtipodedocumento`)
     REFERENCES `Tipo de documento` (`idtipo de documento`),
     FOREIGN KEY (`ID_documentos`)
@@ -109,9 +109,9 @@ CREATE TABLE `DocUsuCambios` (
   `IP revision` VARCHAR(64) NULL,
     PRIMARY KEY (`Id_cambio`),
     FOREIGN KEY (`id_documento`)
-    REFERENCES `GDWKF`.`Documentos` (`ID_documentos`),
+    REFERENCES `Documentos` (`ID_documentos`),
     FOREIGN KEY (`Id_usuario`)
-    REFERENCES `GDWKF`.`Usuarios` (`ID_usuarios`)
+    REFERENCES `Usuarios` (`ID_usuarios`)
 );
 CREATE TABLE `TipoTareas` (
   `idTipoTareas` INT NOT NULL AUTO_INCREMENT,
@@ -135,9 +135,9 @@ CREATE TABLE `Tareas` (
   `NombreTarea` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_tareas`),
     FOREIGN KEY (`Id_usuario`)
-    REFERENCES `GDWKF`.`Usuarios` (`ID_usuarios`),
+    REFERENCES `Usuarios` (`ID_usuarios`),
     FOREIGN KEY (`Tipo`)
-    REFERENCES `GDWKF`.`TipoTareas` (`idTipoTareas`)
+    REFERENCES `TipoTareas` (`idTipoTareas`)
 );
 CREATE TABLE `TareasUsuarios` (
   `Id_proceso` INT NOT NULL AUTO_INCREMENT,
@@ -147,9 +147,9 @@ CREATE TABLE `TareasUsuarios` (
   `Hora` TIME NOT NULL,
   PRIMARY KEY (`Id_proceso`),
     FOREIGN KEY (`Id_tarea`)
-    REFERENCES `GDWKF`.`Tareas` (`id_tareas`),
+    REFERENCES `Tareas` (`id_tareas`),
     FOREIGN KEY (`Id_usuario`)
-    REFERENCES `GDWKF`.`Usuarios` (`ID_usuarios`)
+    REFERENCES `Usuarios` (`ID_usuarios`)
 );
 INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
 VALUES (null, 'Administrador');
@@ -161,21 +161,21 @@ INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
 VALUES (null, 'Docente');
 
 INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (666,'GOD');
-INSERT into proceso VALUES(null,'PC','Planificación del SGC');
-INSERT into proceso VALUES(null,'PF','Planificación Financiera');
-INSERT into proceso VALUES(null,'PA','Planificación Académica');
-INSERT into proceso VALUES(null,'DU','Desarrollo Universitario');
-INSERT into proceso VALUES(null,'MI','Marketing Institucional');
-INSERT into proceso VALUES(null,'RE','Reclutamiento');
-INSERT into proceso VALUES(null,'AR','Admisión y Reforzamiento');
-INSERT into proceso VALUES(null,'FO','Formación');
-INSERT into proceso VALUES(null,'GR','Graduación');
-INSERT into proceso VALUES(null,'SG','Seguimiento a Graduados');
-INSERT into proceso VALUES(null,'GA','Gestión Administrativa');
-INSERT into proceso VALUES(null,'GC','Gestión Contable');
-INSERT into proceso VALUES(null,'GQ','Gestión de Calidad');
-INSERT into proceso VALUES(null,'GI','Gestión de la Información');
-INSERT into proceso VALUES(null,'ID','Investigación y Desarrollo');
+INSERT into Proceso VALUES(null,'PC','Planificación del SGC');
+INSERT into Proceso VALUES(null,'PF','Planificación Financiera');
+INSERT into Proceso VALUES(null,'PA','Planificación Académica');
+INSERT into Proceso VALUES(null,'DU','Desarrollo Universitario');
+INSERT into Proceso VALUES(null,'MI','Marketing Institucional');
+INSERT into Proceso VALUES(null,'RE','Reclutamiento');
+INSERT into Proceso VALUES(null,'AR','Admisión y Reforzamiento');
+INSERT into Proceso VALUES(null,'FO','Formación');
+INSERT into Proceso VALUES(null,'GR','Graduación');
+INSERT into Proceso VALUES(null,'SG','Seguimiento a Graduados');
+INSERT into Proceso VALUES(null,'GA','Gestión Administrativa');
+INSERT into Proceso VALUES(null,'GC','Gestión Contable');
+INSERT into Proceso VALUES(null,'GQ','Gestión de Calidad');
+INSERT into Proceso VALUES(null,'GI','Gestión de la Información');
+INSERT into Proceso VALUES(null,'ID','Investigación y Desarrollo');
 
 INSERT into subproceso VALUES(null,'RT','Recursos Tecnológicos');
 INSERT into subproceso VALUES(null,'RF','Recursos Físicos');
@@ -205,11 +205,11 @@ INSERT into subproceso VALUES(null,'EE','Ejecución, Seguimiento y Evaluación d
 INSERT into subproceso VALUES(null,'AA','Difusión y Aplicación de Resuktadis de Investigación');
 
 
-INSERT into `tipo de documento` VALUES(null,'P','Procedimiento');
-INSERT into `tipo de documento` VALUES(null,'I','Instructivo');
-INSERT into `tipo de documento` VALUES(null,'F','Formato y/o Registros');
-INSERT into `tipo de documento` VALUES(null,'M','Manual Emitido por la UPB');
-INSERT into `tipo de documento` VALUES(null,'D','Documento Interno que Requiere ser Controlado');
+INSERT into `Tipo de documento` VALUES(null,'P','Procedimiento');
+INSERT into `Tipo de documento` VALUES(null,'I','Instructivo');
+INSERT into `Tipo de documento` VALUES(null,'F','Formato y/o Registros');
+INSERT into `Tipo de documento` VALUES(null,'M','Manual Emitido por la UPB');
+INSERT into `Tipo de documento` VALUES(null,'D','Documento Interno que Requiere ser Controlado');
 
 INSERT INTO usuarios VALUES ('GOD', '1','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
 INSERT INTO TipoTareas VALUES (null,'Reunión para documento');
