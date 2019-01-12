@@ -47,7 +47,7 @@
 
       if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['crear'])) {
           $user->username = !empty($_POST['username']) ? $_POST['username'] : $olduser['Usuario'];
-          $user->password = base64_encode(!empty($_POST['password']) ? $_POST['password'] :$olduser['Contraseña']);
+          $user->password = !empty($_POST['password']) ? base64_encode($_POST['password']) :$olduser['Contraseña'];
           $user->names = !empty($_POST['names']) ? $_POST['names'] : $olduser['Nombres'];
           $user->lastname = !empty($_POST['lastname']) ? $_POST['lastname'] : $olduser['Apellidos'];
 
@@ -73,7 +73,7 @@
         </div>
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
+            <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
 
 
           </ul>
@@ -114,10 +114,25 @@
               <p><br>Seleccionar rol</p>
               <select class="form-control" name="rol">
 
-                <option value="2">Administrador</option>
-                <option value="3">Vicerrector/Decano</option>
-                <option value="4">Jefe de carrera</option>
-                <option value="5">Docentes</option>
+
+                <?php
+
+          $count=0;
+
+          $dumbvalorarray=$user->getAllRols();
+          while ($valor=$dumbvalorarray->fetch()) {
+              if ($valor['idRangoUsuarios']!=666) {
+                  ?>
+
+                    <option  value="<?php echo $count=$count+1; ?>" <?php  if ($olduser['Idrango']==$count) {
+                      echo "selected='selected'";
+                  } ?>><?php echo $valor['Descripcion']; ?></option>
+
+
+                  <?php
+              }
+          } ?>
+
               </select>
             </div>
           <?php

@@ -151,14 +151,10 @@ CREATE TABLE `TareasUsuarios` (
     FOREIGN KEY (`Id_usuario`)
     REFERENCES `Usuarios` (`ID_usuarios`)
 );
-INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
-VALUES (null, 'Administrador');
-INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
-VALUES (null, 'Vicerrector/Decano');
-INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
-VALUES (null, 'Jefe de carrera');
-INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion)
-VALUES (null, 'Docente');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (null, 'Administrador');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (null, 'Vicerrector/Decano');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (null, 'Jefe de carrera');
+INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (null, 'Docente');
 
 INSERT INTO RangoUsuarios (idRangoUsuarios, Descripcion) VALUES (666,'GOD');
 INSERT into Proceso VALUES(null,'PC','Planificación del SGC');
@@ -211,7 +207,7 @@ INSERT into `Tipo de documento` VALUES(null,'F','Formato y/o Registros');
 INSERT into `Tipo de documento` VALUES(null,'M','Manual Emitido por la UPB');
 INSERT into `Tipo de documento` VALUES(null,'D','Documento Interno que Requiere ser Controlado');
 
-INSERT INTO usuarios VALUES ('GOD', '1','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
+INSERT INTO Usuarios VALUES ('GOD', '1','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
 INSERT INTO TipoTareas VALUES (null,'Reunión para documento');
 INSERT INTO TipoTareas VALUES (null,'Solicitud de actualización de proceso');
 INSERT INTO TipoTareas VALUES (null,'Solicitud de nuevo proceso');

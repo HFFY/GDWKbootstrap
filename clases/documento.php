@@ -139,11 +139,11 @@ class Documento
             }
 
             if (!empty($string)) {
-               $sql1 = 'SELECT * from Documentos where '.$string.';';
-               $result1 = $this->conn->query($sql1);
-               $result1->setFetchMode(PDO::FETCH_ASSOC);
-               return $result1;
-           }
+                $sql1 = 'SELECT * from Documentos where '.$string.';';
+                $result1 = $this->conn->query($sql1);
+                $result1->setFetchMode(PDO::FETCH_ASSOC);
+                return $result1;
+            }
         }
     }
     public function getLatestDocuments()
@@ -232,7 +232,7 @@ class Documento
     public function addChangeToDocument($iddoc, $iduser, $descrip)
     {
         $date=date('Y-m-d H:i:s');
-        $sql = "INSERT into docusucambios VALUES (null,'$iddoc','$iduser','$date','$date','$descrip',null)";
+        $sql = "INSERT into DocUsuCambios VALUES (null,'$iddoc','$iduser','$date','$date','$descrip',null)";
         echo $sql;
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -299,7 +299,7 @@ class Documento
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
         $dumbvarsql1=$fila['Proceso'];
-        $sql1 = "SELECT Codigo from proceso where idProceso='$dumbvarsql1';";
+        $sql1 = "SELECT Codigo from Proceso where idProceso='$dumbvarsql1';";
 
         $result1 = $this->conn->query($sql1);
         $result1->setFetchMode(PDO::FETCH_ASSOC);
@@ -336,7 +336,7 @@ class Documento
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
         $dumbvarsql1=$fila['Proceso'];
-        $sql1 = "SELECT Codigo from proceso where idProceso='$dumbvarsql1';";
+        $sql1 = "SELECT Codigo from Proceso where idProceso='$dumbvarsql1';";
         $result1 = $this->conn->query($sql1);
         $result1->setFetchMode(PDO::FETCH_ASSOC);
         $fila1 = $result1->fetch();

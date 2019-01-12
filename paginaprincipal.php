@@ -28,11 +28,11 @@
   // $result->setFetchMode(PDO::FETCH_ASSOC);
 
 
-  if (!empty($_SESSION['ser'])&&!empty($_SESSION['id'])) {
+  if (!empty($_SESSION['id'])) {
       //$arrayuser=$user->getUser($_SESSION['id']);
 
-      $user->unserialize($_SESSION['ser']);
-      $sql2 = 'SELECT Idrango, ID_usuarios from Usuarios where Usuario="'.$user->username.'";';
+      $user=$user->getUser($_SESSION['id']);
+      $sql2 = 'SELECT Idrango, ID_usuarios from Usuarios where Usuario="'.$user['Usuario'].'";';
       $result2 = $db->query($sql2);
       $result2->setFetchMode(PDO::FETCH_ASSOC);
       $fila2 = $result2->fetch();
@@ -43,8 +43,7 @@
       $result=$document->getDocumentsPerUser($fila2['Idrango']);
   }
 
-      if (!empty($user->username)) {
-
+      if (!empty($user['Usuario'])) {
           ?>
 
 <header class="header">
@@ -61,7 +60,7 @@
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
-         <li><a href="sessiondestroy.php" type="button"><?php echo $user->username; ?> LOGOUT</a></li>
+         <li><a href="sessiondestroy.php" type="button"><?php echo $user['Usuario']; ?> LOGOUT</a></li>
          <li><a href="tareas/workflowpaginaprincipal.php?id=<?php echo $fila2['ID_usuarios']; ?>">WorkFlow </a></li>
 
 
@@ -75,7 +74,7 @@
  <div class="row">
   <div class="col-sm-6 banner-info">
     <?php if ($_SESSION['rol']==1 || $_SESSION['rol']==666) {
-          ?>
+              ?>
      <h2>Buscador</h2>
   <div class="panel panel-default">
     <div class="panel-body">
@@ -89,7 +88,7 @@
   </div>
 
   <?php
-      } ?>
+          } ?>
 
    </div>
 

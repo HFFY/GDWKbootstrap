@@ -27,7 +27,7 @@
   $db = $database->getConnection();
   $user = new User($db);
   $document= new Documento($db);
-  $sql = 'select * from documentos;';
+  $sql = 'select * from Documentos;';
   $result = $db->query($sql);
   $result->setFetchMode(PDO::FETCH_ASSOC);
   // $sqlasd = "INSERT into documentos VALUES (null, '1', '1','1','1','documentoprueba','1.5','pedro',
@@ -71,8 +71,8 @@
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
-         <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username  ?> LOGOUT</a></li>
-         <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+         <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username;  ?> LOGOUT</a></li>
+         <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">WorkFlow </a></li>
 
 
 

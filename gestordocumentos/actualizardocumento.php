@@ -102,7 +102,7 @@
               $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
               $document->insertDocument();
               $document->deactivateDocument($_GET['iddoc']);
-              $document->addChangeToDocument($_GET['iddoc'],$_SESSION['id'],$document->Descripcion);
+              $document->addChangeToDocument($_GET['iddoc'], $_SESSION['id'], $document->Descripcion);
           } else {
               echo 'Upload failed!';
               //
@@ -126,7 +126,7 @@
   <div class="collapse navbar-collapse" id="micon">
   <ul class="nav navbar-nav navbar-right">
   <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-  <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+  <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">WorkFlow </a></li>
 
       </ul>
     </div>

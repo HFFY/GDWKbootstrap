@@ -125,7 +125,7 @@
   <div class="collapse navbar-collapse" id="micon">
   <ul class="nav navbar-nav navbar-right">
   <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-  <li><a href="../tareas/workflowpaginaprincipal.php">WorkFlow </a></li>
+  <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">WorkFlow </a></li>
 
       </ul>
     </div>

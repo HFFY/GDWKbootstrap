@@ -104,7 +104,7 @@ class User implements \Serializable
         // execute query
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
-          echo "usuario repetido";
+            echo "usuario repetido";
             return true;
         } else {
             return false;
@@ -138,9 +138,9 @@ class User implements \Serializable
 
     public function modifiedUser($iduser)
     {
-      // if ($this->isAlreadyExist()) {
-      //     return false;
-      // }
+        // if ($this->isAlreadyExist()) {
+        //     return false;
+        // }
 
         $this->date=date('Y-m-d H:i:s');
         $sql = "UPDATE $this->table_name SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', `Fecha de cambio de clave`='$this->date'  WHERE ID_usuarios='$iduser';";
@@ -168,5 +168,13 @@ class User implements \Serializable
         $fila = $result->fetch();
 
         return $fila;
+    }
+    public function getAllRols()
+    {
+        $sql = "SELECT * from RangoUsuarios;";
+
+        $result = $this->conn->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
