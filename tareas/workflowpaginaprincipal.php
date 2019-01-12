@@ -26,15 +26,15 @@
 
     $database = new Database();
     $id=$_GET['id'];
+    $rol=$_SESSION['rol'];
     $db = $database->getConnection();
     $user = new User($db);
 
     if (!empty($_SESSION['id']) && $_SESSION['id']==$id) {
+        $verificartarea = new Ticket($db);
+        $verificartarea-> comprobarDateTarea();
 
-      $verificartarea = new Ticket($db);
-      $verificartarea-> comprobarDateTarea();
-
-        if ($id==1||$id==666) {
+        if ($rol==1||$rol==666) {
             // $sql = 'SELECT * from Usuarios;';
             // $result = $db->query($sql);
             // $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -54,8 +54,6 @@
             $sqlTareaTres = "SELECT * from Tareas where Estado='4';";
             $resultTareaTres = $db->query($sqlTareaTres);
             $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
-
-
         } else {
             $sqlTareaCero = "SELECT * from Tareas where Id_usuario='$id' and Estado='1';";
             $resultTareaCero = $db->query($sqlTareaCero);
@@ -138,7 +136,7 @@
                                         <td align="center">
                                             <a href="../tareas/WorkflowVerTarea.php?variable1=2&variable2=<?php echo $idtarea; ?>&id=<?php echo $id; ?>">
                                               <?php
-                                              if ($id==1||$id==666) {
+                                              if ($rol==1||$rol==666) {
                                                   ?>
                                       <button type="submit" value="<?php echo $filaCero['id_tareas']; ?>" > Validar </button>
                                       <?php
@@ -149,7 +147,7 @@
                                         <td align="center">
                                             <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id; ?>">
                                               <?php
-                                              if ($id==1||$id==666) {
+                                              if ($rol==1||$rol==666) {
                                                   ?>
                                     <button type="submit" value="<?php echo $filaCero['id_tareas']; ?>" > Modificar </button>
                                     <?php
@@ -193,7 +191,7 @@
                                         <td align="center">
                                             <a href="../tareas/WorkflowVerTarea.php?variable1=3&variable2=<?php echo $idtarea; ?>&id=<?php echo $id; ?>">
                                               <?php
-                                              if ($id==1||$id==666) {
+                                              if ($rol==1||$rol==666) {
                                                   ?>
                                     <button type="submit" value="<?php echo $filaUno['id_tareas']; ?>" > Terminar </button>
                                     <?php
@@ -203,7 +201,7 @@
                                         <td align="center">
                                             <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id; ?>">
                                               <?php
-                                              if ($id==1||$id==666) {
+                                              if ($rol==1||$rol==666) {
                                                   ?>
                                     <button type="submit" value="<?php echo $filaUno['id_tareas']; ?>" > Modificar </button>
                                   <?php
@@ -244,7 +242,7 @@
                                         <td align="center">
                                             <a href="../tareas/WorkflowVerTarea.php?variable1=3&variable2=<?php echo $idtarea; ?>&id=<?php echo $id; ?>">
                                               <?php
-                                              if ($id==1||$id==666) {
+                                              if ($rol==1||$rol==666) {
                                                   ?>
                                     <button type="submit" value="<?php echo $filaTres['id_tareas']; ?>" herf = ""> Finalizar </button>
                                     <?php
@@ -254,7 +252,7 @@
                                         <td align="center">
                                             <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id; ?>">
                                               <?php
-                                              if ($id==1||$id==666) {
+                                              if ($rol==1||$rol==666) {
                                                   ?>
                                     <button type="submit" value="<?php echo $filaTres['id_tareas']; ?>" > Modificar </button>
                                     <?php
@@ -297,7 +295,7 @@
                                         <td align="center">
                                             <a href="../tareas/WorkflowModificacionDeTarea.php?variable=<?php echo $idtarea; ?>&id=<?php echo $id; ?>">
                                               <?php
-                                              if ($id==1||$id==666) {
+                                              if ($rol==1||$rol==666) {
                                                   ?>
                                        <button type="submit" value="<?php echo $filaDos['id_tareas']; ?>" > Modificar </button>
                                        <?php
