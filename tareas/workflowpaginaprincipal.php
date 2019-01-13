@@ -54,6 +54,10 @@
             $sqlTareaTres = "SELECT * from Tareas where Estado='4';";
             $resultTareaTres = $db->query($sqlTareaTres);
             $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
+            $tareasPopUp = $db->query($sqlTareaTres);
+            $tareasPopUp->setFetchMode(PDO::FETCH_ASSOC);
+            $tareasPopUp2 = $db->query($sqlTareaTres);
+            $tareasPopUp2->setFetchMode(PDO::FETCH_ASSOC);
         } else {
             $sqlTareaCero = "SELECT * from Tareas where Id_usuario='$id' and Estado='1';";
             $resultTareaCero = $db->query($sqlTareaCero);
@@ -74,6 +78,44 @@
 
         <header class="header">
 
+          <button type="hidden" id="modal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="display: none;"> Invisible </button>
+
+<?php if($filaRetrasados = $tareasPopUp->fetch() && ($rol==1||$rol==666)){?>
+          <script>
+            jQuery(function(){
+              jQuery('#modal').click();
+           });
+          </script>
+
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color:#FF0000;">
+                  <h5 class="modal-title" id="exampleModalLongTitle"><font color="white" size="5">
+                    Tienes las siguientes tareas retrasadas:
+                  </font>
+                </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#FF0000;">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body"><font color="red" size="5">
+                  <?php while ($filaRetrasados2 = $tareasPopUp2->fetch()) {
+                      echo $filaRetrasados2 ['NombreTarea'];
+                      echo "    Fecha límite:  ";
+                      echo $filaRetrasados2['Fechaoficial'];
+                      echo "<br>";
+                    }?>
+                    </font>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<?php } ?>
             <nav class="navbar navbar-style">
                 <div class="container">
                     <div class="navbar-header ">
