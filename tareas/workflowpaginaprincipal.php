@@ -74,13 +74,16 @@
             $sqlTareaTres = "SELECT * from Tareas where Id_usuario='$id' and Estado='4';";
             $resultTareaTres = $db->query($sqlTareaTres);
             $resultTareaTres->setFetchMode(PDO::FETCH_ASSOC);
+            $tareasPopUp = $db->query($sqlTareaTres);
+            $tareasPopUp->setFetchMode(PDO::FETCH_ASSOC);
         } ?>
 
         <header class="header">
 
-          <button type="hidden" id="modal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="display: none;"> Invisible </button>
 
-<?php if($filaRetrasados = $tareasPopUp->fetch() && ($rol==1||$rol==666)){?>
+<?php if ($filaRetrasados = $tareasPopUp->fetch() && ($rol==1||$rol==666)) {
+            ?>
+  <button type="hidden" id="modal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="display: none;"> Invisible </button>
           <script>
             jQuery(function(){
               jQuery('#modal').click();
@@ -101,11 +104,11 @@
                 </div>
                 <div class="modal-body"><font color="red" size="5">
                   <?php while ($filaRetrasados2 = $tareasPopUp2->fetch()) {
-                      echo $filaRetrasados2 ['NombreTarea'];
-                      echo "    Fecha límite:  ";
-                      echo $filaRetrasados2['Fechaoficial'];
-                      echo "<br>";
-                    }?>
+                echo $filaRetrasados2 ['NombreTarea'];
+                echo "    Fecha límite:  ";
+                echo $filaRetrasados2['Fechaoficial'];
+                echo "<br>";
+            } ?>
                     </font>
                 </div>
                 <div class="modal-footer">
@@ -115,7 +118,8 @@
             </div>
           </div>
 
-<?php } ?>
+<?php
+        } ?>
             <nav class="navbar navbar-style">
                 <div class="container">
                     <div class="navbar-header ">

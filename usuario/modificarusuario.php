@@ -154,7 +154,7 @@
             <div class="form-group">
             <a  class="btn btn-first" href="../paginaprincipal.php">Cancelar</a>
 
-                <input type="submit" name="crear" class="button" value="Crear" />
+                <input type="submit" name="crear" class="button" value="Modificar" />
               </div>
 
               <!-- <form action="" method="post">

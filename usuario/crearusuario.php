@@ -65,7 +65,7 @@
         <div class="collapse navbar-collapse" id="micon">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-        
+
 
           </ul>
         </div>
@@ -91,13 +91,13 @@
             <p>Ingresar nombre de usuario.</p>
             <div class="form-group" method="post" action="crearusuario.php">
 
-              <input type="text" name="username" class="form-control" placeholder="Usuario">
+              <input type="text" name="username" class="form-control" placeholder="Usuario" required>
 
             </div>
             <p><br>Ingresar Contraseña.</p>
             <div class="form-group">
 
-              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
             </div>
             <div class="form-group">
               <p><br>Seleccionar rol</p>
@@ -113,12 +113,12 @@
             <p><br>Ingresar nombres.</p>
             <div class="form-group">
 
-              <input type="text" name="names" class="form-control" placeholder="Nombres">
+              <input type="text" name="names" class="form-control" placeholder="Nombres" required>
             </div>
              <p><br>Ingresar apellidos.</p>
             <div class="form-group">
 
-              <input type="text" name="lastname" class="form-control" placeholder="Apellidos">
+              <input type="text" name="lastname" class="form-control" placeholder="Apellidos" required>
             </div>
           </div>
           <div class="col-sm-6 banner-image">
