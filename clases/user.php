@@ -104,7 +104,7 @@ class User implements \Serializable
         // execute query
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
-            echo "usuario repetido";
+            
             return true;
         } else {
             return false;

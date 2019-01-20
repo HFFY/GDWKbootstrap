@@ -47,7 +47,36 @@
           // );
           // echo "Creacion exitosa";
       } else {
-          // echo "fallo la creacion";
+
+        ?>
+
+
+                    <button type="hidden" id="modal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="display: none;"> Invisible </button>
+                            <script>
+                              jQuery(function(){
+                                jQuery('#modal').click();
+                             });
+                            </script>
+
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header" style="background-color:#FF0000;">
+                                    <h5 class="modal-title" id="exampleModalLongTitle"><font color="white" size="5">
+                                    Usuario repetido verifique los datos
+                                    </font>
+                                  </h5>
+
+                                  </div>
+
+
+                                </div>
+                              </div>
+                            </div>
+
+
+
+          <?php
       }
       // print_r(json_encode($user_arr));?>
   <header class="header">
