@@ -187,6 +187,7 @@ $name= "../".substr($filaD['Link'], 14);
     } else {
         echo "You don't have permission to view this page.";
     }
+    header("Location: master.php");
 
 
 
