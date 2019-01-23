@@ -41,8 +41,8 @@
       $document->Numerodeldocumento = $filashowdoc['Numero del documento'];
       $document->Nombredeldocumento = $filashowdoc['Nombre del documento'];
       $document->Subproceso =$filashowdoc['Subproceso'];
-      $document->Fechadeentradavigencia = $filashowdoc['Fecha de entrada vigencia'];
-      $document->Fechadeentradaencaducidad = $filashowdoc['Fecha de entrada caducidad'];
+      $document->Fechadeentradavigencia = $filashowdoc['Fecha de entrada en vigencia'];
+      $document->Fechadeentradaencaducidad = $filashowdoc['Fecha de entrada en caducidad'];
       $document->Version = $filashowdoc['Version'];
       $document->Creador = $filashowdoc['Creador'];
       $document->Revisor = $filashowdoc['Revisor'];

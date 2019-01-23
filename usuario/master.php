@@ -87,21 +87,30 @@
            </thead>
            <tbody>
               <?php
+              while($fila=$result->fetch()){
+
+                if ($_SERVER['REQUEST_METHOD']=="POST" && isset($_POST[$fila['ID_usuarios']])) {
+                    if ($fila['Estado']==1) {
+                        $user->setUserDeactivated($fila['ID_usuarios']);
+
+                        unset($_POST['AD'.$fila['ID_usuarios']]);
+                        header("Refresh:0");
+                    } else {
+                        $user->setUserActivated($fila['ID_usuarios']);
+
+                        unset($_POST['AD'.$fila['ID_usuarios']]);
+                         header("Refresh:0");
+                    }
+                    //header("Refresh:0");
+                }
+              }
+
+        $result = $db->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
         while ($fila = $result->fetch()) {
             // echo $_POST['AD'.$fila['ID_usuarios']];
 
-            if ($_SERVER['REQUEST_METHOD']=="POST" && isset($_POST['AD'.$fila['ID_usuarios']])) {
-                if ($fila['Estado']==1) {
-                    $user->setUserDeactivated($fila['ID_usuarios']);
-                    header("Refresh:0");
-                    unset($_POST['AD'.$fila['ID_usuarios']]);
-                } else {
-                    $user->setUserActivated($fila['ID_usuarios']);
-                    header("Refresh:0");
-                    unset($_POST['AD'.$fila['ID_usuarios']]);
-                }
-                // header("Refresh:0");
-            }
+
 
             if ($fila['Idrango']!='666') {
                 ?>
@@ -114,7 +123,7 @@
                  <td>
 
                         <form  method="post" >
-                            <input type="submit" class="button" name="AD<?php
+                            <input type="submit" class="button" name="<?php
                             echo $fila['ID_usuarios']?>"
                               value="<?php
 
@@ -137,7 +146,10 @@
               </tr>
              <?php
             }
-        } ?>
+        }
+
+
+        ?>
            </tbody>
            </table>
 
@@ -187,7 +199,7 @@ $name= "../".substr($filaD['Link'], 14);
     } else {
         echo "You don't have permission to view this page.";
     }
-    header("Location: master.php");
+
 
 
 

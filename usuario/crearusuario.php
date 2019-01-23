@@ -39,6 +39,7 @@
       $user->date = date('Y-m-d H:i:s');
       $olduser=$user->getUser($_SESSION['oldusercreacion']);
       // create the user
+        
       if ($user->signup()) {
           //     $user_arr=array(
           //     "status" => true,
@@ -46,7 +47,8 @@
           //
           // );
           // echo "Creacion exitosa";
-      } else {
+
+      } else if (!empty($_GET['username'])) {
 
         ?>
 

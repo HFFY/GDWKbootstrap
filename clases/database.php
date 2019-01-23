@@ -9,16 +9,16 @@ class Database
     // //ultimas modificaciones
     // super usuarios bug de activador desactivado *
     // quitar texto de usuario repetito copiar pop up *
-    // quitar texto de subida de documento *
+    // quitar texto de subida de documento
     // agregar link de descarga cuando modificamos
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "GDWKF";
-    private $username = "root";
-    private $password = "";
-    // private $db_name = "kcardenas15";
-    // private $username = "kcardenas15";
-    // private $password = "isc818";
+    // private $db_name = "GDWKF";
+    // private $username = "root";
+    // private $password = "";
+    private $db_name = "kcardenas15";
+    private $username = "kcardenas15";
+    private $password = "isc818";
     public $conn;
 
     // get the database connection

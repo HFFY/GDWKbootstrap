@@ -58,8 +58,32 @@
           // $dumbvariable = pathinfo($_FILES['myFile']['tmp_name'], PATHINFO_EXTENSION);
           // echo $dumbvariable;
           if (move_uploaded_file($_FILES['myFile']['tmp_name'], $my_folder . $_FILES['myFile']['name'])) {
-              echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
+            ?>
+            <button type="hidden" id="modal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="display: none;"> Invisible </button>
+                    <script>
+                      jQuery(function(){
+                        jQuery('#modal').click();
+                     });
+                    </script>
 
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header" style="background-color:#FF0000;">
+                            <h5 class="modal-title" id="exampleModalLongTitle"><font color="white" size="5">
+                              Archivo recibido
+                            </font>
+                          </h5>
+
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+              <?php
+          //  echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
               $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
 
               $document->insertDocument();

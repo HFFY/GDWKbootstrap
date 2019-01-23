@@ -41,8 +41,8 @@
       $document->Nombredeldocumento = $filashowdoc['Nombre del documento'];
 
       $document->Subproceso =$filashowdoc['Subproceso'];
-      $document->Fechadeentradavigencia = $filashowdoc['Fecha de entrada vigencia'];
-      $document->Fechadeentradaencaducidad = $filashowdoc['Fecha de entrada caducidad'];
+      $document->Fechadeentradavigencia = $filashowdoc['Fecha de entrada en vigencia'];
+      $document->Fechadeentradaencaducidad = $filashowdoc['Fecha de entrada en caducidad'];
       $document->Version = $filashowdoc['Version'];
       $document->Creador = $filashowdoc['Creador'];
       $document->Revisor = $filashowdoc['Revisor'];
@@ -97,16 +97,21 @@
           // $filePath = realpath($_FILES["myFile"]['tmp_name']);
           // $dumbvariable = pathinfo($_FILES['myFile']['tmp_name'], PATHINFO_EXTENSION);
           // echo $dumbvariable;
-          if (move_uploaded_file($_FILES['myFile']['tmp_name'], $my_folder . $_FILES['myFile']['name'])) {
-              //echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
-              // echo $_GET['iddoc'];
-              $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
+
+
+            if (move_uploaded_file($_FILES['myFile']['tmp_name'], $my_folder . $_FILES['myFile']['name'])) {
+                //echo 'Received file' . $_FILES['myFile']['name'] . ' with size ' . $_FILES['myFile']['size'];
+                // echo $_GET['iddoc'];
+                $document->Link = "gdwkbootstrap/uploads/".basename($_FILES['myFile']['name']);
+                $document->modifiedDocument($_GET['iddoc'], $_SESSION['id']);
+            }
+            else {
+              $document->Link =$document->Link;
               $document->modifiedDocument($_GET['iddoc'], $_SESSION['id']);
-          } else {
-              echo 'Upload failed!';
-              //
-              // var_dump($_FILES['myFile']['error']);
-          }
+            }
+
+
+
 
           // echo "hola";
       } ?>
@@ -224,11 +229,11 @@
 
               <div class="form-group">
                 <p><br>Fecha de entrada en vigencia.</p>
-                <input type="date" name="Fechadeentradavigencia" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en vigencia']; ?>" required>
+                <input type="date" name="Fechadeentradavigencia" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en vigencia']; ?>" >
               </div>
               <div class="form-group">
                 <p><br>Fecha de entrada en caducidad.</p>
-                <input type="date" name="Fechadeentradaencaducidad" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en caducidad']; ?>" required>
+                <input type="date" name="Fechadeentradaencaducidad" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en caducidad']; ?>" >
               </div>
               <div class="form-group">
                 <!-- <input type="checkbox" class="button" name="Administrador" value="1"> Administrador<br> -->
@@ -315,11 +320,15 @@
           </div>
           <br><br><br>
           <div class="form-group">
+
           <!-- <form action="subirdocumento.php" method="post" enctype="multipart/form-data"> -->
-           <input type="file" name="myFile" class="form-control" required>
+           <input type="file" name="myFile" class="form-control" >
          <!-- <input type="submit" name="submit" class="button" value="submit" > -->
          <!-- </form> -->
             </div>
+            <td><a href="<?php
+            $name= substr($filashowdoc['Link'], 14);
+          echo $name; ?>" download>Documento actual</a></td>
           </div>
           <div class="form-group" align="left">
            <label for="inputlg"><br><br><br></label>

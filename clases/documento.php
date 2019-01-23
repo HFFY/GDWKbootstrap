@@ -62,7 +62,7 @@ class Documento
     }
     public function deactivateDocument($iddocument)
     {
-        // echo "HOLA";
+
         $sql = "UPDATE $this->table_name SET Estado='0' WHERE ID_documentos='$iddocument';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -83,7 +83,7 @@ class Documento
         // $stmt->execute();
         //
         // return $stmt;
-        // echo "HOLA";
+
         $sql = "UPDATE $this->table_name SET Estado='1' WHERE ID_documentos='$iddocument';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -103,7 +103,7 @@ class Documento
         // // execute query
         // $stmt->execute();
         $sql = 'SELECT * from Documentos where ID_documentos='.$iddocument.';';
-        // echo $sql;
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
@@ -131,7 +131,7 @@ class Documento
             while ($fila=$result->fetch()) {
                 if ($contador==0) {
                     $string="ID_documentos=".$fila['ID_documentos'];
-                    echo $fila['ID_documentos'];
+                  //  echo $fila['ID_documentos'];
                 } else {
                     $string=$string." or ID_documentos=".$fila['ID_documentos'];
                 }
@@ -159,7 +159,7 @@ class Documento
     public function getDifferentVersions($nombredelactual)
     {
         $sql = "SELECT `Nombre del documento`, Version, Link, Descripción FROM Documentos where `Nombre del documento`='$nombredelactual';";
-        // echo $sql;
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -177,7 +177,7 @@ class Documento
         $sql = "INSERT into Documentos VALUES (null, '$this->Proceso', '$this->Subproceso','$this->Tipodedocumento','$this->Numerodeldocumento','$this->Nombredeldocumento',
           '$this->Version','$this->Creador','$this->Revisor','$this->Autorizador','$this->Disenodelproceso','$this->Fechadeentradavigencia','$this->Fechadeentradaencaducidad','$this->Areasalasqueafecta',
           '$this->Registrosquecorresponden','$this->Descripcion','$this->Estado','$this->Link');";
-        // echo $sql;
+
 
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -200,6 +200,7 @@ class Documento
     }
     public function modifiedDocument($iddoc, $iduser)
     {
+
         // $query = "SELECT
         //             `Proceso`, `Subproceso`, `Tipo de documento`,`Link`, `Numero del documento` ,`Nombre del documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha de entrada en vigencia` , `Fecha de entrada en caducidad` , `Areas a las que afecta` , `Registros que corresponden` , `Descripcion` , `Estado`
         //         FROM
@@ -209,10 +210,13 @@ class Documento
         $sql = "UPDATE Documentos SET Proceso='$this->Proceso', Subproceso='$this->Subproceso', `Tipo de documento`='$this->Tipodedocumento',`Numero del documento`='$this->Numerodeldocumento',`Nombre del documento`='$this->Nombredeldocumento',
           Version='$this->Version',Creador='$this->Creador',Revisor='$this->Revisor',Autorizador='$this->Autorizador',`Diseño del proceso`='$this->Disenodelproceso',`Fecha de entrada en vigencia`='$this->Fechadeentradavigencia',`Fecha de entrada en caducidad`='$this->Fechadeentradaencaducidad',`Areas a las que afecta`='$this->Areasalasqueafecta',
           `Registros que corresponden`='$this->Registrosquecorresponden',`Descripción`='$this->Descripcion',Estado='$this->Estado',Link='$this->Link' WHERE ID_documentos=$iddoc;";
-        // echo $iddoc;
+
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
+
         $fila = $result->fetch();
+
         $sqlget="SELECT LAST_INSERT_ID();";
         $resultget = $this->conn->query($sqlget);
         $resultget->setFetchMode(PDO::FETCH_ASSOC);
@@ -233,7 +237,7 @@ class Documento
     {
         $date=date('Y-m-d H:i:s');
         $sql = "INSERT into DocUsuCambios VALUES (null,'$iddoc','$iduser','$date','$date','$descrip',null)";
-        echo $sql;
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
     }
@@ -242,7 +246,7 @@ class Documento
         $dumbvar=$this->usuariosauto;
         foreach ($dumbvar as $usuario) {
             $sql = "INSERT into documentosPorRango VALUES (null,'$usuario','$iddoc')";
-            // echo $sql;
+
             $result = $this->conn->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $fila = $result->fetch();
@@ -251,10 +255,10 @@ class Documento
     public function getArrayUsuariosAuto($iddoc)
     {
         $sql = "SELECT * from documentosPorRango where ID_documentos='$iddoc';";
-        // echo $sql;
+
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
-        // echo "Asd";
+
         $resvar=array();
 
         $contador=0;
@@ -277,7 +281,7 @@ class Documento
         $filares = $resultres->fetch();
         foreach ($dumbvar as $usuario) {
             $sql = "INSERT into documentosPorRango VALUES (null,'$usuario','$iddoc')";
-            // echo $sql;
+
             $result = $this->conn->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $fila = $result->fetch();

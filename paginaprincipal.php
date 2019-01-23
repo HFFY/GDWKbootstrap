@@ -165,16 +165,25 @@ $name= substr($fila['Link'], 14);
           $resultlatest=$document->getLatestDocuments();
 
           while ($filalatest=$resultlatest->fetch()) {
+            $rslpu=$document->getDocumentsPerUser($fila2['Idrango']);
+          while ($filarslpu=$rslpu->fetch()) {
+            if($filarslpu['ID_documentos']==$filalatest['id_documento']&&$filarslpu['Estado']==1){
+
+
+              $filadoc1= $document->getDocument($filalatest['id_documento']);
+
               ?>
           <tr>
-            <td><?php  echo $filalatest['id_documento']; ?></td>
+            <td><?php  echo $filadoc1['Nombre del documento']; ?></td>
             <td><?php  echo $filalatest['fecha']; ?></td>
             <td><?php  echo $filalatest['hora']; ?></td>
             <td><?php  echo $filalatest['Descripcion']; ?></td>
           </tr>
 
           <?php
-          } ?>
+        }
+      }
+    } ?>
         </tbody>
       </table>
 
