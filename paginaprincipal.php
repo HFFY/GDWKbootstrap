@@ -80,8 +80,8 @@
     <div class="panel-body">
       <div class="search-container">
          <form action="buscador.php">
-           <input type="text" placeholder="Search.." name="search">
-           <button type="submit">Submit</button>
+           <input class="form-control" type="text" placeholder="Ingresar codigo del documento" name="search">
+           <button class="btn btn-first" type="submit">Ingresar</button>
          </form>
        </div>
     </div>

@@ -103,7 +103,7 @@
               <input type="text" name="username" class="form-control" placeholder="<?php echo $olduser['Usuario']; ?>">
 
             </div>
-            <p><br>Ingresar Contraseña.</p>
+            <p><br>Ingresar contraseña.</p>
             <div class="form-group">
 
               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">

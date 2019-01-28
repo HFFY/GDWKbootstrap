@@ -210,7 +210,7 @@
                     </div>
 
                     <div class="col-sm-6 banner-info" id="div1" style="width:700px; height:300px; overflow:auto;">
-                        <h4 class="text-center font-eight-bold">En Ejecución</h4>
+                        <h4 class="text-center font-eight-bold">En ejecución</h4>
                         <table class="table table-striped table-bordered  table-responsive-sm  scrollbar" style="background-color:#F7FE2E;">
                             <thead class="thead-dark">
                                 <tr>

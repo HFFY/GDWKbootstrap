@@ -135,7 +135,7 @@ if(!empty($creartarea->Prioridad)){
                                 <br>
                                 <br>
                             </label>
-                                <textarea class="form-control input-lg" name="descripciontarea" rows="10" cols="30" placeholder="Descripcion" required></textarea>
+                                <textarea class="form-control input-lg" name="descripciontarea" rows="10" cols="30" placeholder="Descripción" required></textarea>
                                 <br>
                         </div>
 

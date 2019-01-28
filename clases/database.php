@@ -13,12 +13,12 @@ class Database
     // agregar link de descarga cuando modificamos
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "GDWKF";
-    private $username = "root";
-    private $password = "";
-    // private $db_name = "kcardenas15";
-    // private $username = "kcardenas15";
-    // private $password = "isc818";
+    // private $db_name = "GDWKF";
+    // private $username = "root";
+    // private $password = "";
+    private $db_name = "kcardenas15";
+    private $username = "kcardenas15";
+    private $password = "isc818";
     public $conn;
 
     // get the database connection

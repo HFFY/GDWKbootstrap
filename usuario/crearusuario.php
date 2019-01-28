@@ -39,7 +39,7 @@
       $user->date = date('Y-m-d H:i:s');
       $olduser=$user->getUser($_SESSION['oldusercreacion']);
       // create the user
-        
+
       if ($user->signup()) {
           //     $user_arr=array(
           //     "status" => true,
@@ -125,7 +125,7 @@
               <input type="text" name="username" class="form-control" placeholder="Usuario" required>
 
             </div>
-            <p><br>Ingresar Contraseña.</p>
+            <p><br>Ingresar contraseña.</p>
             <div class="form-group">
 
               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>

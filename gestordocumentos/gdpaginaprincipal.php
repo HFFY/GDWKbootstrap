@@ -22,7 +22,7 @@
   session_start();
   $variduser=$_GET['id'];
   $variddoc=$_GET['iddoc'];
-  echo $_GET['id'];
+  
   $database = new Database();
   $db = $database->getConnection();
   $user = new User($db);
