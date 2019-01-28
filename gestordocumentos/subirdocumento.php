@@ -184,7 +184,7 @@
             <p>Número del documento.</p>
 
               <div class="form-group">
-              <input type="text" name="Numerodeldocumento" class="form-control" placeholder="Numero del documento">
+              <input type="text" name="Numerodeldocumento" class="form-control" placeholder="Número del documento">
 
             </div>
             <p><br>Nombre del documento.</p>
@@ -256,12 +256,12 @@
             <p><br>Versión.</p>
             <div class="form-group">
 
-              <input type="text" name="Version" class="form-control" placeholder="Version">
+              <input type="text" name="Version" class="form-control" placeholder="Versión">
             </div>
              <p><br>Creador.</p>
             <div class="form-group">
 
-              <input type="text" name="Creador" class="form-control" placeholder="creador">
+              <input type="text" name="Creador" class="form-control" placeholder="Creador">
             </div>
             <p><br>Revisor.</p>
            <div class="form-group">
@@ -280,7 +280,7 @@
          </div>
          <div class="form-group">
            <p><br>Áreas a las que afecta.</p>
-           <input type="text" name="Areasalasqueafecta" class="form-control" placeholder="Areas a las que afecta">
+           <input type="text" name="Areasalasqueafecta" class="form-control" placeholder="Áreas a las que afecta">
          </div>
          <div class="form-group">
            <p><br>Registros que correspondan.</p>
@@ -298,7 +298,7 @@
           <div class="form-group" align="left">
            <label for="inputlg"><br><br><br></label>
 
-         <textarea class="form-control input-lg" name="Descripcion" rows="10" cols="30" placeholder="Descripcion"></textarea>
+         <textarea class="form-control input-lg" name="Descripcion" rows="10" cols="30" placeholder="Descripción"></textarea>
             <br>
 
          </div>
