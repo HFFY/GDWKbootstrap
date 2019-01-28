@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Gestor de documentos pagina principal</title>
+    <title>Gestor de documentos página principal</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -135,7 +135,7 @@
                           <li><a href="../sessiondestroy.php">Logout</a></li>
 
                           <li><a href="../tareas/WorkflowCreacionDeTarea.php?id=<?php echo $id; ?>">Crear tarea</a></li>
-                          <li><a href="../paginaprincipal.php?id=<?php echo $id; ?>">Pagina principal</a></li>
+                          <li><a href="../paginaprincipal.php?id=<?php echo $id; ?>">Página principal</a></li>
 
                         </ul>
                     </div>
@@ -148,14 +148,14 @@
             </div>
             <div class="container">
                 <a href="../tareas/WorkflowCreacionDeTarea.php?id=<?php echo $id; ?>">
-                    <button type="submit" class="button">Crear Tarea</button>
+                    <button type="submit" class="button">Crear tarea</button>
                 </a>
             </div>
 
             <div class="container" style="width:1450px;">
                 <div class="row">
                     <div class="col-sm-6 banner-info" id="div1" style="width:700px; height:300px; overflow:auto;">
-                        <h4 class="text-center font-eight-bold">Pendiente de Validación</h4>
+                        <h4 class="text-center font-eight-bold">Pendiente de validación</h4>
                         <table class="table table-striped table-bordered  table-responsive-sm  scrollbar" style="background-color:powderblue;">
                             <thead class="thead-dark">
                                 <tr>

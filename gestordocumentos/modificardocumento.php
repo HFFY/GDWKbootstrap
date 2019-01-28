@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Gestor de documentos pagina principal</title>
+  <title>Gestor de documentos página principal</title>
   <link rel="stylesheet" type="text/css" href="../css/style.css" />
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -129,8 +129,8 @@
   </div>
   <div class="collapse navbar-collapse" id="micon">
   <ul class="nav navbar-nav navbar-right">
-  <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-  <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">WorkFlow </a></li>
+  <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> Logout</a></li>
+  <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">Workflow </a></li>
 
       </ul>
     </div>
@@ -155,7 +155,7 @@
 
       <div class="col-sm-6 banner-info" align="left" >
         <div class="form-group" >
-          <p><br>Seleccionar Procesos</p>
+          <p><br>Seleccionar procesos</p>
             <select class="form-control" name="Proceso">
               <?php
 
@@ -176,7 +176,7 @@
             </select>
                 </div>
               <div class="form-group">
-              <p><br>Seleccionar Tipo de documento</p>
+              <p><br>Seleccionar típo de documento</p>
               <select class="form-control" name="Tipodedocumento">
                 <?php
 
@@ -195,7 +195,7 @@
       } ?>
               </select>
                 </div>
-            <p>Numero del documento.</p>
+            <p>Número del documento.</p>
 
               <div class="form-group">
               <input type="text" name="Numerodeldocumento" class="form-control" placeholder="<?php echo $filashowdoc['Numero_del_documento']; ?>">
@@ -267,7 +267,7 @@
 
                 </tr>
                 <tr>
-                   <td>Jefedecarrera<br></td>
+                   <td>Jefe de carrera<br></td>
                    <td><input type="checkbox" class="form-control" name="usuariosauto[]" value="3" <?php   echo $dumbvar3; ?>></td>
 
 
@@ -284,7 +284,7 @@
           </div>
           <div class="col-sm-6 banner-image" align="left" >
 
-            <p><br>Version.</p>
+            <p><br>Versión.</p>
             <div class="form-group">
 
               <input type="text" name="Version" class="form-control" placeholder="<?php echo $filashowdoc['Version']; ?>">

@@ -2,7 +2,7 @@
 
 <head>
 
-        <title>Gestor de documentos pagina principal</title>
+        <title>Gestor de documentos página principal</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,8 +71,8 @@
          </div>
          <div class="collapse navbar-collapse" id="micon">
          <ul class="nav navbar-nav navbar-right">
-         <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username;  ?> LOGOUT</a></li>
-         <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">WorkFlow </a></li>
+         <li><a href="../sessiondestroy.php" type="button"><?php echo $user->username;  ?> Logout</a></li>
+         <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">Workflow </a></li>
 
 
 
@@ -103,13 +103,13 @@
  <div class="row">
   <div class="col-sm-6 banner-info" style="background-color:lavenderblush;">
 
-      <h2>Documentos Disponibles</h2>
+      <h2>Documentos disponibles</h2>
 
            <table class="table table-striped table-bordered  table-responsive-sm  scrollbar">
            <thead  class="thead-dark">
              <tr>
                <th style="width: 33%">Nombre</th>
-               <th style="width: 33%">Version</th>
+               <th style="width: 33%">Versión</th>
                <th style="width: 33%">Link</th>
 
              </tr>
@@ -146,7 +146,7 @@
         <thead>
           <tr>
             <th style="width: 50%">Nombre</th>
-            <th style="width: 50%">Descripcion</th>
+            <th style="width: 50%">Descripción</th>
 
 
           </tr>

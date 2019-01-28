@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Gestor de documentos pagina principal</title>
+    <title>Gestor de documentos página principal</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -75,11 +75,11 @@ if(!empty($creartarea->Prioridad)){
 
                           <?php if($_SESSION['rol']=="1"||$_SESSION['rol']=="666"){ ?>
 
-                            <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">WorkFlow</a></li>
+                            <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id;?>">Workflow</a></li>
 
                         <?php } ?>
 
-                          <li><a href="../paginaprincipal.php?id=<?php echo $id;?>">Pagina principal</a></li>
+                          <li><a href="../paginaprincipal.php?id=<?php echo $id;?>">Página principal</a></li>
 
                         </ul>
                     </div>

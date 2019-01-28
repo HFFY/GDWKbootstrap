@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Gestor de documentos pagina principal</title>
+    <title>Gestor de documentos página principal</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -68,9 +68,9 @@ if (!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id && ($_SESSION
                     </div>
                     <div class="collapse navbar-collapse" id="micon">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id; ?>">WorkFlow</a></li>
+                            <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id; ?>">Workflow</a></li>
                             <li><a href="../tareas/WorkflowCreacionDeTarea.php?id=<?php echo $id; ?>">Crear tarea</a></li>
-                            <li><a href="../paginaprincipal.php?id=<?php echo $id; ?>">Pagina principal</a></li>
+                            <li><a href="../paginaprincipal.php?id=<?php echo $id; ?>">Página principal</a></li>
 
                         </ul>
                     </div>

@@ -115,8 +115,8 @@
       </div>
       <div class="collapse navbar-collapse" id="micon">
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> LOGOUT</a></li>
-      <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">WorkFlow </a></li>
+      <li><a href="../sessiondestroy.php" type="button"><?php echo $olduser['Usuario']; ?> Logout</a></li>
+      <li><a href="../tareas/workflowpaginaprincipal.php?id=<?php echo $_SESSION['id']; ?>">Workflow </a></li>
 
           </ul>
         </div>
@@ -144,7 +144,7 @@
 
               <div class="form-group" >
 
-                    <p><br>Seleccionar Procesos</p>
+                    <p><br>Seleccionar procesos</p>
 
                   <select class="form-control" name="Proceso">
 
@@ -166,7 +166,7 @@
               </div>
 
               <div class="form-group">
-              <p><br>Seleccionar Tipo de documento</p>
+              <p><br>Seleccionar tipo de documento</p>
             <select class="form-control" name="Tipodedocumento">
               <?php
               $count=0;
@@ -181,7 +181,7 @@
       } ?>
             </select>
                 </div>
-            <p>Numero del documento.</p>
+            <p>Número del documento.</p>
 
               <div class="form-group">
               <input type="text" name="Numerodeldocumento" class="form-control" placeholder="Numero del documento">
@@ -236,7 +236,7 @@
 
           </tr>
           <tr>
-             <td>Jefedecarrera<br></td>
+             <td>Jefe de carrera<br></td>
              <td><input type="checkbox" class="form-control" name="usuariosauto[]" value="3" ></td>
 
 
@@ -253,7 +253,7 @@
           </div>
           <div class="col-sm-6 banner-image" align="left" >
 
-            <p><br>Version.</p>
+            <p><br>Versión.</p>
             <div class="form-group">
 
               <input type="text" name="Version" class="form-control" placeholder="Version">
@@ -279,7 +279,7 @@
            <input type="text" name="Disenodelproceso" class="form-control" placeholder="Diseño del proceso">
          </div>
          <div class="form-group">
-           <p><br>Areas a las que afecta.</p>
+           <p><br>Áreas a las que afecta.</p>
            <input type="text" name="Areasalasqueafecta" class="form-control" placeholder="Areas a las que afecta">
          </div>
          <div class="form-group">
