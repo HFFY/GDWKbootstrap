@@ -37,7 +37,7 @@ if(!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id){
 $creartarea->Prioridad = !empty($_POST['selectprioridad']) ? $_POST['selectprioridad'] : $creartarea->Prioridad;
 $creartarea->Fechaestimada= !empty($_POST['fechauno']) ? $_POST['fechauno'] : $creartarea->Fechaestimada;
 $creartarea->Fechaoficial= !empty($_POST['fechados']) ? $_POST['fechados'] : $creartarea->Fechaoficial;
-$creartarea->Descripción = !empty($_POST['descripciontarea']) ? $_POST['descripciontarea'] : $creartarea->Descripción;
+$creartarea->Descripcion = !empty($_POST['descripciontarea']) ? $_POST['descripciontarea'] : $creartarea->Descripcion;
 $creartarea->Id_usuario = $id;
 $creartarea->Creadopor = $_SESSION['rol'];
 $creartarea->Tipo = !empty($_POST['selecttarea']) ? $_POST['selecttarea'] : $creartarea->Tipo;

@@ -55,7 +55,7 @@ class Documento
     }
     public function getAllTipoDeDocumento()
     {
-        $sql = "SELECT * from `Tipo de documento`;";
+        $sql = "SELECT * from Tipo_de_documento;";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         return $result;
@@ -92,11 +92,11 @@ class Documento
     public function getDocument($iddocument)
     {
         // $query = "SELECT
-        //             `Proceso`, `Subproceso`, `Tipo de documento`,`Link`, `Numero del documento` ,`Nombre del documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha de entrada en vigencia` , `Fecha de entrada en caducidad` , `Areas a las que afecta` , `Registros que corresponden` , `Descripcion` , `Estado`
+        //             `Proceso`, `Subproceso`, Tipo_de_documento,`Link`, `Numero_del_documento` ,`Nombre_del_documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha_de_entrada_en_vigencia` , `Fecha_de_entrada_en_caducidad` , `Areas_a_las_que_afecta` , `Registros_que_corresponden` , `Descripcion` , `Estado`
         //         FROM
         //             " . $this->table_name . "
         //         WHERE
-        //             Nombre del documento='".$this->Nombredeldocumento."'";
+        //             Nombre_del_documento='".$this->Nombredeldocumento."'";
         //
         // // prepare query statement
         // $stmt = $this->conn->prepare($query);
@@ -158,7 +158,7 @@ class Documento
     }
     public function getDifferentVersions($nombredelactual)
     {
-        $sql = "SELECT `Nombre del documento`, Version, Link, Descripción FROM Documentos where `Nombre del documento`='$nombredelactual';";
+        $sql = "SELECT Nombre_del_documento, Version, Link, Descripcion FROM Documentos where Nombre_del_documento='$nombredelactual';";
 
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -169,11 +169,11 @@ class Documento
     public function insertDocument()
     {
         // $query = "SELECT
-        //             `Proceso`, `Subproceso`, `Tipo de documento`,`Link`, `Numero del documento` ,`Nombre del documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha de entrada en vigencia` , `Fecha de entrada en caducidad` , `Areas a las que afecta` , `Registros que corresponden` , `Descripcion` , `Estado`
+        //             `Proceso`, `Subproceso`, Tipo_de_documento,`Link`, `Numero_del_documento` ,`Nombre_del_documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha_de_entrada_en_vigencia` , `Fecha_de_entrada_en_caducidad` , `Areas_a_las_que_afecta` , `Registros_que_corresponden` , `Descripcion` , `Estado`
         //         FROM
         //             " . $this->table_name . "
         //         WHERE
-        //             Nombre del documento='".$this->Nombredeldocumento."'";
+        //             Nombre_del_documento='".$this->Nombredeldocumento."'";
         $sql = "INSERT into Documentos VALUES (null, '$this->Proceso', '$this->Subproceso','$this->Tipodedocumento','$this->Numerodeldocumento','$this->Nombredeldocumento',
           '$this->Version','$this->Creador','$this->Revisor','$this->Autorizador','$this->Disenodelproceso','$this->Fechadeentradavigencia','$this->Fechadeentradaencaducidad','$this->Areasalasqueafecta',
           '$this->Registrosquecorresponden','$this->Descripcion','$this->Estado','$this->Link');";
@@ -202,14 +202,14 @@ class Documento
     {
 
         // $query = "SELECT
-        //             `Proceso`, `Subproceso`, `Tipo de documento`,`Link`, `Numero del documento` ,`Nombre del documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha de entrada en vigencia` , `Fecha de entrada en caducidad` , `Areas a las que afecta` , `Registros que corresponden` , `Descripcion` , `Estado`
+        //             `Proceso`, `Subproceso`, Tipo_de_documento,`Link`, `Numero_del_documento` ,`Nombre_del_documento`, `Version` , `Creador` , `Revisor`, `Autorizador` , `Diseño del proceso`, `Fecha_de_entrada_en_vigencia` , `Fecha_de_entrada_en_caducidad` , `Areas_a_las_que_afecta` , `Registros_que_corresponden` , `Descripcion` , `Estado`
         //         FROM
         //             " . $this->table_name . "
         //         WHERE
-        //             Nombre del documento='".$this->Nombredeldocumento."'";
-        $sql = "UPDATE Documentos SET Proceso='$this->Proceso', Subproceso='$this->Subproceso', `Tipo de documento`='$this->Tipodedocumento',`Numero del documento`='$this->Numerodeldocumento',`Nombre del documento`='$this->Nombredeldocumento',
-          Version='$this->Version',Creador='$this->Creador',Revisor='$this->Revisor',Autorizador='$this->Autorizador',`Diseño del proceso`='$this->Disenodelproceso',`Fecha de entrada en vigencia`='$this->Fechadeentradavigencia',`Fecha de entrada en caducidad`='$this->Fechadeentradaencaducidad',`Areas a las que afecta`='$this->Areasalasqueafecta',
-          `Registros que corresponden`='$this->Registrosquecorresponden',`Descripción`='$this->Descripcion',Estado='$this->Estado',Link='$this->Link' WHERE ID_documentos=$iddoc;";
+        //             Nombre_del_documento='".$this->Nombredeldocumento."'";
+        $sql = "UPDATE Documentos SET Proceso='$this->Proceso', Subproceso='$this->Subproceso', Tipo_de_documento='$this->Tipodedocumento',Numero_del_documento='$this->Numerodeldocumento',Nombre_del_documento='$this->Nombredeldocumento',
+          Version='$this->Version',Creador='$this->Creador',Revisor='$this->Revisor',Autorizador='$this->Autorizador',`Diseño del proceso`='$this->Disenodelproceso',Fecha_de_entrada_en_vigencia='$this->Fechadeentradavigencia',Fecha_de_entrada_en_caducidad='$this->Fechadeentradaencaducidad',Areas_a_las_que_afecta='$this->Areasalasqueafecta',
+          Registros_que_corresponden='$this->Registrosquecorresponden',`Descripcion`='$this->Descripcion',Estado='$this->Estado',Link='$this->Link' WHERE ID_documentos=$iddoc;";
 
 
         $result = $this->conn->query($sql);
@@ -298,7 +298,7 @@ class Documento
     }
     public function generateCodigoDocument($iddoc)
     {
-        $sql = "SELECT Proceso, Subproceso, `Tipo de documento` from Documentos where ID_documentos='$iddoc';";
+        $sql = "SELECT Proceso, Subproceso, Tipo_de_documento from Documentos where ID_documentos='$iddoc';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
@@ -313,17 +313,17 @@ class Documento
         $result2 = $this->conn->query($sql2);
         $result2->setFetchMode(PDO::FETCH_ASSOC);
         $fila2 = $result2->fetch();
-        $dumbvarsql3=$fila['Tipo de documento'];
-        $sql3 = "SELECT Codigo from `Tipo de documento` where `idtipo de documento`='$dumbvarsql3';";
+        $dumbvarsql3=$fila['Tipo_de_documento'];
+        $sql3 = "SELECT Codigo from Tipo_de_documento where `idtipo_de_documento`='$dumbvarsql3';";
         $result3 = $this->conn->query($sql3);
         $result3->setFetchMode(PDO::FETCH_ASSOC);
         $fila3 = $result3->fetch();
 
-        $codigogenerado=$fila1['Codigo'].$fila2['Codigo'].$fila3['Codigo'];
+        $codigogenerado=$fila1['Codigo']."-".$fila2['Codigo']."-".$fila3['Codigo'];
 
         $var1=$fila['Proceso'];
         $var2=$fila['Subproceso'];
-        $var3=$fila['Tipo de documento'];
+        $var3=$fila['Tipo_de_documento'];
 
         $sqlinsert = "INSERT into codigoDocumento VALUES (null, '$var1','$var2','$var3','$codigogenerado','$iddoc');";
 
@@ -335,7 +335,7 @@ class Documento
     }
     public function modifiedCodigoDocument($iddoc)
     {
-        $sql = "SELECT Proceso, Subproceso, `Tipo de documento` from Documentos where ID_documentos='$iddoc';";
+        $sql = "SELECT Proceso, Subproceso, Tipo_de_documento from Documentos where ID_documentos='$iddoc';";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $fila = $result->fetch();
@@ -349,16 +349,16 @@ class Documento
         $result2 = $this->conn->query($sql2);
         $result2->setFetchMode(PDO::FETCH_ASSOC);
         $fila2 = $result2->fetch();
-        $dumbvarsql3=$fila['Tipo de documento'];
-        $sql3 = "SELECT Codigo from `Tipo de documento` where `idtipo de documento`='$dumbvarsql3';";
+        $dumbvarsql3=$fila['Tipo_de_documento'];
+        $sql3 = "SELECT Codigo from Tipo_de_documento where `idtipo_de_documento`='$dumbvarsql3';";
         $result3 = $this->conn->query($sql3);
         $result3->setFetchMode(PDO::FETCH_ASSOC);
         $fila3 = $result3->fetch();
-        $codigogenerado=$fila1['Codigo'].$fila2['Codigo'].$fila3['Codigo'];
+        $codigogenerado=$fila1['Codigo']."-".$fila2['Codigo']."-".$fila3['Codigo'];
 
         $var1=$fila['Proceso'];
         $var2=$fila['Subproceso'];
-        $var3=$fila['Tipo de documento'];
+        $var3=$fila['Tipo_de_documento'];
         $sqlinsert = "UPDATE codigoDocumento SET idproceso='$var1',idsubproceso='$var2',idtipodedocumento='$var3',descripcion='$codigogenerado' where ID_documentos='$iddoc';";
 
         $resultinsert = $this->conn->query($sqlinsert);

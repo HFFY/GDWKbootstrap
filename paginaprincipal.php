@@ -128,7 +128,7 @@
             if (!empty($fila)&&$fila['Estado']==1) {
                 ?>
               <tr>
-                 <td><a href="gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $fila['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $fila['Nombre del documento']; ?></a></td>
+                 <td><a href="gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $fila['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $fila['Nombre_del_documento']; ?></a></td>
                  <td><?php echo $document->getCodeDocument($fila['ID_documentos'])['descripcion']; ?></td>
                  <td><?php echo $fila['Version']; ?></td>
                   <td><a href="<?php
@@ -174,7 +174,7 @@ $name= substr($fila['Link'], 14);
 
               ?>
           <tr>
-            <td><?php  echo $filadoc1['Nombre del documento']; ?></td>
+            <td><?php  echo $filadoc1['Nombre_del_documento']; ?></td>
             <td><?php  echo $filalatest['fecha']; ?></td>
             <td><?php  echo $filalatest['hora']; ?></td>
             <td><?php  echo $filalatest['Descripcion']; ?></td>

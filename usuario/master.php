@@ -176,7 +176,7 @@
           while ($filaD = $resultD->fetch()) {
               $descripcioncodigo=$document->getCodeDocument($filaD['ID_documentos']); ?>
          <tr>
-            <td><a  href="../gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $filaD['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $filaD['Nombre del documento']; ?></a></td>
+            <td><a  href="../gestordocumentos/gdpaginaprincipal.php?iddoc=<?php echo $filaD['ID_documentos']."&id=".$fila2['ID_usuarios']; ?>"><?php echo $filaD['Nombre_del_documento']; ?></a></td>
             <td><?php echo $descripcioncodigo['descripcion']; ?></td>
             <td><?php echo $filaD['Version']; ?></td>
             <td><a href="<?php

@@ -36,22 +36,22 @@
       $filashowdoc=$document->getDocument($_GET['iddoc']);
 
       $document->Proceso = $filashowdoc['Proceso'];
-      $document->Tipodedocumento = $filashowdoc['Tipo de documento'];
-      $document->Numerodeldocumento = $filashowdoc['Numero del documento'];
-      $document->Nombredeldocumento = $filashowdoc['Nombre del documento'];
+      $document->Tipodedocumento = $filashowdoc['Tipo_de_documento'];
+      $document->Numerodeldocumento = $filashowdoc['Numero_del_documento'];
+      $document->Nombredeldocumento = $filashowdoc['Nombre_del_documento'];
 
       $document->Subproceso =$filashowdoc['Subproceso'];
-      $document->Fechadeentradavigencia = $filashowdoc['Fecha de entrada en vigencia'];
-      $document->Fechadeentradaencaducidad = $filashowdoc['Fecha de entrada en caducidad'];
+      $document->Fechadeentradavigencia = $filashowdoc['Fecha_de_entrada_en_vigencia'];
+      $document->Fechadeentradaencaducidad = $filashowdoc['Fecha_de_entrada_en_caducidad'];
       $document->Version = $filashowdoc['Version'];
       $document->Creador = $filashowdoc['Creador'];
       $document->Revisor = $filashowdoc['Revisor'];
       $document->Autorizador = $filashowdoc['Autorizador'];
       $document->Disenodelproceso = $filashowdoc['Diseño del proceso'];
-      $document->Areasalasqueafecta = $filashowdoc['Areas a las que afecta'];
-      $document->Registrosquecorresponden = $filashowdoc['Registros que corresponden'];
+      $document->Areasalasqueafecta = $filashowdoc['Areas_a_las_que_afecta'];
+      $document->Registrosquecorresponden = $filashowdoc['Registros_que_corresponden'];
 
-      $document->Descripcion = $filashowdoc['Descripción'];
+      $document->Descripcion = $filashowdoc['Descripcion'];
       $document->Link = $filashowdoc['Link'];
 
       $document->usuariosauto = $document->getArrayUsuariosAuto($_GET['iddoc']);
@@ -62,9 +62,9 @@
 
           $document->Tipodedocumento = !empty($_POST['Tipodedocumento']) ? $_POST['Tipodedocumento'] : $document->Tipodedocumento;
 
-          $document->Numerodeldocumento = !empty($_POST['Numerodeldocumento']) ? $_POST['Numerodeldocumento'] : $filashowdoc['Numero del documento'];
+          $document->Numerodeldocumento = !empty($_POST['Numerodeldocumento']) ? $_POST['Numerodeldocumento'] : $filashowdoc['Numero_del_documento'];
 
-          $document->Nombredeldocumento = !empty($_POST['Nombredeldocumento']) ? $_POST['Nombredeldocumento'] : $filashowdoc['Nombre del documento'];
+          $document->Nombredeldocumento = !empty($_POST['Nombredeldocumento']) ? $_POST['Nombredeldocumento'] : $filashowdoc['Nombre_del_documento'];
 
           // echo "asd";
 
@@ -167,7 +167,7 @@
 
                   <option  value="<?php echo $count=$count+1; ?>" <?php  if ($filashowdoc['Proceso']==$count) {
               echo "selected='selected'";
-          } ?>><?php echo $valor['Descripción']; ?></option>
+          } ?>><?php echo $valor['Descripcion']; ?></option>
 
 
                 <?php
@@ -186,9 +186,9 @@
       while ($valor=$dumbvalorarray->fetch()) {
           ?>
 
-                    <option  value="<?php echo $count=$count+1; ?>" <?php  if ($filashowdoc['Tipo de documento']==$count) {
+                    <option  value="<?php echo $count=$count+1; ?>" <?php  if ($filashowdoc['Tipo_de_documento']==$count) {
               echo "selected='selected'";
-          } ?>><?php echo $valor['Descripción']; ?></option>
+          } ?>><?php echo $valor['Descripcion']; ?></option>
 
 
                   <?php
@@ -198,13 +198,13 @@
             <p>Numero del documento.</p>
 
               <div class="form-group">
-              <input type="text" name="Numerodeldocumento" class="form-control" placeholder="<?php echo $filashowdoc['Numero del documento']; ?>">
+              <input type="text" name="Numerodeldocumento" class="form-control" placeholder="<?php echo $filashowdoc['Numero_del_documento']; ?>">
 
             </div>
             <p><br>Nombre del documento.</p>
             <div class="form-group">
 
-              <input type="text" name="Nombredeldocumento" class="form-control" placeholder="<?php echo $filashowdoc['Nombre del documento']; ?>">
+              <input type="text" name="Nombredeldocumento" class="form-control" placeholder="<?php echo $filashowdoc['Nombre_del_documento']; ?>">
             </div>
             <div class="form-group">
             <p><br>Subproceso</p>
@@ -219,7 +219,7 @@
 
                 <option  value="<?php echo $count=$count+1; ?>" <?php  if ($filashowdoc['Subproceso']==$count) {
               echo "selected='selected'";
-          } ?>><?php echo $valor['Descripción']; ?></option>
+          } ?>><?php echo $valor['Descripcion']; ?></option>
 
 
               <?php
@@ -229,11 +229,11 @@
 
               <div class="form-group">
                 <p><br>Fecha de entrada en vigencia.</p>
-                <input type="date" name="Fechadeentradavigencia" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en vigencia']; ?>" >
+                <input type="date" name="Fechadeentradavigencia" class="form-control" placeholder="<?php echo $filashowdoc['Fecha_de_entrada_en_vigencia']; ?>" >
               </div>
               <div class="form-group">
                 <p><br>Fecha de entrada en caducidad.</p>
-                <input type="date" name="Fechadeentradaencaducidad" class="form-control" placeholder="<?php echo $filashowdoc['Fecha de entrada en caducidad']; ?>" >
+                <input type="date" name="Fechadeentradaencaducidad" class="form-control" placeholder="<?php echo $filashowdoc['Fecha_de_entrada_en_caducidad']; ?>" >
               </div>
               <div class="form-group">
                 <!-- <input type="checkbox" class="button" name="Administrador" value="1"> Administrador<br> -->
@@ -311,7 +311,7 @@
          </div>
          <div class="form-group">
            <p><br>Areas a las que afecta.</p>
-           <input type="text" name="Areasalasqueafecta" class="form-control" placeholder="<?php echo $filashowdoc['Areas a las que afecta']; ?>">
+           <input type="text" name="Areasalasqueafecta" class="form-control" placeholder="<?php echo $filashowdoc['Areas_a_las_que_afecta']; ?>">
          </div>
          <div class="form-group">
            <p><br>Registros que correspondan.</p>
@@ -333,7 +333,7 @@
           <div class="form-group" align="left">
            <label for="inputlg"><br><br><br></label>
 
-            <textarea class="form-control input-lg" name="Descripcion" rows="10" cols="30" placeholder="<?php echo $filashowdoc['Descripción']; ?>"></textarea>
+            <textarea class="form-control input-lg" name="Descripcion" rows="10" cols="30" placeholder="<?php echo $filashowdoc['Descripcion']; ?>"></textarea>
             <br>
 
          </div>

@@ -14,9 +14,9 @@ CREATE TABLE Usuarios (
   Contraseña VARCHAR(64) NOT NULL,
   Usuario VARCHAR(64) UNIQUE,
   Estado INT NULL,
-  `Fecha de login` DATETIME,
-  `Fecha de cambio de clave` DATETIME,
-  `Fecha de creación` DATETIME,
+  Fecha_de_login DATETIME,
+  Fecha_de_cambio_de_clave DATETIME,
+  Fecha_de_creacion DATETIME,
   IDcreador INT NULL,
   IPcreación VARCHAR(64),
   IPlogin VARCHAR(64),
@@ -26,41 +26,41 @@ CREATE TABLE Usuarios (
 );
 
 
-CREATE TABLE `Tipo de documento` (
-  `idtipo de documento` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE Tipo_de_documento (
+  `idtipo_de_documento` INT NOT NULL AUTO_INCREMENT,
   `Codigo` VARCHAR(2) NOT NULL,
-  `Descripción` VARCHAR(64) NOT NULL,
-  PRIMARY KEY (`idtipo de documento`)
+  `Descripcion` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`idtipo_de_documento`)
 );
 CREATE TABLE `subproceso` (
   `idsubproceso` INT NOT NULL AUTO_INCREMENT,
   `Codigo` VARCHAR(2) NOT NULL,
-  `Descripción` VARCHAR(64) NOT NULL,
+  `Descripcion` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`idsubproceso`)
 );
 CREATE TABLE `Proceso` (
   `idProceso` INT NOT NULL AUTO_INCREMENT,
   `Codigo` VARCHAR(2) NOT NULL,
-  `Descripción` VARCHAR(64) NOT NULL,
+  `Descripcion` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`idProceso`)
 );
 CREATE TABLE Documentos (
   `ID_documentos` INT NOT NULL AUTO_INCREMENT,
   `Proceso` INT NULL,
   `Subproceso` INT NULL,
-  `Tipo de documento` INT NULL,
-  `Numero del documento` VARCHAR(45) NULL,
-  `Nombre del documento` VARCHAR(45) NULL,
+  `Tipo_de_documento` INT NULL,
+  `Numero_del_documento` VARCHAR(45) NULL,
+  `Nombre_del_documento` VARCHAR(45) NULL,
   `Version` VARCHAR(45) NULL,
   `Creador` VARCHAR(45) NULL,
   `Revisor` VARCHAR(45) NULL,
   `Autorizador` VARCHAR(45) NULL,
   `Diseño del proceso` VARCHAR(45) NULL,
-  `Fecha de entrada en vigencia` DATE NULL,
-  `Fecha de entrada en caducidad` DATE NULL,
-  `Areas a las que afecta` VARCHAR(45) NULL,
-  `Registros que corresponden` VARCHAR(45) NULL,
-  `Descripción` LONGTEXT NULL,
+  `Fecha_de_entrada_en_vigencia` DATE NULL,
+  `Fecha_de_entrada_en_caducidad` DATE NULL,
+  `Areas_a_las_que_afecta` VARCHAR(45) NULL,
+  `Registros_que_corresponden` VARCHAR(45) NULL,
+  `Descripcion` LONGTEXT NULL,
   `Estado` INT NOT NULL,
   `Link` LONGTEXT NOT NULL,
     PRIMARY KEY (`ID_documentos`),
@@ -68,8 +68,8 @@ CREATE TABLE Documentos (
     REFERENCES `Proceso` (`idProceso`),
     FOREIGN KEY (`Subproceso`)
     REFERENCES `subproceso` (`idsubproceso`),
-    FOREIGN KEY (`Tipo de documento`)
-    REFERENCES `Tipo de documento` (`idtipo de documento`)
+    FOREIGN KEY (`Tipo_de_documento`)
+    REFERENCES `Tipo_de_documento` (`idtipo_de_documento`)
 );
 
 CREATE TABLE `codigoDocumento` (
@@ -85,7 +85,7 @@ CREATE TABLE `codigoDocumento` (
     FOREIGN KEY (`idsubproceso`)
     REFERENCES `subproceso` (`idsubproceso`),
     FOREIGN KEY (`idtipodedocumento`)
-    REFERENCES `Tipo de documento` (`idtipo de documento`),
+    REFERENCES `Tipo_de_documento` (`idtipo_de_documento`),
     FOREIGN KEY (`ID_documentos`)
     REFERENCES `Documentos` (`ID_documentos`)
 );
@@ -106,7 +106,7 @@ CREATE TABLE `DocUsuCambios` (
   `fecha` DATE NOT NULL,
   `hora` TIME NOT NULL,
   `Descripcion` LONGTEXT NOT NULL,
-  `IP revision` VARCHAR(64) NULL,
+  `IP_revision` VARCHAR(64) NULL,
     PRIMARY KEY (`Id_cambio`),
     FOREIGN KEY (`id_documento`)
     REFERENCES `Documentos` (`ID_documentos`),
@@ -115,7 +115,7 @@ CREATE TABLE `DocUsuCambios` (
 );
 CREATE TABLE `TipoTareas` (
   `idTipoTareas` INT NOT NULL AUTO_INCREMENT,
-  `Descripción` VARCHAR(64) NOT NULL,
+  `Descripcion` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`idTipoTareas`)
 );
 CREATE TABLE `Tareas` (
@@ -201,11 +201,11 @@ INSERT into subproceso VALUES(null,'EE','Ejecución, Seguimiento y Evaluación d
 INSERT into subproceso VALUES(null,'AA','Difusión y Aplicación de Resuktadis de Investigación');
 
 
-INSERT into `Tipo de documento` VALUES(null,'P','Procedimiento');
-INSERT into `Tipo de documento` VALUES(null,'I','Instructivo');
-INSERT into `Tipo de documento` VALUES(null,'F','Formato y/o Registros');
-INSERT into `Tipo de documento` VALUES(null,'M','Manual Emitido por la UPB');
-INSERT into `Tipo de documento` VALUES(null,'D','Documento Interno que Requiere ser Controlado');
+INSERT into Tipo_de_documento VALUES(null,'P','Procedimiento');
+INSERT into Tipo_de_documento VALUES(null,'I','Instructivo');
+INSERT into Tipo_de_documento VALUES(null,'F','Formato y/o Registros');
+INSERT into Tipo_de_documento VALUES(null,'M','Manual Emitido por la UPB');
+INSERT into Tipo_de_documento VALUES(null,'D','Documento Interno que Requiere ser Controlado');
 
 INSERT INTO Usuarios VALUES ('GOD', '1','666','GOD','MTIzNA==','admin',1,null,null,null,null,null,null);
 INSERT INTO TipoTareas VALUES (null,'Reunión para documento');

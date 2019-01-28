@@ -104,7 +104,7 @@ class User implements \Serializable
         // execute query
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
-            
+
             return true;
         } else {
             return false;
@@ -143,7 +143,7 @@ class User implements \Serializable
         // }
 
         $this->date=date('Y-m-d H:i:s');
-        $sql = "UPDATE $this->table_name SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', `Fecha de cambio de clave`='$this->date'  WHERE ID_usuarios='$iduser';";
+        $sql = "UPDATE $this->table_name SET Nombres='$this->names', Apellidos='$this->lastname', Contraseña='$this->password', Usuario='$this->username', Idrango='$this->rol', Fecha_de_cambio_de_clave='$this->date'  WHERE ID_usuarios='$iduser';";
 
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);

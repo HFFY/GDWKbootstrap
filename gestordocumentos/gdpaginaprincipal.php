@@ -49,9 +49,9 @@
       // $_SESSION['oldusercreacion']=$fila2['ID_usuarios'];
 
 
-     $r = $document->getDifferentVersions($filadoc['Nombre del documento']);
+     $r = $document->getDifferentVersions($filadoc['Nombre_del_documento']);
 
-     $r2 = $document->getDifferentVersions($filadoc['Nombre del documento']);
+     $r2 = $document->getDifferentVersions($filadoc['Nombre_del_documento']);
 
 
 
@@ -122,7 +122,7 @@
               while ($f = $r->fetch()) {
                   ?>
               <tr>
-                 <td><?php echo $f['Nombre del documento']; ?></td>
+                 <td><?php echo $f['Nombre_del_documento']; ?></td>
                  <td><?php echo $f['Version']; ?></td>
                  <td><a href="<?php
      $name= "../".substr($f['Link'], 14);
@@ -158,8 +158,8 @@
           while ($f2 = $r2->fetch()) {
               ?>
           <tr>
-             <td><?php echo $f2['Nombre del documento']; ?></td>
-             <td><?php echo $f2['Descripción']; ?></td>
+             <td><?php echo $f2['Nombre_del_documento']; ?></td>
+             <td><?php echo $f2['Descripcion']; ?></td>
 
 
           </tr>

@@ -43,7 +43,7 @@ if (!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id && ($_SESSION
     $tareamodificada->Prioridad = !empty($_POST['selectprioridad']) ? $_POST['selectprioridad'] : $tareamodificada->Prioridad;
     $tareamodificada->Fechaestimada= !empty($_POST['fechauno']) ? $_POST['fechauno'] : $tareamodificada->Fechaestimada;
     $tareamodificada->Fechaoficial= !empty($_POST['fechados']) ? $_POST['fechados'] : $tareamodificada->Fechaoficial;
-    $tareamodificada->Descripción = !empty($_POST['descripciontarea']) ? $_POST['descripciontarea'] : $tareamodificada->Descripción;
+    $tareamodificada->Descripcion = !empty($_POST['descripciontarea']) ? $_POST['descripciontarea'] : $tareamodificada->Descripcion;
     $tareamodificada->Tipo = !empty($_POST['selecttarea']) ? $_POST['selecttarea'] : $tareamodificada->Tipo;
     $tareamodificada->Estado = !empty($_POST['selectestado']) ? $_POST['selectestado'] : $tareamodificada->Estado;
     $tareamodificada->NombreTarea= !empty($_POST['nombretarea']) ? $_POST['nombretarea'] : $tareamodificada->NombreTarea;
@@ -208,7 +208,7 @@ if (!empty($id) && !empty($_SESSION['id']) && $_SESSION['id']==$id && ($_SESSION
                                 <br>
                                 <br>
                             </label>
-                                <textarea class="form-control input-lg" name="descripciontarea" rows="10" cols="30" placeholder="Descripción" required><?php echo $fila['Descripcion']; ?></textarea>
+                                <textarea class="form-control input-lg" name="descripciontarea" rows="10" cols="30" placeholder="Descripcion" required><?php echo $fila['Descripcion']; ?></textarea>
                                 <br>
                         </div>
                         <a class="btn btn-first" href="../tareas/workflowpaginaprincipal.php?id=<?php echo $id; ?>">Cancelar</a>

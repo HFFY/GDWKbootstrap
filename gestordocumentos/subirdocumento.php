@@ -156,7 +156,7 @@
       while ($valor=$dumbvalorarray->fetch()) {
           ?>
 
-                <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripción']; ?></option>
+                <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripcion']; ?></option>
 
 
               <?php
@@ -174,7 +174,7 @@
       while ($valor=$dumbvalorarray->fetch()) {
           ?>
 
-                  <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripción']; ?></option>
+                  <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripcion']; ?></option>
 
 
                 <?php
@@ -201,7 +201,7 @@
       while ($valor=$dumbvalorarray->fetch()) {
           ?>
 
-                <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripción']; ?></option>
+                <option value="<?php echo $count=$count+1; ?>"><?php echo $valor['Descripcion']; ?></option>
 
 
               <?php

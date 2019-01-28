@@ -11,7 +11,7 @@ class Ticket
     public $Prioridad;
     public $Fechaestimada;
     public $Fechaoficial;
-    public $Descripción;
+    public $Descripcion;
     public $Id_usuario;
     public $Tipo;
     public $Estado;
@@ -25,7 +25,7 @@ class Ticket
     }
     public function crearTarea()
     {
-        $sql = "INSERT into Tareas VALUES (null, '$this->Prioridad', '$this->Fechaestimada','$this->Fechaoficial','$this->Descripción','$this->Id_usuario',
+        $sql = "INSERT into Tareas VALUES (null, '$this->Prioridad', '$this->Fechaestimada','$this->Fechaoficial','$this->Descripcion','$this->Id_usuario',
           '$this->Tipo',null,'$this->Creadopor',null,'$this->Fechadecreacion','1',null,'$this->NombreTarea');";
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ class Ticket
                 $resultup->setFetchMode(PDO::FETCH_ASSOC);
             }
         }
-      
+
     }
 
     public function resolverTarea($idtarea, $newdate)
@@ -63,7 +63,7 @@ class Ticket
     }
     public function modificarTarea($idtarea)
     {
-        $sql = "UPDATE Tareas SET Prioridad = '$this->Prioridad' , Descripcion='$this->Descripción', NombreTarea='$this->NombreTarea', Tipo='$this->Tipo' , Estado='$this->Estado' , Fechaestimada ='$this->Fechaestimada' , Fechaoficial ='$this->Fechaoficial' WHERE id_tareas ='$idtarea';";
+        $sql = "UPDATE Tareas SET Prioridad = '$this->Prioridad' , Descripcion='$this->Descripcion', NombreTarea='$this->NombreTarea', Tipo='$this->Tipo' , Estado='$this->Estado' , Fechaestimada ='$this->Fechaestimada' , Fechaoficial ='$this->Fechaoficial' WHERE id_tareas ='$idtarea';";
 
         $result = $this->conn->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
